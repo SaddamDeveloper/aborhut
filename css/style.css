@@ -796,7 +796,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .banner .item-100vh {
-    height: 480px;
+    height: 325px;
 }
 
 .banner .item img {
@@ -1007,6 +1007,7 @@ input[type=checkbox]:checked + label:before {
     padding: 30px 15px;
     display: inline-block;
     float: none;
+    margin-top: 10px;
 }
 
 .banner-search-box .search-area {
@@ -4677,7 +4678,7 @@ a:hover {
 .sub-banner {
     background: rgba(0, 0, 0, 0.04) url(../img/sub-banner-1.jpg) top left repeat;
     background-size: cover;
-    height: 280px;
+    height: 100px;
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
@@ -4689,14 +4690,14 @@ a:hover {
     text-align: center;
     width: 100%;
     position: absolute;
-    top: 40%;
+    top: 12%;
     right: 0;
     left: 0;
     z-index: 20;
 }
 
 .sub-banner .breadcrumb-area h1 {
-    margin: 0 0 15px;
+    margin: 0 0 10px;
     font-weight: 700;
     text-transform: uppercase;
     color: #dadada;
@@ -4707,7 +4708,7 @@ a:hover {
     display: inline-block;
     list-style: none;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .sub-banner .breadcrumbs li a {

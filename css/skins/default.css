@@ -1,19 +1,24 @@
+:root {
+  --main-bg-color: #bd0000;
+  --main-hover-bg-color: #d40000;
+}
+
 a:hover {
     text-decoration: none;
 }
 
 .button-theme {
-    background: #cf005c;
-    border: 2px solid #cf005c;
+    background: var(--main-bg-color);
+    border: 2px solid var(--main-bg-color);
 }
 
 .button-theme:hover {
-    background: #84ad1d;
-    border: 2px solid #84ad1d;
+    background: var(--main-hover-bg-color);
+    border: 2px solid var(--main-hover-bg-color);
 }
 
 #page_scroller {
-    background: #cf005c;
+    background: var(--main-bg-color);
 }
 
 .overlay-link:hover{
@@ -27,7 +32,7 @@ a:hover {
 }
 
 .property-content .title a{
-    color: #cf005c;
+    color: var(--main-bg-color);;
 }
 
 .setting-button{
@@ -133,7 +138,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .search-button {
-    background: #d0005c;
+    background: #bd0000;
 
 }
 
@@ -148,22 +153,22 @@ input[type=checkbox]:checked + label:before {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:focus,
 .navbar-default .navbar-nav > .active > a:hover {
-    color: #cf005c !important;
+    color: var(--main-bg-color) !important;
 /*    border-top: solid 5px #cf005c !important;
 */}
 
 .main-header .navbar-default .nav > li > a:hover {
-   color: #cf005c;
+   color: var(--main-bg-color);
 /*    border-top: solid 5px #cf005c;
 */}
 
 .intro-section {
-    background: #cf005c;
+    background: var(--main-bg-color);
 }
 
 .search-button:hover {
     color: #fff;
-    background: #ad034e;
+    background: #d40000;
 }
 
 .panel-box .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -238,11 +243,11 @@ input[type=checkbox]:checked + label:before {
 }
 
 .property-2 .content .title a{
-    color: #95c41f;
+    color: var(--main-bg-color);
 }
 
 .property-2 .facilities-list li i{
-    color: #95c41f;
+    color: var(--main-bg-color);
 }
 
 .property-2 .featured{
@@ -255,7 +260,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .option-bar .heading-icon{
-    background: #cf005c;
+    background: var(--main-bg-color);
 }
 
 .change-view-btn {
@@ -310,18 +315,18 @@ input[type=checkbox]:checked + label:before {
 }
 
 .pagination > li > a:hover {
-    background: #95c41f;
-    border-color: #95c41f;
+    background: var(--main-hover-bg-color);
+    border-color: var(--main-hover-bg-color);
 }
 
 .pagination > .active > a {
-    background: #cf005c;
-    border-color: #cf005c;
+    background: var(--main-bg-color);
+    border-color: var(--main-bg-color);
 }
 
 .pagination > .active > a:hover {
-    background: #a2034a;
-    border-color: #a2034a;
+    background: var(--main-hover-bg-color);
+    border-color: var(--main-hover-bg-color);
 }
 
 .blog-box .detail .post-meta span a i {
@@ -414,7 +419,7 @@ blockquote {
 }
 
 .popular-posts .media-heading a {
-    color: #cf005c;
+    color: var(--main-bg-color);
 }
 
 .comment-meta-author a {
@@ -426,8 +431,8 @@ blockquote {
 }
 
 .contact-1 .contact-details .media .media-left i {
-    color: #95c41f;
-    border: 1px dashed #95c41f;
+    color: var(--main-bg-color);
+    border: 1px dashed var(--main-bg-color);
 }
 
 .about-text ul li i {
@@ -443,7 +448,7 @@ blockquote {
 }
 
 .helping-center .icon {
-    color: #cf005c;
+    color: var(--main-bg-color);
 }
 
 .main-title-2 h1 a:hover{
@@ -451,7 +456,7 @@ blockquote {
 }
 
 .option-bar h4 {
-    color: #cf005c;
+    color: var(--main-bg-color);
 }
 
 .attachments a:hover{
