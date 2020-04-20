@@ -39,7 +39,7 @@
                     <!-- Footer -->
                     <div class="footer">
                         <span>
-                            New to Tempo? <a href="signup.php">Sign up now</a>
+                            New to Aborhut? <a href="signup.php">Sign up now</a>
                         </span>
                     </div>
                 </div>

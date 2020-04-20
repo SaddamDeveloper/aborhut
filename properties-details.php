@@ -64,6 +64,18 @@
                                     <div class="item">
                                         <img src="img/properties/properties-8.jpg" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-5.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
                                     <div class="item active">
                                         <img src="img/properties/properties-2.jpg" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
@@ -92,84 +104,20 @@
                                 <li data-target="#carousel-custom" data-slide-to="5" class=""><img src="img/properties/properties-small-7.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="6" class=""><img src="img/properties/properties-small-8.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="7" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="8" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="9" class=""><img src="img/properties/properties-small-1.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="10" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="11" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li>
                             </ol>
                         </div>
                     </div>
                     <!-- Properties detail slider end -->
-
-                    <!-- Advanced search start -->
-                    <div class="advabced-search hidden-lg hidden-md">
-                        <div class="main-title-2">
-                            <h1><span>Property</span> Search</h1>
-                        </div>
-
-                        <form method="GET">
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                <option>City</option>
-                                <option>For Sale</option>
-                                <option>For Rent</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                <option>Location</option>
-                                <option>United States</option>
-                                <option>United Kingdom</option>
-                                <option>American Samoa</option>
-                                <option>Belgium</option>
-                                <option>Cameroon</option>
-                                <option>Canada</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value" >
-                                <option>Property Type</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
-                                <option>Land</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bedrooms">
-                                        <option>Min Budget</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bathroom">
-                                        <option>Max budget</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-0">
-                            <button class="search-button">Search</button>
-                        </div>
-                    </form>
-                    </div>
-                    <!-- Advanced search end -->
 
                     <!-- Properties description start -->
                     <div class="properties-description mb-40 ">
                         <div class="main-title-2">
                             <h1><span>Description</span></h1>
                         </div>
-                        <p class="propery_description_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
                         <table class="property_detail_table">
                             <tbody>
                                 <tr>
@@ -209,7 +157,7 @@
                             <h1><span>Property</span> Search</h1>
                         </div>
 
-                        <form method="GET">
+                        <form action="index.php" method="GET">
                         <div class="form-group">
                             <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
                                 <option>City</option>
@@ -271,8 +219,12 @@
                     <!-- Search contents sidebar end -->
 
                     <!-- Social media start -->
-                    <div class="social-media sidebar-widget clearfix">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    <div class="social-media" style="border: 15px solid #fff;">
+                        <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
+                    </div>
+                    <div class="book-now">
+                        <a href="#">Book Now</a>
                     </div>
                 </div>
                 <!-- Sidebar end -->

@@ -39,8 +39,6 @@
                                     <option>Properties (High To Low)</option>
                                     <option>Properties (Low To High)</option>
                                 </select>
-                                <a href="properties-list-rightside.php" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                <a href="properties-grid-rightside.php" class="change-view-btn"><i class="fa fa-th-large"></i></a>
                             </div>
                         </div>
                     </div>

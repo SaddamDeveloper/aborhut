@@ -12,13 +12,12 @@
                             <h1>Contact Us</h1>
                         </div>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printing and
+                            Aborhut is the leading and trusted apartment search company. In today's busy schedule we are here in a mission to get rid of the pain in finding an apartment.
                         </p>
                         <ul class="personal-info">
                             <li>
                                 <i class="fa fa-map-marker"></i>
-                                Address: Mandakini Path, Jatia, Kahilipara,
-Guwahati, Assam, Pincode: 781034
+                                Address: Mandakini Path, Jatia, Kahilipara, Guwahati, Assam, Pincode: 781034
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
@@ -63,70 +62,38 @@ Guwahati, Assam, Pincode: 781034
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="footer-item popular-posts">
                         <div class="main-title-2">
-                            <h1>Popular Posts</h1>
+                            <h1>More Links</h1>
                         </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <img class="media-object" src="img/properties/small-properties-1.jpg" alt="small-properties-1">
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">
-                                    <a href="properties-details.html">Sweet Family Home</a>
-                                </h3>
-                                <p>February 27, 2018</p>
-                                <div class="price">
-                                    $734,000
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <img class="media-object" src="img/properties/small-properties-2.jpg" alt="small-properties-2">
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">
-                                    <a href="properties-details.html">Modern Family Home</a>
-                                </h3>
-                                <p>February 27, 2018</p>
-                                <div class="price">
-                                    $734,000
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <img class="media-object" src="img/properties/small-properties-3.jpg" alt="small-properties-3">
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">
-                                    <a href="properties-details.html">Beautiful Single Home</a>
-                                </h3>
-                                <p>February 27, 2018</p>
-                                <div class="price">
-                                    $734,000
-                                </div>
-                            </div>
-                        </div>
+                         <ul class="links">
+                            <li>
+                                <a href="t&c.html">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <a href="privacy_policy.php">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="refund_policy.php">Refund Policy</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <!-- Subscribe -->
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item">
                         <div class="main-title-2">
-                            <h1>Subscribe</h1>
+                            <h1>Quick Contact</h1>
                         </div>
                         <div class="newsletter clearfix">
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                            </p>
-
                             <form action="#" method="post">
                                 <div class="form-group">
+                                    <input class="nsu-field btn-block" id="nsu-email-0" type="text" name="name" placeholder="Enter your Name" required="">
                                     <input class="nsu-field btn-block" id="nsu-email-0" type="text" name="email" placeholder="Enter your Email Address" required="">
+                                    <textarea class="nsu-field btn-block" name="message" id=""  rows="2"
+                                    placeholder="Enter your message..."></textarea>
                                 </div>
                                 <div class="form-group mb-0">
                                     <button type="submit" class="button-sm button-theme btn-block">
-                                        Subscribe
+                                        Submit
                                     </button>
                                 </div>
                             </form>
