@@ -9,8 +9,6 @@ $start = $_REQUEST['start'];
 if(isset($_POST['submit12345'])){
 	
 	$city_name    =  $_POST['city_name'];
- 
-
 
 	$update_user = "INSERT `city` SET
  
