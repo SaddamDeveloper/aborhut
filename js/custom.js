@@ -7,3 +7,7 @@ $(window).scroll(function() {
         $('.main-header').removeClass('menu_fixed animated fadeInDown');
     }
 });
+
+$(".my-account").click(function(){
+  $('.dropDownBox').toggleClass('hidden');
+});

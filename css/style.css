@@ -612,7 +612,7 @@ input[type=checkbox]:checked + label:before {
 .main-header .navbar-default .nav > li > a {
     position: relative;
     display: block;
-    padding: 15px 20px 15px 26px;
+    padding: 15px 18px 15px 18px;
     font-size: 15px;
     border-top: solid 5px transparent;
     line-height: 27px;
@@ -692,7 +692,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .rightside-navbar {
-    padding: 21px 0 20px;
+    padding: 15px 0 13px;
 }
 
 .rightside-navbar li a.button {
@@ -876,7 +876,7 @@ input[type=checkbox]:checked + label:before {
     left: 0%;
     padding: 0;
     bottom: 0%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.12);
     display: flex !important;
 }
 
@@ -1224,6 +1224,7 @@ input[type=checkbox]:checked + label:before {
     position: relative;
     display: block;
     overflow: hidden;
+    height: 128px;
 }
 
 .property-tag {
@@ -1306,7 +1307,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .property-content .facilities-list li {
-    width: 33%;
+    width: 20%;
     float: left;
     font-size: 12px;
     line-height: 26px;
@@ -1950,7 +1951,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .content-area {
-    padding: 80px 0 70px;
+    padding: 50px 0;
 }
 
 .content-area-2 {
@@ -3683,7 +3684,7 @@ strong {
     max-width: 450px;
     box-shadow: rgba(0, 0, 0, 0.0980392) 0 1px 1px;
     color: #4a4747;
-    margin: 50px auto;
+    margin-top: 70px;
     text-align: center;
 }
 
@@ -5359,7 +5360,7 @@ mark, .mark {
     display: inline-block;
     height: auto;
     margin: 0 !important;
-    width: 12.50%;
+    width: 8.334%;
     border: none;
     float: left;
 }

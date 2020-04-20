@@ -1,3 +1,4 @@
+<?php require_once "connection/connection.php"; ?>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -50,10 +51,13 @@
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <ul class="top-social-media pull-right">
                     <li>
-                        <a href="login.php" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                        <a href="#" class="sign-in"><i class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="signup.php" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                        <a href="#" class="sign-in"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="sign-in"><i class="fa fa-instagram"></i></a>
                     </li>
                 </ul>
             </div>
@@ -110,6 +114,30 @@
                             Contact Us<span></span>
                         </a>
                     </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right rightside-navbar">
+                    <li class="phone-mb-15">
+                        <a class="button my-account">
+                            <i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i>
+                        </a>
+                    </li>
+                    <div class="dropDownBox buyerDBLink hidden">
+                        <div class="carrot"></div>
+                        <ul class="border-bottom">
+                            <li><a href="#">My Activity</a>
+                                <ul style="margin-left: 20px;">
+                                    <li><a href="properties_booked.php">Properties Booked (4)</a></li>
+                                    <li>Searches (9)</li>
+                                </ul>
+                            </li>
+                            <li>Recommendations</li>
+                            <li>My Profile</li>
+                        </ul>
+                        <a href="#" class="btn btn-danger">Login</a>
+                        <div class="text-center sign-up-cart">
+                            New to Aborhut ? <a href="#">Sign Up</a>
+                        </div>
+                    </div>
                 </ul>
             </div>
         </nav>

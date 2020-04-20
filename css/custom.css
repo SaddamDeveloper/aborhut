@@ -56,3 +56,84 @@ img {
   background-image: url(../img/bg-icon-1.png);
   padding: 0 0 70px !important;
 }
+.dropDownBox {
+  position: absolute;
+  top: 70px;
+  z-index: 99;
+  background-color: white;
+  box-shadow: 0 0 20px #00000078;
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 250px;
+  right: -42px;
+}
+.dropDownBox ul li {
+  line-height: 30px;
+}
+.dropDownBox {
+  border-bottom: 3px solid #337ab7;
+}
+.dropDownBox .border-bottom {
+  border-bottom: 1px solid #dedede;
+  padding: 10px 0;
+}
+.dropDownBox ul li ul li {
+  line-height: 30px;
+}
+.dropDownBox .btn-danger {
+  width: 100%;
+  background-color: #bd0000;
+  margin-top: 20px;
+}
+.sign-up-cart a {
+  color: #bd0000;
+}
+.sign-up-cart {
+  padding: 8px 0;
+}
+.carrot {
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.book-now {
+  background-color: #d40000;
+  text-align: center;
+  padding: 5px;
+  border: 15px solid #fff;
+  margin-top: 25px;
+}
+.book-now a {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 150%;
+  text-transform: uppercase;
+}
+
+/*phone*/
+@media (max-width: 768px) {
+.phone-mb-15 {
+  margin-bottom: 15px;
+}
+.dropDownBox {
+    position: absolute;
+    top: unset;
+    z-index: 99;
+    background-color: white;
+    box-shadow: 0 0 20px #00000078;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 100%;
+    right: unset;
+}
+.rightside-navbar {
+        display: block;
+    }
+}
