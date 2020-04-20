@@ -14,6 +14,8 @@ if(isset($_POST['submit12345'])){
     $prop_desc = $_POST['prop_desc'];
     $prop_city = $_POST['prop_city'];
     $prop_state = $_POST['prop_state'];
+    $prop_latitude = $_POST['latitude'];
+    $prop_longitude = $_POST['longitude'];
     $prop_location = $_POST['prop_location'];
     $prop_type = $_POST['prop_type'];
     $prop_ac = $_POST['prop_ac'];
@@ -31,7 +33,6 @@ if(isset($_POST['submit12345'])){
     $prop_bathroom = $_POST['prop_bathroom'];
     $prop_category = $_POST['prop_category'];
 
-    
     $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
         
@@ -186,6 +187,8 @@ if(isset($_POST['submit12345'])){
  
     prop_visit_price = '".$prop_visit_price."',
     prop_category = '".$prop_category."',
+    prop_latitude = '".$prop_latitude."',
+    prop_longitude = '".$prop_longitude."',
     prop_location = '".$prop_location."'";
     $sql_update=$dbconn->prepare($update_user);
     $sql_update->execute();
@@ -293,10 +296,13 @@ $select_enquiry="SELECT * FROM location order by id desc limit 20";
                                     echo "Details Successfully Updated.";
                                     
                                     } ?>
-                                
-                                
+
+                                <!-- <label for="location">Location</label> -->
+                                <!-- <button class="btn btn-primary" onclick="getLocation()"><i class="fa fa-map-marker"></i></button>
+
+                                <p id="demo"></p> -->
+
                                 <form id="formID" class="m-t-30" method="post" action="" enctype="multipart/form-data"> 
-                                    
                                     
                                     
                                     
@@ -390,8 +396,6 @@ $select_enquiry="SELECT * FROM location order by id desc limit 20";
                                     </div>
                                 
                                     
-                                  
-                                    
                                     <div class="form-group m-b-30">
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">State</label>
                                         <select class="custom-select mr-sm-2" id="prop_state" name="prop_state" >
@@ -408,7 +412,20 @@ $select_enquiry="SELECT * FROM location order by id desc limit 20";
                                             <?php }} ?>
                                         </select>
                                     </div>
-
+                                    <div class="form-group m-b-30">
+                                            <p id="demo"></p>
+                                            <span onclick="getLocation()" style="cursor:pointer;"><i class="fa fa-map-marker"></i></span>
+                                    </div>
+                                    <div class="form-group m-b-30 row">
+                                        <div class="col-md-6">
+                                            <label for="latitude">Latitude</label>
+                                            <input type="text" class="form-control" id="latitude" name="latitude">    
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="longitude">Longitude</label>
+                                            <input type="text" class="form-control" id="longitude" name="longitude">    
+                                        </div>
+                                    </div>
                                     <div class="form-group m-b-30">
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Location  </label>
                                         <select class="custom-select mr-sm-2" id="prop_location" name="prop_location" >
@@ -470,11 +487,8 @@ $select_enquiry="SELECT * FROM location order by id desc limit 20";
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">AC  </label>
                                         <select class="custom-select mr-sm-2" id="prop_ac" name="prop_ac" >
                                         <option selected>Choose...</option>
-                                        
-                                         
                                             <option value="fa fa-check">Yes </option>
                                             <option value="fa fa-times">No </option> 
-                                           
                                         </select>
                                     </div>
                                     </div>
@@ -682,5 +696,23 @@ $select_enquiry="SELECT * FROM location order by id desc limit 20";
         // Start in source mode.
         this.setMode('source');
     });
+
+
+        //Location get By GPS
+        var x = document.getElementById("demo");
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        }
+            
+        function showPosition(position) {
+            // x.innerHTML="Latitude: " + position.coords.latitude + 
+            // "<br>Longitude: " + position.coords.longitude;
+            document.getElementById("latitude").value=position.coords.latitude;
+            document.getElementById("longitude").value=position.coords.longitude;
+        }
     </script>
             <?php include('inc/footer.php'); ?>
