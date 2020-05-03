@@ -1,4 +1,48 @@
-<?php include('include/header.php'); ?>
+
+<?php
+include_once('customer-panel/configure.php');
+DB::connect();
+    if(isset($_POST['Login'])){
+        $mobile = $_POST['mobile'];
+        $password = $_POST['password'];
+
+        $select  = "select * from `customer` WHERE cus_phone = '".$mobile."' and cus_password = '".$password."'";
+        $sql=$dbconn->prepare($select);
+        $sql->execute();
+        $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
+        if(!empty($mobile) || !empty($password)){
+            if($sql->rowCount() > 0){
+            foreach($wlvd as $row5)
+            {
+                // echo "Details";exit();
+                $_SESSION['id'] = $row5->id;  
+                $_SESSION['cus_name'] = $row5->cus_name; 
+                header("location:customer-panel/welcome.php");
+            }
+            
+           } else {
+             $error = "<span class='text-danger'>Invalid Phone Number or Password</span>";  
+           }
+        }else{
+            $error = "<span class='text-danger'>Phone Number or Password is required!</span>";
+        }
+    }
+
+?>
+<?php
+
+//     if (isset($_GET['action'])) {
+//         $action=$_GET['action'];
+//         switch($action) {
+//         case "lo":              
+//             $msg="You are now logged out.";
+//             break;
+//         }
+        
+// }
+?>
+<?php include_once('include/header.php'); ?>
+
 <!-- Content area start -->
 <div class="content-area login">
     <div class="container">
@@ -12,13 +56,18 @@
                         <div class="main-title">
                             <h1><span>Login</span></h1>
                         </div>
+                        <?php 
+                            if(!empty($error)){
+                                echo $error;
+                            }
+                        ?>
                         <!-- Form start -->
-                        <form action="#" method="GET">
+                        <form method="POST">
                             <div class="form-group">
-                                <input type="email" name="email" class="input-text" placeholder="Email Address">
+                                <input type="text" name="mobile" class="input-text" placeholder="Phone Number">
                             </div>
                             <div class="form-group">
-                                <input type="password" name="Password" class="input-text" placeholder="Password">
+                                <input type="password" name="password" class="input-text" placeholder="Password">
                             </div>
                             <div class="checkbox">
                                 <div class="ez-checkbox pull-left">
@@ -31,7 +80,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="button-md button-theme btn-block">login</button>
+                                <button type="submit" name="Login" class="button-md button-theme btn-block">login</button>
                             </div>
                         </form>
                         <!-- Form end -->

@@ -25,16 +25,14 @@ class AUTH{
 			foreach ($results as $row) {
 
         //print_r($row);
-
+				
 				$_SESSION['st_password']=$row->st_password;
 				$_SESSION['u_id']=$row->admin_id;
 				$_SESSION['name']=$row->st_name; 
 				$_SESSION['st_name']=$row->st_name;
 				
 				//$usr=$_SESSION['u_id'];
-				
-			 
-				
+			
 
 					header("location: dashboard.php");
 				}

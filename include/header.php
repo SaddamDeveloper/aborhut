@@ -1,4 +1,9 @@
-<?php require_once "connection/connection.php"; ?>
+<?php //require_once "connection/connection.php"; ?>
+<?php 
+include_once('customer-panel/configure.php');
+DB::connect();
+    // require_once("./customer-panel/check.php");
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -65,7 +70,16 @@
     </div>
 </header>
 <!-- Top header end -->
-
+<?php  
+    $id = $_SESSION['id'];
+    if($id !=''){
+        $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."'";
+        $sql=$dbconn->prepare($select_bookings25);
+        $sql->execute();
+        $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
+    foreach($wlvd25 as $rows25);
+    }
+?>
 <!-- Main header start -->
 <header class="main-header">
     <div class="container">
@@ -105,9 +119,15 @@
                         </a>
                     </li>
                     <li>
+                    <?php
+                    if(!$_SESSION['id']){
+                    ?>
                         <a href="list_your_property.php">
                             List Your Property<span></span>
                         </a>
+                    <?php
+                    }
+                    ?>
                     </li>
                     <li>
                         <a href="contact.php">
@@ -123,20 +143,23 @@
                     </li>
                     <div class="dropDownBox buyerDBLink hidden">
                         <div class="carrot"></div>
+                        <?php 
+                            if(isset($_SESSION['id'])) { 
+                        ?>
                         <ul class="border-bottom">
-                            <li><a href="#">My Activity</a>
-                                <ul style="margin-left: 20px;">
-                                    <li><a href="properties_booked.php">Properties Booked (4)</a></li>
-                                    <li>Searches (9)</li>
-                                </ul>
+                            <li><a href="customer-panel/welcome.php">My Dashboard</a>
                             </li>
-                            <li>Recommendations</li>
-                            <li>My Profile</li>
                         </ul>
-                        <a href="#" class="btn btn-danger">Login</a>
+
+                            <a href="logout.php" class="btn btn-danger">Logout</a>
+                        <?php
+                            }else{
+                        ?>
+                        <a href="login.php" class="btn btn-danger">Login</a>
                         <div class="text-center sign-up-cart">
-                            New to Aborhut ? <a href="#">Sign Up</a>
+                            New to Aborhut ? <a href="signup.php">Sign Up</a>
                         </div>
+                        <?php } ?>
                     </div>
                 </ul>
             </div>

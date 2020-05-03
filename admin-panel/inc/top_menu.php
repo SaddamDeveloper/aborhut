@@ -40,9 +40,6 @@
                         <li class="nav-item d-none d-md-block">
                             
                         </li>
-                         
-
-
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -57,20 +54,15 @@
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <?php 
-                                                $id = $_SESSION['id'];
-
-                                                 
-if($id !=''){
- $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."'";
- $sql=$dbconn->prepare($select_bookings25);
- $sql->execute();
- $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
- foreach($wlvd25 as $rows25);
-}
-                                                 
-                                                ?>
-
-
+                                $id = $_SESSION['id'];                                                 
+                                if($id !=''){
+                                    $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."'";
+                                    $sql=$dbconn->prepare($select_bookings25);
+                                    $sql->execute();
+                                    $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
+                                foreach($wlvd25 as $rows25);
+                                }
+                                ?>
                                 <img style="width: 35px; height: 35px;" src="images/admin.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -83,7 +75,7 @@ if($id !=''){
                                                 <img style="width: 50px; height: 50px;" src="images/admin.png" alt="user" class="img-circle" width="60">
                                     </div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0"><?php echo $rows25->cus_fname; ?> <?php echo $rows25->cus_lname; ?></h4>
+                                        <h4 class="m-b-0"><?php echo $_SESSION['admin_name']; ?></h4>
                                         
                                     </div>
                                 </div>

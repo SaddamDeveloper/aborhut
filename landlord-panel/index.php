@@ -20,16 +20,9 @@ if(isset($_POST['button'])){
     if($sql->rowCount() > 0){
     foreach($wlvd as $row5)
     {
-     
-          $_SESSION['id'] = $row5->id;  
-          $_SESSION['landlord_name'] = $row5->landlord_name; 
-          
-                
-          header("Location: welcome.php");
-     
-        
-    
-      
+        $_SESSION['id'] = $row5->id;  
+        $_SESSION['landlord_name'] = $row5->landlord_name; 
+        header("Location: welcome.php");
     }
     
    } else {
@@ -81,9 +74,6 @@ if(isset($_POST['button'])){
                                     </div>
                                     
                                     <input type="text" name="landlord_phone" id="landlord_phone"  class="form-control form-control-lg" required="" placeholder="Mobile Number" aria-label="Mobile Number" aria-describedby="basic-addon1">
-                                
-                                
-                                
                                 
                                 </div>
                                 <div class="input-group mb-3">

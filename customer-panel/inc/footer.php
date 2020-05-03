@@ -1,8 +1,8 @@
  <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by India Web Designs. Designed and Developed by
-                <a href="https://indiawebdesigns.in">India Web Designs</a>.
+                All Rights Reserved by Web Infotech. Designed and Developed by
+                <a href="https://webinfotech.co.in">Web infotech</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

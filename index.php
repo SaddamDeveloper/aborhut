@@ -235,7 +235,7 @@
 
                 $limit = ($page * 10) - 10;
 
-                $pdo_statement = $pdo_conn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
+                $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
                 $pdo_statement->execute();
                 $result = $pdo_statement->fetchAll();
 
@@ -247,26 +247,27 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-pad">
                         <!-- Property img -->
                         <div class="property-img">
-                            <div class="property-tag button alt featured">Featured</div>
+                            <!-- <div class="property-tag button alt featured">Featured</div> -->
                             <div class="property-tag button sale">For Sale</div>
-                            <div class="property-price">₹<?php print $row['prop_price']; ?></div>
-                            <img src="images/property/<?php print $row['prop_image1']; ?>" alt="fp-list" class="img-responsive hp-1">
+                            <div class="property-price">₹<?php echo $row['prop_price']; ?></div>
+                            <img src="images/property/<?php echo $row['prop_image1']; ?>" alt="fp-list" class="img-responsive hp-1">
                             <div class="property-overlay">
                                 <div class="property-magnify-gallery">
-                                    <a href="images/property/<?php print $row['prop_image2']; ?>" class="overlay-link">
+                                    <a href="images/property/<?php echo $row['prop_image2']; ?>" class="overlay-link">
                                         <i class="fa fa-search-plus"></i>
                                     </a>
-                                    <a href="images/property/<?php print $row['prop_image3']; ?>" class="hidden"></a>
-                                    <a href="images/property/<?php print $row['prop_image4']; ?>" class="hidden"></a>
-                                    <a href="images/property/<?php print $row['prop_image5']; ?>" class="hidden"></a>
+                                    <a href="images/property/<?php echo $row['prop_image3']; ?>" class="hidden"></a>
+                                    <a href="images/property/<?php echo $row['prop_image4']; ?>" class="hidden"></a>
+                                    <a href="images/property/<?php echo $row['prop_image5']; ?>" class="hidden"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-3 col-xs-12 property-content ">
+                    <?php $id = $row['id']; ?>
                         <!-- title -->
                         <h1 class="title">
-                            <a href="properties-details.php"><?php print $row['prop_name']; ?></a>
+                            <a href="properties-details.php?p=<?php echo $id ?>"><?php print $row['prop_name']; ?></a>
                         </h1>                        <!-- Facilities List -->
                         <ul class="facilities-list clearfix">
                             <li>
@@ -310,7 +311,7 @@
                     <ul class="pagination">
                         <?php
 
-                        $pdo_statement = $pdo_conn->prepare("SELECT * FROM property order by id desc");
+                        $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc");
                         $pdo_statement->execute();
                         $total = $pdo_statement->rowCount();
 
