@@ -1,4 +1,15 @@
-<?php include('include/header.php'); ?>
+<?php
+include_once('customer-panel/configure.php');
+DB::connect();
+    if(isset($_GET['p']) && !empty($_GET['p'])){
+        $id = $_GET['p'];
+        $select  = "select * from `property` WHERE id = '$id' LIMIT 1";
+        $sql=$dbconn->prepare($select);
+        $sql->execute();
+        $data=$sql->fetch(PDO::FETCH_OBJ);
+    }
+?>
+<?php include_once('include/header.php'); ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="overlay">
@@ -23,15 +34,15 @@
                 <!-- Header -->
                 <div class="heading-properties clearfix sidebar-widget">
                     <div class="pull-left">
-                        <h3>Sweet Family Home</h3>
+                        <h3><?php echo $data->prop_name ?></h3>
                         <p>
-                            <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
+                            <i class="fa fa-map-marker"></i><?php echo $data->prop_location.", ". $data->prop_address ?>
                         </p>
                     </div>
                     <div class="pull-right">
-                        <h3><span>$362,100</span></h3>
+                        <h3><span>₹<?php echo $data->prop_price ?></span></h3>
                         <h5>
-                            Per Manth
+                            Per Month
                         </h5>
                     </div>
                 </div>
@@ -44,19 +55,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     <div class="item">
-                                        <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                        <img src="images/property/<?php echo $data->prop_image1 ?>" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
-                                        <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                        <img src="images/property/<?php echo $data->prop_image2 ?>" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
-                                        <img src="img/properties/properties-4.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                        <img src="images/property/<?php echo $data->prop_image3 ?>" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
-                                        <img src="img/properties/properties-5.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                        <img src="images/property/<?php echo $data->prop_image4 ?>" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
-                                        <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                        <img src="images/property/<?php echo $data->prop_image5 ?>" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
                                         <img src="img/properties/properties-7.jpg" class="thumb-preview" alt="Chevrolet Impala">
@@ -96,7 +107,7 @@
                             </div>
                             <!-- Indicators -->
                             <ol class="carousel-indicators thumbs visible-lg visible-md">
-                                <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="img/properties/properties-small-1.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="images/property/<?php echo $data->prop_image1 ?>" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="img/properties/properties-small-3.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="2" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="img/properties/properties-small-5.jpg" alt="Chevrolet Impala"></li>
@@ -122,23 +133,27 @@
                             <tbody>
                                 <tr>
                                     <th>Lift</th>
-                                    <td>Available</td>
+                                    <td><?php echo $data->prop_lift == 'Yes' ? 'Available' : 'NA' ?></td>
                                 </tr>
                                 <tr>
                                     <th>Car Parking</th>
-                                    <td>Yes</td>
+                                    <td><?php echo $data->prop_parking == 'Yes' ? 'Yes' : 'No' ?></td>
                                 </tr>
                                 <tr>
                                     <th>Electricity Back-Up</th>
-                                    <td>Yes</td>
+                                    <td><?php //echo $data['prop_lift'] == 'Yes' ? 'Yes' : 'No' ?></td>
                                 </tr>
                                 <tr>
                                     <th>Furnishing Type</th>
-                                    <td>Lorem Ipsum</td>
+                                    <td><?php echo $data->prop_furnishing ?></td>
                                 </tr>
                                 <tr>
                                     <th>Balcony</th>
-                                    <td>Available</td>
+                                    <td><?php echo $data->prop_balcony == 'Yes' ? 'Yes' : 'No' ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Water Facility</th>
+                                    <td><?php echo $data->prop_water ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -220,8 +235,16 @@
 
                     <!-- Social media start -->
                     <div class="social-media" style="border: 15px solid #fff;">
-                        <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
-                        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
+                    <?php
+                        // if(isset($_SESSION['id'])){
+                    ?>
+                            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
+                    <?php  //}else{
+                    ?>
+                            <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                    <?php
+                    //}
+                    ?>
                     </div>
                     <div class="book-now">
                         <a href="#">Book Now</a>
@@ -230,11 +253,20 @@
                 <!-- Sidebar end -->
             </div>
         </div>
+        
 
         <div class="main-title-2">
             <h1><span>Related Properties</span></h1>
         </div>
         <div class="row">
+				<?php
+					$stmt = $dbconn->prepare("SELECT * FROM property ORDER BY id DESC LIMIT 4");
+					$stmt->execute();
+					$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+				  if(!empty($result)) { 
+					  foreach($stmt->fetchAll() as $k=>$v) {
+				?>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <!-- Property 2 start -->
                 <div class="property-2">
@@ -244,7 +276,7 @@
                             Featured
                         </div>
                         <div class="price-ratings">
-                            <div class="price">$150,000</div>
+                            <div class="price">$<?php echo $v['prop_price'] ?></div>
                             <div class="ratings">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -253,13 +285,10 @@
                                 <i class="fa fa-star-o"></i>
                             </div>
                         </div>
-                        <img src="img/properties/properties-4.jpg" alt="rp" class="img-responsive">
+                        <img src="images/property/<?php echo $v['prop_image1'] ?>" alt="rp" class="img-responsive">
                         <div class="property-overlay">
-                            <a href="properties-details.php" class="overlay-link">
+                            <a href="properties-details.php?p=<?php echo $v['id'] ?>" class="overlay-link">
                                 <i class="fa fa-link"></i>
-                            </a>
-                            <a class="overlay-link property-video" title="Lexus GS F">
-                                <i class="fa fa-video-camera"></i>
                             </a>
                             <div class="property-magnify-gallery">
                                 <a href="img/properties/properties-4.jpg" class="overlay-link">
@@ -274,12 +303,12 @@
                     <div class="content">
                         <!-- title -->
                         <h4 class="title">
-                            <a href="properties-details.php">Big Head House</a>
+                            <a href="properties-details.php"><?php echo $v['prop_name']; ?></a>
                         </h4>
                         <!-- Property address -->
                         <h3 class="property-address">
-                            <a href="properties-details.php">
-                                <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
+                            <a href="properties-details.php?p=<?php echo $v['id']; ?>">
+                                <i class="fa fa-map-marker"></i><?php echo $v['prop_address'] ?>
                             </a>
                         </h3>
                     </div>
@@ -287,236 +316,42 @@
                     <ul class="facilities-list clearfix">
                         <li>
                             <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                            <span>4800 sq ft</span>
+                            <span><?php echo $v['prop_area'] ?></span>
                         </li>
                         <li>
                             <i class="flaticon-bed"></i>
-                            <span>3</span>
+                            <span><?php echo $v['prop_bedroom'] ?></span>
                         </li>
                         <li>
                             <i class="flaticon-holidays"></i>
-                            <span>2</span>
+                            <span><?php echo $v['prop_bathroom'] ?></span>
                         </li>
                         <li>
                             <i class="flaticon-vehicle"></i>
-                            <span>1</span>
+                            <span><?php echo $v['prop_parking'] ?></span>
                         </li>
                     </ul>
                 </div>
                 <!-- Property 2 end -->
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <!-- Property 2 start -->
-                <div class="property-2">
-                    <!-- Property img -->
-                    <div class="property-img">
-                        <div class="featured">
-                            Featured
-                        </div>
-                        <div class="price-ratings">
-                            <div class="price">$150,000</div>
-                            <div class="ratings">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                        <img src="img/properties/properties-3.jpg" alt="rp" class="img-responsive">
-                        <div class="property-overlay">
-                            <a href="properties-details.php" class="overlay-link">
-                                <i class="fa fa-link"></i>
-                            </a>
-                            <a class="overlay-link property-video" title="Lexus GS F">
-                                <i class="fa fa-video-camera"></i>
-                            </a>
-                            <div class="property-magnify-gallery">
-                                <a href="img/properties/properties-3.jpg" class="overlay-link">
-                                    <i class="fa fa-expand"></i>
-                                </a>
-                                <a href="img/properties/properties-2.jpg" class="hidden"></a>
-                                <a href="img/properties/properties-5.jpg" class="hidden"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="content">
-                        <!-- title -->
-                        <h4 class="title">
-                            <a href="properties-details.php">Beautiful Single Home</a>
-                        </h4>
-                        <!-- Property address -->
-                        <h3 class="property-address">
-                            <a href="properties-details.php">
-                                <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                            </a>
-                        </h3>
-                    </div>
-                    <!-- Facilities List -->
-                    <ul class="facilities-list clearfix">
-                        <li>
-                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                            <span>4800 sq ft</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-bed"></i>
-                            <span>3</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-holidays"></i>
-                            <span>2</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-vehicle"></i>
-                            <span>1</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Property 2 end -->
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <!-- Property 2 start -->
-                <div class="property-2">
-                    <!-- Property img -->
-                    <div class="property-img">
-                        <div class="featured">
-                            Featured
-                        </div>
-                        <div class="price-ratings">
-                            <div class="price">$150,000</div>
-                            <div class="ratings">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                        <img src="img/properties/properties-2.jpg" alt="rp" class="img-responsive">
-                        <div class="property-overlay">
-                            <a href="properties-details.php" class="overlay-link">
-                                <i class="fa fa-link"></i>
-                            </a>
-                            <a class="overlay-link property-video" title="Lexus GS F">
-                                <i class="fa fa-video-camera"></i>
-                            </a>
-                            <div class="property-magnify-gallery">
-                                <a href="img/properties/properties-2.jpg" class="overlay-link">
-                                    <i class="fa fa-expand"></i>
-                                </a>
-                                <a href="img/properties/properties-1.jpg" class="hidden"></a>
-                                <a href="img/properties/properties-5.jpg" class="hidden"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="content">
-                        <!-- title -->
-                        <h4 class="title">
-                            <a href="properties-details.php">Park Avenue</a>
-                        </h4>
-                        <!-- Property address -->
-                        <h3 class="property-address">
-                            <a href="properties-details.php">
-                                <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                            </a>
-                        </h3>
-                    </div>
-                    <!-- Facilities List -->
-                    <ul class="facilities-list clearfix">
-                        <li>
-                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                            <span>4800 sq ft</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-bed"></i>
-                            <span>3</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-holidays"></i>
-                            <span>2</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-vehicle"></i>
-                            <span>1</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Property 2 end -->
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <!-- Property 2 start -->
-                <div class="property-2">
-                    <!-- Property img -->
-                    <div class="property-img">
-                        <div class="featured">
-                            Featured
-                        </div>
-                        <div class="price-ratings">
-                            <div class="price">$150,000</div>
-                            <div class="ratings">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                        <img src="img/properties/properties-1.jpg" alt="rp" class="img-responsive">
-                        <div class="property-overlay">
-                            <a href="properties-details.php" class="overlay-link">
-                                <i class="fa fa-link"></i>
-                            </a>
-                            <a class="overlay-link property-video" title="Lexus GS F">
-                                <i class="fa fa-video-camera"></i>
-                            </a>
-                            <div class="property-magnify-gallery">
-                                <a href="img/properties/properties-1.jpg" class="overlay-link">
-                                    <i class="fa fa-expand"></i>
-                                </a>
-                                <a href="img/properties/properties-2.jpg" class="hidden"></a>
-                                <a href="img/properties/properties-5.jpg" class="hidden"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="content">
-                        <!-- title -->
-                        <h4 class="title">
-                            <a href="properties-details.php">Sweet Family Home</a>
-                        </h4>
-                        <!-- Property address -->
-                        <h3 class="property-address">
-                            <a href="properties-details.php">
-                                <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                            </a>
-                        </h3>
-                    </div>
-                    <!-- Facilities List -->
-                    <ul class="facilities-list clearfix">
-                        <li>
-                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                            <span>4800 sq ft</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-bed"></i>
-                            <span>3</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-holidays"></i>
-                            <span>2</span>
-                        </li>
-                        <li>
-                            <i class="flaticon-vehicle"></i>
-                            <span>1</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Property 2 end -->
+				  <?php 
+                  }
+                  }
+                  ?>
             </div>
         </div>
     </div>
 </div>
 <!-- Properties details page end -->
-<?php include('include/footer.php'); ?>
+<?php
+// }else{
+//     echo "
+//     <div class='properties-details-page content-area'>
+//     <div class='container'>
+//         <center><h2>NOT FOUND!!!</h2></center>
+//     </div>
+//     </div>
+//     ";
+// }
+?>
+<?php include_once('include/footer.php'); ?>

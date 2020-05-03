@@ -116,7 +116,49 @@ img {
   font-size: 150%;
   text-transform: uppercase;
 }
-
+#cartpage {
+  margin-top: 30px;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+#cartpage table {
+  background: #fff;
+}
+#cartpage .fa-trash {
+  font-size: 20px;
+  color: red;
+}
+#checkout-table th, #checkout-table td {
+  padding: 10px;
+}
+.border-bottom {
+  border-bottom: 2px solid lightgrey;
+  padding-bottom: 15px;
+}
+.login-page, .signup-page {
+  margin-left: auto;
+  margin-right: auto;
+}
+.thank_you_box {
+  text-align: center;
+}
+.thank_you_box h2 {
+  font-weight: 800;
+}
+.order_id {
+  background-color: #dedede;
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 20px;
+  font-size: 95%;
+}
+.thank_you_msg {
+  font-size: 25px;
+  color: #808080;
+  line-height: normal;
+  font-family: auto;
+  margin-top: 10px;
+}
 /*phone*/
 @media (max-width: 768px) {
 .phone-mb-15 {

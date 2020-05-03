@@ -9,8 +9,6 @@ DB::connect();
  $sql=$dbconn->prepare($select_enquiry);
  $sql->execute();
  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-	
-	
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +64,11 @@ DB::connect();
                 <!-- ============================================================== -->
                 <!-- Info box -->
                 <!-- ============================================================== -->
-                
+                <?php
+                    if(isset($_GET['message'])){
+                        echo $_GET['message'];
+                    }
+                ?>
                 <!-- basic table -->
                 <div class="row">
                     <div class="col-12">
@@ -97,32 +99,28 @@ DB::connect();
 											  </tr>
 											  
 											 
-<?php
+                                    <?php
 
-//while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
-//{ 
-if($sql->rowCount() > 0){
-	foreach($wlvd as $rows){
-$id = $rows->id;
-$prop_name= $rows->prop_name;
-$prop_price= $rows->prop_price;
-$prop_address= $rows->prop_address;
-$prop_desc= $rows->prop_desc;
-$prop_city= $rows->prop_city;
-$prop_location= $rows->prop_location;
-$prop_state = $rows->prop_state;
-$prop_image1 = $rows->prop_image1;
-$prop_image2 = $rows->prop_image2;
-$prop_image3 = $rows->prop_image3;
-$prop_image4 = $rows->prop_image4;
-$prop_image5 = $rows->prop_image5;
-$prop_status = $rows->prop_status;
- 
-?>
-							
-
-
-
+                                    //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
+                                    //{ 
+                                    if($sql->rowCount() > 0){
+                                        foreach($wlvd as $rows){
+                                    $id = $rows->id;
+                                    $prop_name= $rows->prop_name;
+                                    $prop_price= $rows->prop_price;
+                                    $prop_address= $rows->prop_address;
+                                    $prop_desc= $rows->prop_desc;
+                                    $prop_city= $rows->prop_city;
+                                    $prop_location= $rows->prop_location;
+                                    $prop_state = $rows->prop_state;
+                                    $prop_image1 = $rows->prop_image1;
+                                    $prop_image2 = $rows->prop_image2;
+                                    $prop_image3 = $rows->prop_image3;
+                                    $prop_image4 = $rows->prop_image4;
+                                    $prop_image5 = $rows->prop_image5;
+                                    $prop_status = $rows->prop_status;
+                                    
+                                    ?>
 
 
 

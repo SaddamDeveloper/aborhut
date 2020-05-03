@@ -18,7 +18,6 @@ if($lid !=''){
 <html lang="en" dir="ltr">
 <?php include('inc/header.php'); ?>
 
-
 <body>
     <?php include('inc/preloader.php'); ?>
     <!-- ============================================================== -->
@@ -78,20 +77,15 @@ if($lid !=''){
                                    Welcome back Dear <?php echo $_SESSION["landlord_name"]; ?>!   <br><br>
 								    
                                 </div>
-                              
-                    
                     <!-- column -->
                             </div>
                         </div>
                     </div>
                 </div>
-			 
 			
 			<div class="col-12">
             
-                    </div>
-			
-			
+            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
