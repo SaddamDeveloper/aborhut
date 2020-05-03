@@ -116,7 +116,22 @@ img {
   font-size: 150%;
   text-transform: uppercase;
 }
-
+#cartpage {
+  margin-top: 30px;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+#cartpage table {
+  background: #fff;
+}
+#cartpage .fa-trash {
+  font-size: 20px;
+  color: red;
+}
+.border-bottom {
+  border-bottom: 2px solid lightgrey;
+  padding-bottom: 15px;
+}
 /*phone*/
 @media (max-width: 768px) {
 .phone-mb-15 {

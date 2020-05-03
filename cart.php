@@ -16,11 +16,11 @@
 <!-- Sub Banner end -->
 
 <!-- About city estate start -->
-<div style="margin-top: 30px; font-size: 18px; margin-bottom: 50px;">
+<div id="cartpage">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-               <table class="table" style="background: #fff;">
+               <table class="table">
                   <thead>
                     <tr>
                       <th>Remove</th>
@@ -32,7 +32,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th><i class="fa fa-trash" style="font-size: 20px; color: red;"></i></th>
+                      <th><i class="fa fa-trash"></i></th>
                       <td><img src="http://www.aborhut.com/images/property/6f5d5d77b723da21addca839cf8150a4.png" width="70" alt=""></td>
                       <td><a href="#"><h4>Single room at Natun Sarania,012</h4></a></td>
                       <td>₹150.00</td>
@@ -48,7 +48,7 @@
             <div class="col-md-8"></div>
             <div class="col-md-4">
                 <h4>Subtotal ₹ 150</h4>
-                <h4 style="border-bottom: 2px solid lightgrey;padding-bottom: 15px;">Grand Total ₹ 150</h4>
+                <h4 class="border-bottom">Grand Total ₹ 150</h4>
                 <a href="#" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
             </div>
         </div>
