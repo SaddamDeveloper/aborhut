@@ -56,7 +56,7 @@ function test_input($data) {
         <div class="row">
             <div class="col-lg-12">
                 <!-- Form content box start -->
-                <div class="form-content-box">
+                <div class="form-content-box signup-page">
                     <!-- details -->
                     <div class="details">
                         <!-- Main title -->

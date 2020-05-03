@@ -49,7 +49,7 @@ DB::connect();
         <div class="row">
             <div class="col-lg-12">
                 <!-- Form content box start -->
-                <div class="form-content-box">
+                <div class="form-content-box login-page">
                     <!-- details -->
                     <div class="details">
                         <!-- Main title -->

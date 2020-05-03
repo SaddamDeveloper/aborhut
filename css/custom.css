@@ -135,6 +135,10 @@ img {
   border-bottom: 2px solid lightgrey;
   padding-bottom: 15px;
 }
+.login-page, .signup-page {
+  margin-left: auto;
+  margin-right: auto;
+}
 /*phone*/
 @media (max-width: 768px) {
 .phone-mb-15 {
