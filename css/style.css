@@ -1975,7 +1975,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .content-area-7 {
-    padding: 100px 0;
+    padding: 40px 0;
 }
 
 .content-area-8 {
@@ -5608,7 +5608,7 @@ table.manage-table .title-container .title span {
 }
 
 .submit-address form textarea {
-    min-height: 250px;
+    min-height: 135px;
 }
 
 .submit-address form label {
