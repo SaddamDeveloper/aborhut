@@ -16,7 +16,7 @@
 <!-- Sub Banner end -->
 
 <!-- About city estate start -->
-<div style="margin-top: 30px;">
+<div style="margin-top: 30px; font-size: 18px; margin-bottom: 50px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -33,7 +33,7 @@
                   <tbody>
                     <tr>
                       <th><i class="fa fa-trash" style="font-size: 20px; color: red;"></i></th>
-                      <td><img src="http://www.aborhut.com/images/property/6f5d5d77b723da21addca839cf8150a4.png" width="80" alt=""></td>
+                      <td><img src="http://www.aborhut.com/images/property/6f5d5d77b723da21addca839cf8150a4.png" width="70" alt=""></td>
                       <td><a href="#"><h4>Single room at Natun Sarania,012</h4></a></td>
                       <td>₹150.00</td>
                       <td>₹150.00</td>
