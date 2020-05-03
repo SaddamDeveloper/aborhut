@@ -49,7 +49,7 @@
             <div class="col-md-4">
                 <h4>Subtotal ₹ 150</h4>
                 <h4 class="border-bottom">Grand Total ₹ 150</h4>
-                <a href="#" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
+                <a href="checkout.php" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
             </div>
         </div>
     </div>
