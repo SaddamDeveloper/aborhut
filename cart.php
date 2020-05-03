@@ -32,7 +32,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><i class="fa fa-trash"></i></td>
+                      <td><a href="#"><i class="fa fa-trash"></i></a></td>
                       <td><img src="http://www.aborhut.com/images/property/6f5d5d77b723da21addca839cf8150a4.png" width="70" alt=""></td>
                       <td><a href="#"><h4>Single room at Natun Sarania,012</h4></a></td>
                       <td>₹150.00</td>
