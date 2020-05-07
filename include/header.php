@@ -136,6 +136,7 @@ DB::connect();
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right rightside-navbar">
+                   
                     <li class="phone-mb-15">
                         <a class="button my-account">
                             <i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i>
@@ -143,6 +144,11 @@ DB::connect();
                     </li>
                     <div class="dropDownBox buyerDBLink hidden">
                         <div class="carrot"></div>
+                        <ul class="border-bottom">
+                            <li>
+                               <a href="cart.php"> Cart (0)</a>
+                            </li>
+                        </ul>
                         <?php 
                             if(isset($_SESSION['id'])) { 
                         ?>

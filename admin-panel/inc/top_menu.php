@@ -71,8 +71,7 @@
                                 </span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
                                     <div class="">
-                                        
-                                                <img style="width: 50px; height: 50px;" src="images/admin.png" alt="user" class="img-circle" width="60">
+                                        <img style="width: 50px; height: 50px;" src="images/admin.png" alt="user" class="img-circle" width="60">
                                     </div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['admin_name']; ?></h4>
@@ -82,9 +81,6 @@
                                 <a class="dropdown-item" href="profile.php">
                                     <i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)">
-                                    
-                                
-                                
                             
                                 <a class="dropdown-item" href="logout.php">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>

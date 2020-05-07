@@ -5,29 +5,26 @@ DB::connect();
 require_once("check.php");
 $id = $_SESSION['id'];
 
- 
- 
-     
-     
-     if($id !=''){
- $select_bookings= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."'";
- $sql=$dbconn->prepare($select_bookings);
- $sql->execute();
- $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
- foreach($wlvd as $rows);
+if($id !=''){
+    $select_bookings= "SELECT orders.id, orders.product_id, checkout.chk_bill_name, checkout.chk_bill_phone,
+    orders.amount, orders.status FROM `orders` 
+    LEFT JOIN checkout ON orders.checkout_id = checkout.id WHERE orders.user_id = '$id' order by orders.id desc LIMIT 20";
+   $sql=$dbconn->prepare($select_bookings);
+   $sql->execute();
+   $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
 }
 
 
 
 
-{
- $select_client1= "SELECT * FROM `checkout` WHERE 
-chk_bill_phone = '".$rows->cus_phone."' ORDER BY ID DESC";
- $sql1=$dbconn->prepare($select_client1);
- $sql1->execute();
- $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
- foreach($wlvd1 as $rows1);
-}
+// {
+//  $select_client1= "SELECT * FROM `checkout` WHERE 
+// chk_bill_phone = '".$rows->cus_phone."' ORDER BY ID DESC";
+//  $sql1=$dbconn->prepare($select_client1);
+//  $sql1->execute();
+//  $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
+//  foreach($wlvd1 as $rows1);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +86,7 @@ chk_bill_phone = '".$rows->cus_phone."' ORDER BY ID DESC";
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All state</h4>
+                                <h4 class="card-title">All Orders</h4>
                                 
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
@@ -98,58 +95,40 @@ chk_bill_phone = '".$rows->cus_phone."' ORDER BY ID DESC";
 									<table class="table table-hover" id="sample-table-1">
 										<thead>
 											<tr>
-												<th class="center"> ID</th>
-										 
-												<th class="center">Date | Time</th>
-												
-                                                 <th class="center">Amount  </th>
-                                                 <th class="center">Status</th>
-												<th class="center">View Property</th>
-                                              
+                                                <th class="center"> ID</th>
+												<th class="center">Property View</th>
+												<th class="center"> Amount</th>
+												<th class="center"> Status</th>
 											  </tr>
-											  
-											 
-<?php
+                                            <?php
 
-//while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
-//{ 
-if($sql->rowCount() > 0){
-
-  foreach($wlvd1 as $rows1){
-
-$id = $rows1->id;
-
-$chk_total = $rows1->chk_total;            
- 
-$chk_trans_timestamp = $rows1->chk_trans_timestamp; 
-$chk_status = $rows1->chk_status;
- 
-?>
-							
-
-
-
-
-
+                                            //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
+                                            //{ 
+                                            if($sql->rowCount() > 0){
+                                                foreach($wlvd as $rows=> $row){
+                                                $id = $row->id;
+                                            ?>
 
 											 </thead>
 										<tbody>
                                     <tr>
 										<td class="center"><?php echo $id;?> </td>
 									 
-										<td class="center"><?php echo $chk_trans_timestamp; ?></td>
+										<td class="center">
+                                            <a href="appointment_prop.php?id=<?php echo $row->product_id; ?>&start=2"target="_self"><font color="purple">View</font></a>
+                                        </td>
 										
-										<td class="center"><?php echo $chk_total; ?></td>
-										<td class="center"><?php echo $chk_status; ?></td>
-                                       
-                                        
-										
-										<td class="center"><a href="property_view.php?id=<?php echo $id; ?>&start=2"target="_self">View</a> 
-										
-								 
-										
-															
-											
+										<td class="center">₹<?php echo number_format($row->amount, 2); ?></td>
+										<td class="center">
+                                        <?php 
+                                        if($row->status == 2){
+                                            echo '<label class="label-success">ACCEPTED</label>';
+                                        }else if($row->status == 1){ 
+                                            echo '<label class="label-danger">REJECTED</label>';
+                                        }else if($row->status == 3){
+                                            echo '<label class="label-warning">REFUNDED</label>';
+                                        }
+                                        ?></td>
 									</tr>	
 										<?php } } ?>
 										</tbody>

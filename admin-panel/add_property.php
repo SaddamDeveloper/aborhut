@@ -343,7 +343,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                     <div class="form-group">
                                         <label  for="exampleInputEmail1">Name</label>
                                         <input name="prop_name" type="text" class="form-control" id="prop_name" value="<?php echo isset($_POST['prop_name']) ? $_POST['prop_name'] : '' ?>" >
-                                        <small id="emailHelp" class="form-text text-danger"><?php echo $nameErr; ?></small> 
+                                        <small class="form-text text-danger"><?php echo $nameErr; ?></small> 
                                     </div> 
                                     
                                     <div class="form-group m-b-30">

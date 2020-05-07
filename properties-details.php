@@ -7,6 +7,25 @@ DB::connect();
         $sql=$dbconn->prepare($select);
         $sql->execute();
         $data=$sql->fetch(PDO::FETCH_OBJ);
+
+        $select_carts = "SELECT product_id FROM `carts` where product_id='$id' ";
+        $sql2=$dbconn->prepare($select_carts);
+        $sql2->execute();
+        $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
+        if($sql2->rowCount() > 0){
+         $addandcheckoutStatus = 0;
+        }else{
+         $addandcheckoutStatus = 1;
+        }
+
+        $select_check = "select orders.product_id, orders.status, orders.user_id, property.prop_landlord_id, property.prop_latitude, property.prop_longitude, landlord.landlord_phone from `orders`
+            INNER JOIN property ON orders.product_id = property.id
+            INNER JOIN landlord ON property.prop_landlord_id = landlord.id
+            WHERE orders.product_id = '$id' LIMIT 1";
+        $sql3=$dbconn->prepare($select_check);
+        $sql3->execute();
+        $data3=$sql3->fetch(PDO::FETCH_OBJ);
+        // print_r($data3);exit();
     }
 ?>
 <?php include_once('include/header.php'); ?>
@@ -236,18 +255,37 @@ DB::connect();
                     <!-- Social media start -->
                     <div class="social-media" style="border: 15px solid #fff;">
                     <?php
-                        // if(isset($_SESSION['id'])){
+                        $latitude = $data3->prop_latitude;
+                        $longitude = $data3->prop_longitude;
+                        if($data3->user_id == $_SESSION['id']){
+                            if($data3->product_id){
+                                if($data3->status == 2){ 
+
                     ?>
-                            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
-                    <?php  //}else{
+                           <iframe src = 'https://maps.google.com/maps?q=<?php echo $latitude ?>,<?php echo $longitude ?>&hl=es;z=14&amp;output=embed' width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <div class="book-now">
+                                <a href="tel:<?php echo $data3->chk_bill_phone ?>">+91-<?php echo $data3->landlord_phone ?></a>
+                            </div>
+                    <?php
+                                }
+                            }else{
+                                ?>
+                                <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                            <div class="book-now">
+                                <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
+                            </div>
+                                <?php
+                            }
+                        }
+                     else{
                     ?>
                             <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                            <div class="book-now">
+                                <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
+                            </div>
                     <?php
-                    //}
+                    }
                     ?>
-                    </div>
-                    <div class="book-now">
-                        <a href="#">Book Now</a>
                     </div>
                 </div>
                 <!-- Sidebar end -->

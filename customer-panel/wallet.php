@@ -3,37 +3,25 @@ ob_start();
 include('configure.php');
 DB::connect();
 require_once("check.php");
+$id = $_SESSION['id'];
 
- $select_bookings= "SELECT orders.id, orders.product_id, checkout.chk_bill_name, checkout.chk_bill_phone,
-  orders.amount, orders.status FROM `orders` 
-  LEFT JOIN checkout ON orders.checkout_id = checkout.id order by orders.id desc LIMIT 20";
+if(isset($id) && !empty($id)){
+ $select_bookings= "SELECT * FROM `wallet` WHERE user_id = '".$_SESSION['id']."' LIMIT 1";
  $sql=$dbconn->prepare($select_bookings);
  $sql->execute();
- $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-
-if(isset($_GET['v']) == 2){
-    $id = $_GET['p'];
-    $data = $_GET['v'];
-    $c = $_GET['c'];
-    $update_order = "UPDATE `orders` SET
-    status = '".$data."' WHERE id = '$c'";
-    $sql_update=$dbconn->prepare($update_order);
-    $sql_update->execute();
-
-    if($sql_update){
-        $delete_app = "DELETE FROM appointment WHERE app_property_id ='$id'";
-            $sql_update=$dbconn->prepare($delete_app);
-            $sql_update->execute();
-        header('location:order.php');
-    }
+ $wlvd=$sql->fetch(PDO::FETCH_OBJ);
+ $select_client1= "SELECT * FROM `wallet_history` WHERE 
+ wallet_id = '".$wlvd->id."' AND user_id = '".$wlvd->user_id."' ORDER BY ID DESC";
+ $sql1=$dbconn->prepare($select_client1);
+ $sql1->execute();
+ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
+ foreach($wlvd1 as $rows1);
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <?php include('inc/header.php'); ?>
-
-
 <body>
     <?php include('inc/preloader.php'); ?>
     <!-- ============================================================== -->
@@ -64,7 +52,7 @@ if(isset($_GET['v']) == 2){
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">   </h4>
+                        <h4 class="page-title">My Wallet</h4>
                         <div class="d-flex align-items-center">
 
                         </div>
@@ -88,7 +76,7 @@ if(isset($_GET['v']) == 2){
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All Orders</h4>
+                                <h3 class="card-title" style="text-align: center;">Wallet Balance: ₹ <?php echo number_format($wlvd->amount, 2) ?></h3>
                                 
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
@@ -98,66 +86,49 @@ if(isset($_GET['v']) == 2){
 										<thead>
 											<tr>
 												<th class="center"> ID</th>
-												<th class="center"> User Name</th>
-												<th class="center"> Phone No</th>
-												<th class="center">Property VIew</th>
-												<th class="center"> Amount</th>
-                                                 <th class="center">Action</th>
+                                                 <th class="center">Amount</th>
+                                                 <th class="center">Date</th>
+                                                 <th class="center">Status</th>
 											  </tr>
-											  
-                                        <?php
+                                            <?php
 
-                                        //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
-                                        //{ 
-                                        if($sql->rowCount() > 0){
+                                            //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
+                                            //{ 
+                                            if($sql->rowCount() > 0){
 
-                                        foreach($wlvd as $rows){
+                                            foreach($wlvd1 as $rows1){
 
-                                        $id = $rows->id;
-                                        // print_r($rows);
-                                        ?>
-						            </thead>
+                                            $id = $rows1->id;
+
+                                            $amount = $rows1->amount;            
+                                            
+                                            $total_amount = $rows1->total_amount; 
+                                            $chk_status = $rows1->type;
+                                            $msg = $rows1->message
+                                            ?>
+
+											 </thead>
 										<tbody>
                                     <tr>
 										<td class="center"><?php echo $id;?> </td>
-										<td class="center"><?php echo $rows->chk_bill_name;?> </td>
-									    <td class="center"><?php echo $rows->chk_bill_phone; ?></td>
-										<td class="center"><a href="appointment_prop.php?id=<?php echo $rows->product_id; ?>&start=2"target="_self"><font color="purple">View</font></a> 
-										<td class="center"><?php echo $rows->amount; ?></td>
-                                        <td class="center">
-                                        <div class="form-group row">
-                                            <form method="POST">
-                                                <?php
-                                                if($rows->status == 1){ 
-                                                ?>
-                                                    <a href="appointments.php?p=<?php echo $id ?>&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
-                                                <?php
-                                                }else if($rows->status == 2){
-                                                    ?>
-                                                    <a href="order.php?p=<?php echo $rows->product_id ?>&&v=1&&c=<?php echo $id ?>" name="accpt" class="btn btn-danger btn-sm">Reject</a>
-                                                    <a href="" class="btn btn-primary btn-sm">Refund</a>
-                                                <?php
-                                                }else if($rows->status == 3){
-                                                ?>
-                                                    <a href="#" class="btn btn-warning" disabled>REFUNDED</a>
-                                                <?php
-                                                }else if($rows->status == 4){
-                                                ?>
-                                                    <a href="#" class="btn btn-info">PENDING</a>    
-                                                <?php
-                                                }
-                                                ?>
-                                            </form>
-                                        </div>
-                                        </td>
-                                        <td class="center">
+									 
+										<td class="center"><?php echo $amount; ?></td>
+										<td class="center"><?php echo $total_amount; ?></td>
+										<?php
+                                            if($chk_status == 1){ 
+                                        ?>
+										<td class="center"><label class="label label-success">Cr</label></td>
                                         <?php
-                                        if($rows->status == 3){
+                                            }else{
                                                 ?>
-                                                <a href="order.php?p=<?php echo $id ?>&&v=1" name="accpt" class="btn btn-primary btn-sm">Refund</a>
+                                                <td class="center"><label class="label label-warning">Dr</label></td>
+
                                                 <?php
-                                                }
-                                            ?>
+                                            }
+                                        ?>
+
+                                        <td class="center">
+                                            <?php echo $msg ?>
                                         </td>
 									</tr>	
 										<?php } } ?>

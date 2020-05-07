@@ -3,13 +3,13 @@ include('configure.php');
 DB::connect();
 require_once("check.php");
 
-$id = $_SESSION['id'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $select_bookings= "SELECT appointment.id, checkout.chk_bill_name, checkout.chk_bill_phone,
-appointment.app_date, property.prop_address, property.id as prop_id, landlord.landlord_name, landlord.landlord_phone FROM `appointment` 
-LEFT JOIN checkout ON appointment.app_checkout_id = checkout.id
-INNER JOIN property ON appointment.app_property_id = property.id
-INNER JOIN landlord ON property.prop_landlord_id = landlord.id
-WHERE appointment.app_cus_id = '$id' order by appointment.id desc LIMIT 20";
+appointment.app_date FROM `appointment` 
+LEFT JOIN checkout ON appointment.app_checkout_id = checkout.id order by appointment.id desc LIMIT 20";
 $sql=$dbconn->prepare($select_bookings);
 $sql->execute();
 $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
@@ -82,11 +82,11 @@ $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
                                             <thead>
                                                 <tr>
                                                     <th class="center"> ID</th>
-                                                    <th class="center"> Landlord Name</th>
-                                                    <th class="center">Property Address</th>
-                                                    <th class="center">Landlord Phone No</th>
+                                                    <th class="center"> Name</th>
+                                                    <th class="center">Phone</th>
                                                     <th class="center"> Appointment Date</th> 
                                                     <th class="center"> View Property</th>
+                                                    <th class="center">Action</th>
                                                     </tr>
                                                     </thead>
                                             <tbody>
@@ -96,11 +96,11 @@ $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
                                             ?>
                                         <tr>
                                             <td class="center"><?php echo $rows->id;?> </td>
-                                            <td class="center"><?php echo $rows->landlord_name; ?></td>
-                                            <td class="center"><?php echo $rows->prop_address; ?></td>
-                                            <td class="center"><?php echo $rows->landlord_phone; ?></td>
+                                            <td class="center"><?php echo $rows->chk_bill_name; ?></td>
+                                            <td class="center"><?php echo $rows->chk_bill_phone; ?></td>
                                             <td class="center"><?php echo $rows->app_date; ?></td>
-                                            <td><a href="appointment_prop.php?id=<?php echo $rows->prop_id; ?>&start=2"target="_self"><font color="purple">View</font></a</td>
+                                            <td class="center"><a href="appointment_prop.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="purple">View</font></a> 
+                                            <td class="center"><a href="appointment_edit.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="red">Check</font></a>
                                         </tr>	
                                                 <?php } ?>  
                                             </tbody>

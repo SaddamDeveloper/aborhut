@@ -41,6 +41,10 @@
                         <li class="sidebar-item"> <a class="sidebar-link" href="../index.php" ><i class="icon-Car-Wheel"></i>Visit Website </a>
                             
                         </li>    
+
+                        <li class="sidebar-item"> <a class="sidebar-link" href="./wallet.php" ><i class="fas fa-wallet"></i>Wallet</a>
+                            
+                        </li>    
                             
                         
                         
