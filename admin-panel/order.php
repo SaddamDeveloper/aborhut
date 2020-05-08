@@ -143,7 +143,7 @@ if(isset($_GET['v']) == 2){
                                                 <?php
                                                 }else if($rows->status == 4){
                                                 ?>
-                                                    <a href="#" class="btn btn-info">PENDING</a>    
+                                                    <a href="appointments.php?p=<?php echo $id ?>&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
                                                 <?php
                                                 }
                                                 ?>

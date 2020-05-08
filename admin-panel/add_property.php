@@ -22,7 +22,8 @@ if(isset($_POST['submit12345'])){
     empty($_POST['latitude']) ? $latErr = "Latitude is required!" : $prop_latitude = test_input($_POST['latitude']);
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
-
+    !is_numeric($_POST['bua']) ? $buaErr = "Built Up area should be numeric!" : $prop_bua = test_input($_POST['bua']);
+    !is_numeric($_POST['ca']) ? $caErr = "Carpet area should be numeric!" : $prop_ca = test_input($_POST['ca']);
     $prop_desc = test_input($_POST['prop_desc']);
 
     $prop_ac = test_input($_POST['prop_ac']);
@@ -194,6 +195,8 @@ if(isset($_POST['submit12345'])){
         prop_latitude = '".$prop_latitude."',
         prop_longitude = '".$prop_longitude."',
         prop_location = '".$prop_location."',
+        prop_bua = '".$prop_bua."',
+        prop_ca = '".$prop_ca."',
         posted_by = '".$prop_posted_by."',
         created_at = '".$prop_created_at."'";
         $sql_update=$dbconn->prepare($update_user);
@@ -461,6 +464,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                             <small id="emailHelp" class="form-text text-danger"><?php echo $longErr ?></small> 
                                         </div>
                                     </div>
+                                   
                                     <div class="form-group m-b-30">
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Location  </label>
                                         <select class="custom-select mr-sm-2" id="prop_location" name="prop_location" >
@@ -476,6 +480,18 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                             <?php }} ?>
                                         </select>
                                         <small class="form-text text-danger"><?php echo $locationErr ?></small> 
+                                    </div>
+                                    <div class="form-group m-b-30 row">
+                                        <div class="col-md-6">
+                                            <label for="bua">Built Up Area</label>
+                                            <input type="text" class="form-control" id="bua" name="bua" value="<?php echo isset($_POST['bua']) ? $_POST['bua'] : '' ?>">    
+                                            <small class="form-text text-danger"><?php echo $buaErr ?></small> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ca">Carpet Area</label>
+                                            <input type="text" class="form-control" id="ca" name="ca" value="<?php echo isset($_POST['ca']) ? $_POST['ca'] : '' ?>">    
+                                            <small class="form-text text-danger"><?php echo $caErr ?></small> 
+                                        </div>
                                     </div>
                                     <h4>Amentities</h4>
                                     <hr>

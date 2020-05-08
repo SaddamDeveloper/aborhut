@@ -66,7 +66,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 
     $hash_string .= $SALT;
 
-
     $hash = strtolower(hash('sha512', $hash_string));
     $action = $PAYU_BASE_URL . '/_payment';
   }
@@ -105,11 +104,10 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 					</div>
               <div class="container"> 
 							<?php if($formError) {?>
-                              
-                                  <span style="color:red">Please fill all mandatory fields.</span>
-                                  <br/>
-                                  <br/>
-                                <?php } ?> 
+                <span style="color:red">Please fill all mandatory fields.</span>
+                <br/>
+                <br/>
+              <?php } ?> 
 								<form action="<?php echo $action; ?>" class="m-t-30" method="post" name="payuForm">
                                
 									<input type="hidden" name="key" value="<?php echo $MERCHANT_KEY ?>" />
@@ -136,8 +134,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 									<tr>
           <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" size="64" /></td>
         </tr>
-									
-									<?php if(!$hash) { ?>
+					<?php if(!$hash) { ?>
             <td colspan="4"><input type="submit" value="Pay Now"  id = "loginsubmit"  class="btn btn-primary" /></td>
           <?php } ?>
 									

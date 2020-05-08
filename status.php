@@ -4,6 +4,7 @@
 
 $id = $_SESSION['id'];
 $myid= $_REQUEST['id'];
+$wallet_due = $_SESSION['wallet_due'];
   /*
    *  @author   Saddam Hussain
    *  @about    PayUMoney Payment Gateway integration in PHP
@@ -47,7 +48,7 @@ if(isset($_POST['submit12345'])){
   $sql_insert->execute();
 
   $update_wallet = "UPDATE `wallet` SET
-	amount   = '".addslashes($amount)."'
+	amount   = '".addslashes($wallet_due)."'
   WHERE id = '".$myid."'"; 
 
   $sql = $dbconn->prepare($update_wallet);

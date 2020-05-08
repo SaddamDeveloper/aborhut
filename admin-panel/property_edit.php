@@ -23,6 +23,8 @@ if(isset($_POST['submit'])){
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
     empty($_POST['prop_status']) ? $statusErr = "Status is required!" : $prop_status = test_input($_POST['prop_status']);
+    !is_numeric($_POST['bua']) ? $buaErr = "Built Up area should be numeric!" : $prop_bua = test_input($_POST['bua']);
+    !is_numeric($_POST['ca']) ? $caErr = "Carpet area should be numeric!" : $prop_ca = test_input($_POST['ca']);
 
     $prop_desc = test_input($_POST['prop_desc']);
 
@@ -188,7 +190,8 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
             prop_parking   = '".addslashes($prop_parking)."',
             prop_state   = '".addslashes($prop_state)."',
             prop_category   = '".addslashes($prop_category)."',
-         
+            prop_bua = '".addslashes($prop_bua)."',
+            prop_ca = '".addslashes($prop_ca)."',
             prop_visit_price   = '".addslashes($prop_visit_price)."',
             prop_pool   = '".addslashes($prop_pool)."',
             prop_furnishing   = '".addslashes($prop_furnishing)."',
@@ -451,7 +454,18 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                         </select>
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $locationErr; ?></small> 
                                     </div>
-                                    
+                                    <div class="form-group m-b-30 row">
+                                        <div class="col-md-6">
+                                            <label for="bua">Built Up Area</label>
+                                            <input type="text" class="form-control" id="bua" name="bua" value="<?php echo $rows->prop_bua ?>">    
+                                            <small class="form-text text-danger"><?php echo $buaErr ?></small> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ca">Carpet Area</label>
+                                            <input type="text" class="form-control" id="ca" name="ca" value="<?php echo $rows->prop_ca ?>">    
+                                            <small class="form-text text-danger"><?php echo $caErr ?></small> 
+                                        </div>
+                                    </div>
                                     <h4>Amentities</h4>
                                     <hr>
                                     <div class="box-body row">

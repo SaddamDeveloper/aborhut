@@ -25,7 +25,6 @@ DB::connect();
         $sql3=$dbconn->prepare($select_check);
         $sql3->execute();
         $data3=$sql3->fetch(PDO::FETCH_OBJ);
-        // print_r($data3);exit();
     }
 ?>
 <?php include_once('include/header.php'); ?>
@@ -73,42 +72,72 @@ DB::connect();
                             <div class="carousel-outer">
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
-                                    <div class="item">
-                                        <img src="images/property/<?php echo $data->prop_image1 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/property/<?php echo $data->prop_image2 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/property/<?php echo $data->prop_image3 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/property/<?php echo $data->prop_image4 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/property/<?php echo $data->prop_image5 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
+                                    <?php
+                                        if($data->prop_image1){
+                                            ?>
+                                        <div class="item-active">
+                                            <img src="images/property/<?php echo $data->prop_image1 ?>" class="thumb-preview" alt="Chevrolet Impala">
+                                        </div>
+                                    <?php
+                                        }
+                                    ?>
+                                    <?php
+                                        if($data->prop_image2){
+                                            ?>
+                                            <div class="item">
+                                                <img src="images/property/<?php echo $data->prop_image2 ?>" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
+                                      <?php
+                                        if($data->prop_image3){
+                                            ?>
+                                            <div class="item">
+                                                <img src="images/property/<?php echo $data->prop_image3 ?>" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
+                                    <?php
+                                        if($data->prop_image4){
+                                            ?>
+                                            <div class="item">
+                                                <img src="images/property/<?php echo $data->prop_image4 ?>" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
+                                    <?php
+                                        if($data->prop_image5){
+                                            ?>
+                                            <div class="item">
+                                                <img src="images/property/<?php echo $data->prop_image5 ?>" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
+                                    <!-- <div class="item">
                                         <img src="img/properties/properties-7.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
+                                    </div> -->
+                                    <!-- <div class="item">
                                         <img src="img/properties/properties-8.jpg" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
                                         <img src="img/properties/properties-5.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item">
-                                        <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
-                                    <div class="item active">
-                                        <img src="img/properties/properties-2.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div>
+                                    </div> -->
+                                    <!-- <div class="item"> -->
+                                        <!-- <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
+                                    <!-- </div> -->
+                                    <!-- <div class="item"> -->
+                                        <!-- <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
+                                    <!-- </div> -->
+                                    <!-- <div class="item"> -->
+                                        <!-- <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
+                                    <!-- </div> -->
+                                    <!-- <div class="item active"> -->
+                                        <!-- <img src="img/properties/properties-2.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
+                                    <!-- </div> -->
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-custom" role="button" data-slide="prev">
@@ -126,10 +155,44 @@ DB::connect();
                             </div>
                             <!-- Indicators -->
                             <ol class="carousel-indicators thumbs visible-lg visible-md">
-                                <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="images/property/<?php echo $data->prop_image1 ?>" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="img/properties/properties-small-3.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="2" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="img/properties/properties-small-5.jpg" alt="Chevrolet Impala"></li>
+                                <?php
+                                    if($data->prop_image1){
+                                ?>
+                                    <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="images/property/<?php echo $data->prop_image1 ?>" alt="Chevrolet Impala"></li>
+                                <?php 
+                                    }
+                                ?>
+                                <?php
+                                    if($data->prop_image2){
+                                ?>
+                                    <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="images/property/<?php echo $data->prop_image2 ?>" alt="Image"></li>
+                                <?php 
+                                    }
+                                ?>
+                                <?php
+                                    if($data->prop_image3){
+                                ?>
+                                    <li data-target="#carousel-custom" data-slide-to="2" class=""><img src="images/property/<?php echo $data->prop_image3 ?>" alt="Image"></li>
+                                <?php 
+                                    }
+                                ?>
+                                <?php
+                                    if($data->prop_image4){
+                                ?>
+                                    <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="images/property/<?php echo $data->prop_image4 ?>" alt="Image"></li>
+                                <?php 
+                                    }
+                                ?>
+                                <?php
+                                    if($data->prop_image5){
+                                ?>
+                                    <li data-target="#carousel-custom" data-slide-to="4" class=""><img src="images/property/<?php echo $data->prop_image5 ?>" alt="Image"></li>
+                                <?php 
+                                    }
+                                ?>
+                                <!-- <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="img/properties/properties-small-3.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="img/properties/properties-small-5.jpg" alt="Chevrolet Impala"></li> -->
+                                <!--<li data-target="#carousel-custom" data-slide-to="2" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="4" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="5" class=""><img src="img/properties/properties-small-7.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="6" class=""><img src="img/properties/properties-small-8.jpg" alt="Chevrolet Impala"></li>
@@ -137,7 +200,7 @@ DB::connect();
                                 <li data-target="#carousel-custom" data-slide-to="8" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="9" class=""><img src="img/properties/properties-small-1.jpg" alt="Chevrolet Impala"></li>
                                 <li data-target="#carousel-custom" data-slide-to="10" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="11" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="11" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li> -->
                             </ol>
                         </div>
                     </div>
@@ -147,6 +210,7 @@ DB::connect();
                     <div class="properties-description mb-40 ">
                         <div class="main-title-2">
                             <h1><span>Description</span></h1>
+                            <p><?php echo $data->prop_desc ?></p>
                         </div>
                         <table class="property_detail_table">
                             <tbody>
@@ -173,6 +237,14 @@ DB::connect();
                                 <tr>
                                     <th>Water Facility</th>
                                     <td><?php echo $data->prop_water ?></td>
+                                </tr> 
+                                <tr>
+                                    <th>Built Up Area</th>
+                                    <td><?php echo $data->bua ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Carpet Area</th>
+                                    <td><?php echo $data->ca ?></td>
                                 </tr>
                             </tbody>
                         </table>

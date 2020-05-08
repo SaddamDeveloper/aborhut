@@ -22,6 +22,7 @@ DB::connect();
     $sql2->execute();
     $data2=$sql2->fetchAll(PDO::FETCH_OBJ);
 
+
 ?>
 <!-- Banner start -->
 <div class="banner">
@@ -41,7 +42,7 @@ DB::connect();
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields" name="city" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>City</option>
+                                                        <option value="">City</option>
                                                         <?php 
                                                         if($sql->rowCount() > 0){
                                                             foreach ($data as $row) {
@@ -55,7 +56,7 @@ DB::connect();
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Location</option>
+                                                        <option value="">Location</option>
                                                         <?php 
                                                         if($sql1->rowCount() > 0){
                                                             foreach ($data1 as $row) {
@@ -68,8 +69,8 @@ DB::connect();
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Property Type</option>
+                                                    <select class="selectpicker search-fields" name="property_type" data-live-search="true" data-live-search-placeholder="Search value">
+                                                        <option value="">Property Type</option>
                                                         <?php 
                                                         if($sql1->rowCount() > 0){
                                                             foreach ($data2 as $row) {
@@ -82,8 +83,8 @@ DB::connect();
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Min Budget</option>
+                                                    <select class="selectpicker search-fields" name="min_budget" data-live-search="true" data-live-search-placeholder="Search value">
+                                                        <option value="">Min Budget</option>
                                                         <option>2000</option>
                                                         <option>3000</option>
                                                         <option>4000</option>
@@ -93,8 +94,8 @@ DB::connect();
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="bedrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                                        <option>Max Budget</option>
+                                                    <select class="selectpicker search-fields" name="max_budget" data-live-search="true" data-live-search-placeholder="Search value" >
+                                                        <option value="">Max Budget</option>
                                                         <option>10000</option>
                                                         <option>15000</option>
                                                         <option>20000</option>
@@ -107,7 +108,7 @@ DB::connect();
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group mb-0">
-                                                    <button class="search-button">Search</button>
+                                                    <button class="search-button" name="search" type="submit">Search</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -260,16 +261,77 @@ DB::connect();
                 <div class="clearfix"></div>
                 <?php
 
-                if(!empty($_GET['page']) > 0)
-                    $page = $_GET['page'];
-                else
-                    $page = 1;
+                if(isset($_POST['search'])){
+                    $city = $_POST['city'];
+                    $location = $_POST['location'];
+                    $type = $_POST['property_type'];
+                    $min_budget = $_POST['min_budget'];
+                    $max_budget = $_POST['max_budget'];
 
-                $limit = ($page * 10) - 10;
+                    $query_flag = false;
+                  
+                    if(!empty($_GET['page']) > 0)
+                        $page = $_GET['page'];
+                    else
+                        $page = 1;
 
-                $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
-                $pdo_statement->execute();
-                $result = $pdo_statement->fetchAll();
+                    $limit = ($page * 10) - 10;
+                    $select13 = "select * from `property` WHERE";
+                    
+                    if(!empty($_POST['city'])){                                              
+                        $select13  .= " prop_city LIKE '%$city%'";
+                        $query_flag = true;  
+                    }
+                    if(!empty($_POST['location'])){                        
+                        if ($query_flag) {                            
+                            $select13  .= " AND prop_location LIKE '%$location%'";
+                        } else {
+                            $select13  .= " prop_location LIKE '%$location%'";
+                        }                        
+                        $query_flag = true;
+                    }
+                    if(!empty($type)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_type LIKE '%$type%'";
+                        } else {
+                            $select13  .= " prop_type LIKE '%$type%'";
+                        }   
+                        $query_flag = true;
+                    }
+                    if(!empty($min_budget)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_price >= '$min_budget'";
+                        } else {
+                            $select13  .= " prop_price >= '$min_budget'";
+                        }  
+                        $query_flag = true;
+                    }
+                    if(!empty($max_budget)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_price <= '$max_budget'";
+                        } else {
+                            $select13  .= " prop_price <= '$max_budget'";
+                        } 
+                        $query_flag = true;
+                    }
+
+                        $select13 .= " ORDER BY id DESC LIMIT $limit, 10";
+                    $sql13=$dbconn->prepare($select13);
+                    $sql13->execute();
+                    $result=$sql13->fetchAll();
+                    print_r($select13);
+                }else{
+                    if(!empty($_GET['page']) > 0)
+                        $page = $_GET['page'];
+                    else
+                        $page = 1;
+    
+                    $limit = ($page * 10) - 10;
+    
+                    $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
+                    $pdo_statement->execute();
+                    $result = $pdo_statement->fetchAll();
+                }
 
                 if(!empty($result)) { 
                     foreach($result as $row) {
@@ -313,7 +375,7 @@ DB::connect();
                             </li>
                             <li>
                                 <p class="property_listing_features">Property area</p>
-                                <span><?php print $row['prop_area']; ?></span>
+                                <span><?php print $row['prop_ca']; ?> sq ft.</span>
                             </li>
                             <li>
                                 <p class="property_listing_features">Bedroom</p>

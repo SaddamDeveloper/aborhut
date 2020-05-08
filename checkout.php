@@ -4,14 +4,24 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
     require_once("check.php"); 
     include_once('include/header.php');
+    
+    $cart_data_count = 0;
+    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+        $cart_sql  = "select * from `carts` WHERE customer_id ='$_SESSION[id]'";
+        $cart_prep=$dbconn->prepare($cart_sql);
+        $cart_prep->execute();
+        $cart_data=$cart_prep->fetchAll(PDO::FETCH_OBJ);
+        $cart_data_count = $cart_prep->rowCount();
 
-    if(isset($_GET['product']) && !empty($_GET['product'])){
-        $pid = $_GET['product'];
-        $visitCharge = $_GET['visit'];
-    }
+        if($cart_data_count > 0){
+            foreach ($cart_data as $row) {
+                
+            }
+        }
 
     $nameErr = $emailErr = $mobileErr = $visitErr = $addressErr = $cityErr = $stateErr = "";
     if(isset($_POST['pay'])){
+        // Fetch cart Product
         empty($_POST['name']) ? $nameErr = "Name is required!" : $name = test_input($_POST['name']);
         empty($_POST['email']) ? $emailErr = "email is required!" : $email = test_input($_POST['email']);
         empty($_POST['date']) ? $dateErr = "Visit date is required!" : $date = test_input($_POST['date']);
@@ -20,6 +30,7 @@ error_reporting(E_ALL);
         $address = test_input($_POST['address']);
         $city = test_input($_POST['city']);
         $state = test_input($_POST['state']);
+
         $product_id = explode(',',$_POST['product_id']);
         $amount = explode(',',$_POST['visit']);
         $chk_total = $_POST['chk_total'];
@@ -61,18 +72,15 @@ error_reporting(E_ALL);
         }
     }
 
-$id = $_SESSION['id'];
-if(!empty($_SESSION['id'])){
-   $select_client= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."' LIMIT 1";
-   $sql=$dbconn->prepare($select_client);
-   $sql->execute();
-   $wlvd=$sql->fetch(PDO::FETCH_OBJ);
-   
-   $select_wallet= "SELECT * FROM `wallet` WHERE user_id = '".$_SESSION['id']."' LIMIT 1";
-   $sql25=$dbconn->prepare($select_wallet);
-   $sql25->execute();
-   $wlvd25=$sql25->fetch(PDO::FETCH_OBJ);
-}
+$select_client= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."' LIMIT 1";
+$sql=$dbconn->prepare($select_client);
+$sql->execute();
+$wlvd=$sql->fetch(PDO::FETCH_OBJ);
+
+$select_wallet= "SELECT * FROM `wallet` WHERE user_id = '".$_SESSION['id']."' LIMIT 1";
+$sql25=$dbconn->prepare($select_wallet);
+$sql25->execute();
+$wlvd25=$sql25->fetch(PDO::FETCH_OBJ);
 
 
 
@@ -82,6 +90,7 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
+}
 ?>
 
 <!-- Sub banner start -->
@@ -192,8 +201,10 @@ function test_input($data) {
                                     <?php
                                         if($wlvd25->amount > $total){
                                             echo $total = '0.00'; 
+                                            $_SESSION['wallet_due'] = $total;
                                         }else if($wlvd25->amount < $total){
                                             echo ($total = $total - $wlvd25->amount);
+                                            $_SESSION['wallet_due'] = $total;
                                         }
                                     ?></b></td>
                                     <input  type="hidden" name="chk_total" required='required' value="<?php echo $total; ?>" class="form-control">

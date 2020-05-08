@@ -4,7 +4,19 @@
     DB::connect();
     
     /* Add Product to carts */
-    if(isset($_GET['pid']) && !empty($_GET['pid'])){
+    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+        if(isset($_GET['pid']) && !empty($_GET['pid'])){
+            $id = $_GET['pid'];
+            $productId = base64_decode($id);
+            $select_bookings= "INSERT INTO `carts`(`property_id`, `customer_id`) VALUES ('$productId','$_SESSION[id]')";
+            $sql=$dbconn->prepare($select_bookings);
+            $sql->execute();
+            header("location:cart.php");
+        }else{
+            header('location:index.php');
+        }
+    } else {
+        if(isset($_GET['pid']) && !empty($_GET['pid'])){
             $id = $_GET['pid'];
             $productId = base64_decode($id);
             // print_r($_SESSION['cart'][$productId]);exit();
@@ -25,8 +37,11 @@
             
             $_SESSION['cart'] = $cart;
             // $_SESSION['cart'][] = $data;
-            header("location:cart.php?pid=$id");
-    }else{
-        header('location:index.php');
+            header("location:cart.php");
+        }else{
+            header('location:index.php');
+        }
     }
+    
+   
 ?>

@@ -8,11 +8,24 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $select_bookings= "SELECT appointment.id, checkout.chk_bill_name, checkout.chk_bill_phone,
-appointment.app_date FROM `appointment` 
+appointment.app_date, appointment.app_status FROM `appointment` 
 LEFT JOIN checkout ON appointment.app_checkout_id = checkout.id order by appointment.id desc LIMIT 20";
 $sql=$dbconn->prepare($select_bookings);
 $sql->execute();
 $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
+
+if(isset($_GET['c'])){
+    $c_status = $_GET['c'];
+    $p = $_GET['p'];
+    $update_wallet = "UPDATE `appointment` SET
+	app_status   = '".addslashes($c_status)."'
+    WHERE id  = '".$p."'"; 
+
+    $sql = $dbconn->prepare($update_wallet);
+    // die($update_wallet);
+    $sql->execute();
+    header('location:all_appointment.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -92,15 +105,35 @@ $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
                                             <tbody>
                                         <?php
                                                 foreach ($wlvd as $row=> $rows) {
-                                                    
                                             ?>
                                         <tr>
                                             <td class="center"><?php echo $rows->id;?> </td>
                                             <td class="center"><?php echo $rows->chk_bill_name; ?></td>
                                             <td class="center"><?php echo $rows->chk_bill_phone; ?></td>
                                             <td class="center"><?php echo $rows->app_date; ?></td>
-                                            <td class="center"><a href="appointment_prop.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="purple">View</font></a> 
-                                            <td class="center"><a href="appointment_edit.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="red">Check</font></a>
+                                            <td class="center"><a href="appointment_prop.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="purple">View</font></a></td> 
+                                            <td class="center"> 
+                                            <?php
+                                                if($rows->app_status == 1){ 
+                                                    ?>
+                                                <a href="refund.php?p=<?php echo $rows->id ?>&&c=1" name="accpt" class="btn btn-danger btn-sm">Refund</a>
+                                                <?php
+                                                }else if($rows->app_status == 2){
+                                                    ?>
+                                                    <a href="#" name="accpt" class="btn btn-danger btn-sm">COMPLETED</a>
+                                                <?php
+                                                    
+                                                }
+                                            else{
+                                                ?>
+                                                <a href="all_appointment.php?p=<?php echo $rows->id ?>&&c=2" name="accpt" class="btn btn-primary btn-sm">Complete</a>
+                                                <a href="all_appointment.php?p=<?php echo $rows->id ?>&&c=1" name="accpt" class="btn btn-danger btn-sm">
+                                                        InComplete
+                                                    </a>
+                                                <?php
+                                                }
+                                            ?>
+                                            </td>
                                         </tr>	
                                                 <?php } ?>  
                                             </tbody>
