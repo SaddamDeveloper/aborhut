@@ -26,6 +26,22 @@ DB::connect();
         $sql3->execute();
         $data3=$sql3->fetch(PDO::FETCH_OBJ);
     }
+
+    $city_sql  = "select * from `city` ORDER BY id DESC";
+    $city_prep=$dbconn->prepare($city_sql);
+    $city_prep->execute();
+    $city=$city_prep->fetchAll(PDO::FETCH_OBJ);
+   
+   
+    $location_sql  = "select * from `location` ORDER BY id DESC";
+    $location_prep=$dbconn->prepare($location_sql);
+    $location_prep->execute();
+    $location=$location_prep->fetchAll(PDO::FETCH_OBJ);
+
+    $property_sql  = "select * from `property_type` ORDER BY id DESC";
+    $prop_prep=$dbconn->prepare($property_sql);
+    $prop_prep->execute();
+    $prop=$prop_prep->fetchAll(PDO::FETCH_OBJ);
 ?>
 <?php include_once('include/header.php'); ?>
 <!-- Sub banner start -->
@@ -68,76 +84,90 @@ DB::connect();
                 <div class="sidebar-widget mb-40">
                     <!-- Properties detail slider start -->
                     <div class="properties-detail-slider simple-slider mb-40">
-                        <div id="carousel-custom" class="carousel slide" data-ride="carousel">
+                            <div id="carousel-custom" class="carousel slide" data-ride="carousel">
                             <div class="carousel-outer">
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     <?php
+                                    $counter = false;
                                         if($data->prop_image1){
-                                            ?>
-                                        <div class="item-active">
-                                            <img src="images/property/<?php echo $data->prop_image1 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                        </div>
-                                    <?php
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$data->prop_image1.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
                                         }
-                                    ?>
-                                    <?php
                                         if($data->prop_image2){
-                                            ?>
-                                            <div class="item">
-                                                <img src="images/property/<?php echo $data->prop_image2 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                            </div>
-                                    <?php
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$data->prop_image2.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
                                         }
-                                    ?>
-                                      <?php
                                         if($data->prop_image3){
-                                            ?>
-                                            <div class="item">
-                                                <img src="images/property/<?php echo $data->prop_image3 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                            </div>
-                                    <?php
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$data->prop_image3.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
                                         }
-                                    ?>
-                                    <?php
                                         if($data->prop_image4){
-                                            ?>
-                                            <div class="item">
-                                                <img src="images/property/<?php echo $data->prop_image4 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                            </div>
-                                    <?php
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$data->prop_image4.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
                                         }
-                                    ?>
-                                    <?php
                                         if($data->prop_image5){
-                                            ?>
-                                            <div class="item">
-                                                <img src="images/property/<?php echo $data->prop_image5 ?>" class="thumb-preview" alt="Chevrolet Impala">
-                                            </div>
-                                    <?php
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$data->prop_image5.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
                                         }
-                                    ?>
-                                    <!-- <div class="item">
-                                        <img src="img/properties/properties-7.jpg" class="thumb-preview" alt="Chevrolet Impala">
-                                    </div> -->
+                                   ?>
                                     <!-- <div class="item">
                                         <img src="img/properties/properties-8.jpg" class="thumb-preview" alt="Chevrolet Impala">
                                     </div>
                                     <div class="item">
+                                        <img src="img/properties/properties-7.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    
+                                    <div class="item">
                                         <img src="img/properties/properties-5.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    
+                                    <div class="item">
+                                        <img src="img/properties/properties-4.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    
+                                    <div class="item">
+                                        <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/properties/properties-2.jpg" class="thumb-preview" alt="Chevrolet Impala">
+                                    </div>                                    
+                                    <div class="item active" >
+                                        <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala">
                                     </div> -->
-                                    <!-- <div class="item"> -->
-                                        <!-- <img src="img/properties/properties-3.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="item"> -->
-                                        <!-- <img src="img/properties/properties-6.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="item"> -->
-                                        <!-- <img src="img/properties/properties-1.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="item active"> -->
-                                        <!-- <img src="img/properties/properties-2.jpg" class="thumb-preview" alt="Chevrolet Impala"> -->
-                                    <!-- </div> -->
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-custom" role="button" data-slide="prev">
@@ -156,51 +186,80 @@ DB::connect();
                             <!-- Indicators -->
                             <ol class="carousel-indicators thumbs visible-lg visible-md">
                                 <?php
+                                    $data_counter = 0;
+                                    $data_class = false;
                                     if($data->prop_image1){
-                                ?>
-                                    <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="images/property/<?php echo $data->prop_image1 ?>" alt="Chevrolet Impala"></li>
-                                <?php 
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$data->prop_image1.'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
                                     }
-                                ?>
-                                <?php
                                     if($data->prop_image2){
-                                ?>
-                                    <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="images/property/<?php echo $data->prop_image2 ?>" alt="Image"></li>
-                                <?php 
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$data->prop_image2.'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
                                     }
-                                ?>
-                                <?php
                                     if($data->prop_image3){
-                                ?>
-                                    <li data-target="#carousel-custom" data-slide-to="2" class=""><img src="images/property/<?php echo $data->prop_image3 ?>" alt="Image"></li>
-                                <?php 
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$data->prop_image3.'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
                                     }
-                                ?>
-                                <?php
                                     if($data->prop_image4){
-                                ?>
-                                    <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="images/property/<?php echo $data->prop_image4 ?>" alt="Image"></li>
-                                <?php 
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$data->prop_image4.'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
                                     }
-                                ?>
-                                <?php
                                     if($data->prop_image5){
-                                ?>
-                                    <li data-target="#carousel-custom" data-slide-to="4" class=""><img src="images/property/<?php echo $data->prop_image5 ?>" alt="Image"></li>
-                                <?php 
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$data->prop_image5.'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
                                     }
                                 ?>
-                                <!-- <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="img/properties/properties-small-3.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="img/properties/properties-small-5.jpg" alt="Chevrolet Impala"></li> -->
-                                <!--<li data-target="#carousel-custom" data-slide-to="2" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="4" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="5" class=""><img src="img/properties/properties-small-7.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="6" class=""><img src="img/properties/properties-small-8.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="7" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="8" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="9" class=""><img src="img/properties/properties-small-1.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="10" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
-                                <li data-target="#carousel-custom" data-slide-to="11" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li> -->
+                              
+                              
+                             
+                                <!-- <li data-target="#carousel-custom" data-slide-to="0" class=""><img src="img/properties/properties-small-8.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="1" class=""><img src="img/properties/properties-small-7.jpg" alt="Chevrolet Impala"></li>                                
+                                <li data-target="#carousel-custom" data-slide-to="2" class=""><img src="img/properties/properties-small-6.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="3" class=""><img src="img/properties/properties-small-5.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="4" class=""><img src="img/properties/properties-small-4.jpg" alt="Chevrolet Impala"></li> 
+                                <li data-target="#carousel-custom" data-slide-to="5" class=""><img src="img/properties/properties-small-3.jpg" alt="Chevrolet Impala"></li>                               
+                                <li data-target="#carousel-custom" data-slide-to="6" class=""><img src="img/properties/properties-small-2.jpg" alt="Chevrolet Impala"></li>
+                                <li data-target="#carousel-custom" data-slide-to="7" class=""><img src="img/properties/properties-small-1.jpg" alt="Chevrolet Impala"></li> -->
                             </ol>
                         </div>
                     </div>
@@ -210,7 +269,11 @@ DB::connect();
                     <div class="properties-description mb-40 ">
                         <div class="main-title-2">
                             <h1><span>Description</span></h1>
-                            <p><?php echo $data->prop_desc ?></p>
+                            <p>
+                            <?php 
+                                $str = $data->prop_desc;
+                                echo preg_replace("#<p.*?>.*?</p>#", "", $str);
+                            ?></p>
                         </div>
                         <table class="property_detail_table">
                             <tbody>
@@ -220,11 +283,11 @@ DB::connect();
                                 </tr>
                                 <tr>
                                     <th>Car Parking</th>
-                                    <td><?php echo $data->prop_parking == 'Yes' ? 'Yes' : 'No' ?></td>
+                                    <td><?php echo $data->prop_parking ?></td>
                                 </tr>
                                 <tr>
                                     <th>Electricity Back-Up</th>
-                                    <td><?php //echo $data['prop_lift'] == 'Yes' ? 'Yes' : 'No' ?></td>
+                                    <td><?php echo $data->prop_lift ?></td>
                                 </tr>
                                 <tr>
                                     <th>Furnishing Type</th>
@@ -232,19 +295,23 @@ DB::connect();
                                 </tr>
                                 <tr>
                                     <th>Balcony</th>
-                                    <td><?php echo $data->prop_balcony == 'Yes' ? 'Yes' : 'No' ?></td>
+                                    <td><?php echo $data->prop_balcony ?></td>
                                 </tr>
                                 <tr>
                                     <th>Water Facility</th>
                                     <td><?php echo $data->prop_water ?></td>
                                 </tr> 
                                 <tr>
+                                    <th>Total Area</th>
+                                    <td><?php echo $data->prop_area ?> sq. ft</td>
+                                </tr>
+                                <tr>
                                     <th>Built Up Area</th>
-                                    <td><?php echo $data->bua ?></td>
+                                    <td><?php echo $data->prop_bua ?> sq. ft</td>
                                 </tr>
                                 <tr>
                                     <th>Carpet Area</th>
-                                    <td><?php echo $data->ca ?></td>
+                                    <td><?php echo $data->prop_ca ?> sq. ft</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -263,62 +330,73 @@ DB::connect();
                             <h1><span>Property</span> Search</h1>
                         </div>
 
-                        <form action="index.php" method="GET">
+                        <form action="index.php" method="POST">
                         <div class="form-group">
-                            <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                <option>City</option>
-                                <option>For Sale</option>
-                                <option>For Rent</option>
+                            <select class="selectpicker search-fields" name="city" data-live-search="true" data-live-search-placeholder="Search value">
+                                <option value="" disabled>City</option>
+                                <?php 
+                                    if($city_prep->rowCount() > 0){
+                                        foreach ($city as $row) {
+                                            echo '<option>'.$row->city_name.'</option>';
+                                        }
+                                    } 
+                                    ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                <option>Location</option>
-                                <option>United States</option>
-                                <option>United Kingdom</option>
-                                <option>American Samoa</option>
-                                <option>Belgium</option>
-                                <option>Cameroon</option>
-                                <option>Canada</option>
+                                <option value="" disabled>Location</option>
+                                  <?php 
+                                    if($location_prep->rowCount() > 0){
+                                        foreach ($location as $row) {
+                                            echo '<option>'.$row->location_name.'</option>';
+                                        }
+                                    } 
+                                    ?>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value" >
-                                <option>Property Type</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
-                                <option>Land</option>
+                            <select class="selectpicker search-fields" name="types" data-live-search="true" data-live-search-placeholder="Search value" >
+                                <option value="" disabled>Property Type</option>
+                                <?php 
+                                    if($prop_prep->rowCount() > 0){
+                                        foreach ($prop as $row) {
+                                            echo '<option>'.$row->property_type.'</option>';
+                                        }
+                                    } 
+                                    ?>
                             </select>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bedrooms">
-                                        <option>Min Budget</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="selectpicker search-fields" name="min_budget">
+                                        <option value="" disabled>Min Budget</option>
+                                        <option>2000</option>
+                                        <option>3000</option>
+                                        <option>4000</option>
+                                        <option>5000</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bathroom">
-                                        <option>Max budget</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="selectpicker search-fields" name="max_budget">
+                                        <option value="" disabled>Max budget</option>
+                                        <option>10000</option>
+                                        <option>15000</option>
+                                        <option>20000</option>
+                                        <option>25000</option>
+                                        <option>30000</option>
+                                        <option>40000</option>
+                                        <option>50000</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-0">
-                            <button class="search-button">Search</button>
+                            <button class="search-button" name="search">Search</button>
                         </div>
                     </form>
                     </div>

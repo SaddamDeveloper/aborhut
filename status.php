@@ -1,14 +1,8 @@
 <?php include_once('include/header.php'); ?>
 <?php
+  $id = $_SESSION['id'];
+  $checkout_id = $_REQUEST['id'];
 
-
-$id = $_SESSION['id'];
-$myid= $_REQUEST['id'];
-$wallet_due = $_SESSION['wallet_due'];
-  /*
-   *  @author   Saddam Hussain
-   *  @about    PayUMoney Payment Gateway integration in PHP
-   */
 if(isset($_SESSION['id'])){
   $status      = $_POST["status"];
   $firstname   = $_POST["firstname"];
@@ -21,7 +15,6 @@ if(isset($_SESSION['id'])){
   $salt        = "LKT8zBvmaD"; // Your salt
 
   If(isset($_POST["additionalCharges"])) {
-
     $additionalCharges = $_POST["additionalCharges"];
     $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;      
   } else {	  
@@ -34,76 +27,73 @@ if(isset($_SESSION['id'])){
     echo "Invalid Transaction. Please try again";
   }  
 
- 
-$start = $_REQUEST['start'];
-if(isset($_POST['submit12345'])){
-	$chk_status    =  $_POST['chk_status'];
-  $amount = $_POST['amount'];
+if($id !='' && $status == 'success'){
 
-	$insert_bookings = "UPDATE `checkout` SET
-	chk_status   = '".addslashes($chk_status)."'
-  WHERE id = '".$myid."'";             
+	$select_bookings= "UPDATE `checkout` SET `chk_status`='SUCCESS' WHERE id = '".$_REQUEST['id']."'";
+	$sql=$dbconn->prepare($select_bookings);
+	$sql->execute();
 
-  $sql_insert = $dbconn->prepare($insert_bookings);
-  $sql_insert->execute();
+	$select_bookings= "UPDATE `orders` SET `payment_status`='SUCCESS', WHERE checkout_id = '".$_REQUEST['id']."'";
+	$sql=$dbconn->prepare($select_bookings);
+	$sql->execute();
 
-  $update_wallet = "UPDATE `wallet` SET
-	amount   = '".addslashes($wallet_due)."'
-  WHERE id = '".$myid."'"; 
-
-  $sql = $dbconn->prepare($update_wallet);
-  $sql->execute();
-
-  header("Location: customer-panel/order.php");
-
-}
-
-
-if($id !=''){
  $select_bookings= "SELECT * FROM `checkout` WHERE id = '".$_REQUEST['id']."'";
  $sql=$dbconn->prepare($select_bookings);
  $sql->execute();
  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-foreach($wlvd as $rows);}
- 
-$chk_bill_name = $rows->chk_bill_name;
-$chk_bill_phone = $rows->chk_bill_phone;
-$chk_prop_visit_date = $rows->chk_prop_visit_date;
- 
+  foreach($wlvd as $rows);
 
-$mss = "Dear $chk_bill_name, 
-The status of your request for property visit on $chk_prop_visit_date with Aborhut.com is $status .
-You shall recieve a feedback call from us shortly!
-
-Team,
-Aborhut.com";  
-$encodedMessage = urlencode($mss); 
-
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://bulksms.bulksmsvalue.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=746c67381b212b474442e9293e2ffb4a&message=$encodedMessage&senderId=DEMOOS&routeId=3&mobileNos=91$chk_bill_phone&smsContentType=english",
+  $chk_bill_name = $rows->chk_bill_name;
+  $chk_bill_phone = $rows->chk_bill_phone;
+  $chk_prop_visit_date = $rows->chk_prop_visit_date;
   
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_SSL_VERIFYHOST => 0,
-  CURLOPT_SSL_VERIFYPEER => 0,
-));
 
-$response = curl_exec($curl);
-$err = curl_error($curl);
+ 
 
-curl_close($curl);
+  $sms = "Dear $chk_bill_name, 
+  The status of your request for property visit on $chk_prop_visit_date with Aborhut.com is $status .
+  You shall recieve a feedback call from us shortly!
+  Team,
+  Aborhut.com";   
 
-if ($err) {
-  echo "cURL Error #:" . $err;
-} 
-else {
-  echo $response;
-}
+    $username="Fiscaleindia";
+    $api_password="9aea62lulgu3by1ph";
+    $sender="FISCLE";
+    $domain="http://sms.webinfotech.co";
+    $priority="11";// 11-Enterprise, 12- Scrub
+    $method="GET";
+
+    $mobile=$rows->chk_bill_phone;
+    $message=$sms;
+
+    $username=urlencode($username);
+    $api_password=urlencode($api_password);
+    $sender=urlencode($sender);
+    $message=urlencode($message);
+
+    $sms = urlencode($sms);
+
+    $parameters="username=$username&api_password=$api_password&sender=$sender&to=$mobile&message=$message&priority=$priority";
+    $url="$domain/pushsms.php?".$parameters;
+    $ch = curl_init($url);
+
+    if($method=="POST")
+    {
+        curl_setopt($ch, CURLOPT_POST,1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+    }
+    else
+    {
+        $get_url=$url."?".$parameters;
+
+        curl_setopt($ch, CURLOPT_POST,0);
+        curl_setopt($ch, CURLOPT_URL, $get_url);
+    }
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
+    curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+    $return_val = curl_exec($ch);
+  }
 }
 ?>
 
@@ -119,50 +109,16 @@ else {
                         <div class="card">
                             <div class="card-body">
 							                <div style="text-align: center;">
-                                <h3>Your Payment Status is <span style="color: #FF0000;"><?php echo $status; ?></span></h3>
-                                <h3>You can check your payment status in the payment history</h3>
-                                <p>You will be redirected automatically to the home page after 3 seconds. Do not close this window</p>
+                                <h3>Your Payment Status is <span style="color: green;"><?php echo $status; ?></span></h3>
+                                <!-- <h3>You can check your payment status in the payment history</h3> -->
+                                <!-- <p>You will be redirected automatically to the home page after 3 seconds. Do not close this window</p> -->
                               </div>
-							<?php if($message!="") { ?>
-              
-              <?php
-                  switch($vendor_status) {
-                    case "success":
-                      echo $db->success_message_info($message);
-                      break;
-                    case "failed":
-                      echo $db->error_message_info($message);
-                      break;
-                    default:
-                      echo "Nothing Done";
-                      break;
-                  }
-                ?>
-                <?php } ?>
+                         
                                 
-                                
-                      <form id="loginform" class="m-t-30" method="post" action="" enctype="multipart/form-data">  
-                          
-                        <input name="chk_status" type="hidden" class="form-control" id="chk_status" required="" value="<?php echo $status; ?>" >
-                        </div>
-                        
-                        </div>	
-                          
-                        <button type="submit" class="btn button-md button-theme"  id = "loginsubmit" name="submit12345" value="Submit" display = "none">Submit</button>
-                      </form>
+                      <center><a href="customer-panel/order.php" class="btn btn-info">Go to Order history</a></center>
                   </div>
-                </div>
-                   
-                   
-				 <!-- row -->
-                <!-- .row -->
-                
-                
+                </div>      
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
     <script src="assets/libs/ckeditor/ckeditor.js"></script>
     <script src="assets/libs/ckeditor/samples/js/sample.js"></script>
 			
@@ -173,10 +129,10 @@ else {
 <?php include('include/footer.php'); ?>
 
  		
-<script>
+<!-- <script>
     window.onload = setTimeout(function(){
         var form = document.getElementById('loginsubmit').click();
     }
     ,0000);
-</script>  
+</script>   -->
            

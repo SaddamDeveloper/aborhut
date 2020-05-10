@@ -125,109 +125,6 @@ DB::connect();
 </div>
 <!-- Banner end -->
 
-<!-- Search area start -->
-<!-- <div class="search-area hidden-lg hidden-md">
-    <div class="container">
-        <div class="search-area-inner">
-            <div class="search-contents ">
-                <form method="GET">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="area-from" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Area From</option>
-                                    <option>1000</option>
-                                    <option>800</option>
-                                    <option>600</option>
-                                    <option>400</option>
-                                    <option>200</option>
-                                    <option>100</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Property Status</option>
-                                    <option>For Sale</option>
-                                    <option>For Rent</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>American Samoa</option>
-                                    <option>Belgium</option>
-                                    <option>Cameroon</option>
-                                    <option>Canada</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Property Types</option>
-                                    <option>Residential</option>
-                                    <option>Commercial</option>
-                                    <option>Land</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="bedrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                    <option>Bedrooms</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="bathrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                    <option>Bathrooms</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
-                            <div class="form-group">
-                                <button class="search-button">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- Search area start -->
-
 <!-- Properties section body start -->
 <div class="properties-section-body content-area">
     <div class="container">
@@ -260,8 +157,9 @@ DB::connect();
 
                 <div class="clearfix"></div>
                 <?php
-
+                $pagination = true;
                 if(isset($_POST['search'])){
+                    $pagination = false;
                     $city = $_POST['city'];
                     $location = $_POST['location'];
                     $type = $_POST['property_type'];
@@ -315,11 +213,10 @@ DB::connect();
                         $query_flag = true;
                     }
 
-                        $select13 .= " ORDER BY id DESC LIMIT $limit, 10";
+                        $select13 .= " ORDER BY id DESC LIMIT $limit, 50";
                     $sql13=$dbconn->prepare($select13);
                     $sql13->execute();
                     $result=$sql13->fetchAll();
-                    print_r($select13);
                 }else{
                     if(!empty($_GET['page']) > 0)
                         $page = $_GET['page'];
@@ -375,7 +272,7 @@ DB::connect();
                             </li>
                             <li>
                                 <p class="property_listing_features">Property area</p>
-                                <span><?php print $row['prop_ca']; ?> sq ft.</span>
+                                <span><?php print $row['prop_area']; ?> sq ft.</span>
                             </li>
                             <li>
                                 <p class="property_listing_features">Bedroom</p>
@@ -402,6 +299,7 @@ DB::connect();
                 }
                 ?>
                 <!-- Page navigation start -->
+                <?php if($pagination){?>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php
@@ -434,6 +332,7 @@ DB::connect();
                         ?>
                     </ul>
                 </nav>
+                    <?php } ?>
                 <!-- Page navigation end-->
             </div>
         </div>

@@ -129,7 +129,11 @@
             <div class="col-md-4">
                 <h4>Subtotal ₹ <?php echo number_format($subtotal, 2) ?></h4>
                 <h4 class="border-bottom">Grand Total ₹ <?php echo number_format($subtotal, 2) ?></h4>
-                <a href="checkout.php" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
+                <?php if($cart_data_count > 0){
+                    ?>
+                    <a href="checkout.php" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
+                <?php
+                }?>
             </div>
         </div>
     </div>

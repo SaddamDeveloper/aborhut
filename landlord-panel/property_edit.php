@@ -3,11 +3,10 @@ ob_start();
 include('configure.php');
 DB::connect();
 require_once("check.php");
-
 $id = $_REQUEST['id'];
 
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = "";
+$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = $areaErr = $buaErr = $caErr = "";
 if(isset($_POST['submit'])){
    
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
@@ -16,13 +15,14 @@ if(isset($_POST['submit'])){
     empty($_POST['prop_address']) ? $typeErr = "Address is required!" : $prop_address = test_input($_POST['prop_address']);
     empty($_POST['prop_city']) ? $cityErr = "City is required!" : $prop_city = test_input($_POST['prop_city']);
     empty($_POST['prop_state']) ? $stateErr = "State is required!" : $prop_state = test_input($_POST['prop_state']);
-    empty($_POST['prop_landlord_id']) ? $landlordErr = "Landlord is required!" : $prop_landlord_id = test_input($_POST['prop_landlord_id']);
     empty($_POST['prop_location']) ? $locationErr = "Location is required!" : $prop_location = test_input($_POST['prop_location']);
-    empty($_POST['prop_visit_price']) ? $visitErr = "Visit charge is required!" : $prop_visit_price = test_input($_POST['prop_visit_price']);
     empty($_POST['latitude']) ? $latErr = "Latitude is required!" : $prop_latitude = test_input($_POST['latitude']);
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
-    empty($_POST['prop_status']) ? $statusErr = "Status is required!" : $prop_status = test_input($_POST['prop_status']);
+    empty($_POST['prop_status']) ? $statusErr = "Status is required!" : $prop_status = test_input($_POST['prop_status']);    
+    !is_numeric($_POST['bua']) ? $buaErr = "Built Up area should be numeric!" : $prop_bua = test_input($_POST['bua']);
+    !is_numeric($_POST['ca']) ? $caErr = "Carpet area should be numeric!" : $prop_ca = test_input($_POST['ca']);
+    empty($_POST['prop_area']) ? $areaErr = "Area is required!" : $prop_area = test_input($_POST['prop_area']);
 
     $prop_desc = test_input($_POST['prop_desc']);
 
@@ -34,16 +34,18 @@ if(isset($_POST['submit'])){
     $prop_internet = test_input($_POST['prop_internet']);
     $prop_parking = test_input($_POST['prop_parking']);
     $prop_pool = test_input($_POST['prop_pool']);
-    $prop_status = test_input($_POST['prop_status']);
     $prop_bedroom = test_input($_POST['prop_bedroom']);
     $prop_bathroom = test_input($_POST['prop_bathroom']);
     $prop_posted_by = test_input($_SESSION['admin_name']);
     $prop_created_at = test_input(date('Y-m-d H:i:s', time()));
-
+    $prop_water = test_input($_POST['prop_water']);
+    $prop_furnishing = test_input($_POST['prop_furnishing']);
+    $prop_landlord_id = $_SESSION['id'];
+    $prop_visit_price = '';
 
 $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
-        
+    
         //1st
         if($_FILES['photo1']['name'] =="") {
             //echo "No Image";
@@ -163,14 +165,13 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         }
  
         if($prop_name && $prop_price && $prop_type && $prop_address && $prop_city && $prop_state && $prop_landlord_id 
-        && $prop_location && $prop_latitude && $prop_longitude && $prop_visit_price
-        && $prop_category && $prop_status != ""){
+        && $prop_location && $prop_latitude && $prop_longitude && $prop_category != ""){
 
             $update_user = "UPDATE `property` SET
             $sql1 $sql2 $sql3 $sql4 $sql5
             prop_name   = '".addslashes($prop_name)."',
-            prop_status   = '".addslashes($prop_status)."',
             prop_price   = '".addslashes($prop_price)."',
+            prop_area = '".addslashes($prop_area)."',
             prop_address   = '".addslashes($prop_address)."',
             prop_landlord_id   = '".addslashes($prop_landlord_id)."',
             prop_desc   = '".addslashes($prop_desc)."',
@@ -188,13 +189,14 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
             prop_parking   = '".addslashes($prop_parking)."',
             prop_state   = '".addslashes($prop_state)."',
             prop_category   = '".addslashes($prop_category)."',
-         
+            prop_bua = '".addslashes($prop_bua)."',
+            prop_ca = '".addslashes($prop_ca)."',
             prop_visit_price   = '".addslashes($prop_visit_price)."',
             prop_pool   = '".addslashes($prop_pool)."',
             prop_furnishing   = '".addslashes($prop_furnishing)."',
             prop_water   = '".addslashes($prop_water)."'
             WHERE id = '".$id."'"; 
-
+            // echo $update_user;exit();
             $sql_update=$dbconn->prepare($update_user);
             $sql_update->execute();
             if($update_user){
@@ -260,31 +262,10 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
 
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -296,27 +277,11 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- row -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            
-                            <?php if($_REQUEST['message']!="") { 
-                                    
-                                    echo "Details Successfully Updated.";
-                                    
-                                    } ?>
                                 <h4 class="card-title"> </h4>
                                 <h6 class="card-subtitle">  </h6>
                               
@@ -346,7 +311,7 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                             <option <?php echo $property_type == $rows->prop_type ? "selected": ""?>><?php echo $property_type ?></option>
                                         <?php } ?>
                                         </select>
-                                        <small id="emailHelp" class="form-text text-danger"><?php echo $typeErr ?></small> 
+                                        <small id="emailHelp" class="form-text text-danger">><?php echo $typeErr ?></small> 
                                     </div>
 
                                     <div class="form-group">
@@ -429,7 +394,23 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                         </select>
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $locationErr; ?></small> 
                                     </div>
-                                    
+                                    <div class="form-group m-b-30 row">
+                                        <div class="col-md-6">
+                                            <label for="bua">Built Up Area</label>
+                                            <input type="text" class="form-control" id="bua" name="bua" value="<?php echo $rows->prop_bua ?>">    
+                                            <small class="form-text text-danger"><?php echo $buaErr ?></small> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ca">Carpet Area</label>
+                                            <input type="text" class="form-control" id="ca" name="ca" value="<?php echo $rows->prop_ca ?>">    
+                                            <small class="form-text text-danger"><?php echo $caErr ?></small> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-b-30">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Total Area (In SQ Ft.)</label>
+                                        <input type="text" class="form-control" name="prop_area" value=" <?php echo $rows->prop_area ?>">
+                                        <small class="form-text text-danger"><?php echo $areaErr ?></small> 
+                                    </div>
                                     <h4>Amentities</h4>
                                     <hr>
                                     <div class="box-body row">
@@ -482,9 +463,9 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Water Facilities</label>
                                             <select class="custom-select mr-sm-2" id="prop_water" name="prop_water" >
                                             <option selected value="">--Select Water facility--</option>
-                                                <option <?php echo $rows->prop_water === 'Yes' ? 'selected' : '';  ?>>Yes</option>
-                                                <option <?php echo $rows->prop_water === 'No' ? 'selected' : '';  ?>>No</option> 
-                                            </select>   
+                                                <option <?php echo $rows->prop_water === 'Available' ? 'selected' : ''?>>Available</option>
+                                                <option <?php echo $rows->prop_water === 'NA' ? 'selected' : ''?>>NA</option> 
+                                            </select>  
                                         </div>
                                         <div class="col-md-6">
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">D2h/Cable Connection  </label>

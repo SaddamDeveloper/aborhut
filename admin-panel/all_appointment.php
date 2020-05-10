@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$select_bookings= "SELECT appointment.id, checkout.chk_bill_name, checkout.chk_bill_phone,
+$select_bookings= "SELECT appointment.id,appointment.app_property_id, checkout.chk_bill_name, checkout.chk_bill_phone,
 appointment.app_date, appointment.app_status FROM `appointment` 
 LEFT JOIN checkout ON appointment.app_checkout_id = checkout.id order by appointment.id desc LIMIT 20";
 $sql=$dbconn->prepare($select_bookings);
@@ -34,31 +34,11 @@ if(isset($_GET['c'])){
 
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -70,18 +50,7 @@ if(isset($_GET['c'])){
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Info box -->
-                <!-- ============================================================== -->
-                
-                <!-- basic table -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -111,26 +80,16 @@ if(isset($_GET['c'])){
                                             <td class="center"><?php echo $rows->chk_bill_name; ?></td>
                                             <td class="center"><?php echo $rows->chk_bill_phone; ?></td>
                                             <td class="center"><?php echo $rows->app_date; ?></td>
-                                            <td class="center"><a href="appointment_prop.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="purple">View</font></a></td> 
+                                            <td class="center"><a href="appointment_prop.php?id=<?php echo $rows->app_property_id; ?>&start=2"target="_self"><font color="purple">View</font></a></td> 
                                             <td class="center"> 
                                             <?php
                                                 if($rows->app_status == 1){ 
-                                                    ?>
-                                                <a href="refund.php?p=<?php echo $rows->id ?>&&c=1" name="accpt" class="btn btn-danger btn-sm">Refund</a>
-                                                <?php
+                                                    print '<a href="#" name="accpt" class="btn btn-danger btn-sm">Incomplete</a>';
                                                 }else if($rows->app_status == 2){
-                                                    ?>
-                                                    <a href="#" name="accpt" class="btn btn-danger btn-sm">COMPLETED</a>
-                                                <?php
-                                                    
-                                                }
-                                            else{
-                                                ?>
-                                                <a href="all_appointment.php?p=<?php echo $rows->id ?>&&c=2" name="accpt" class="btn btn-primary btn-sm">Complete</a>
-                                                <a href="all_appointment.php?p=<?php echo $rows->id ?>&&c=1" name="accpt" class="btn btn-danger btn-sm">
-                                                        InComplete
-                                                    </a>
-                                                <?php
+                                                    print '<a href="#" name="accpt" class="btn btn-danger btn-sm">COMPLETED</a>';
+                                                }else{
+                                                    print '<a href="all_appointment.php?p='.$rows->id.'&&c=2" name="accpt" class="btn btn-primary btn-sm">Complete</a>
+                                                    <a href="all_appointment.php?p='.$rows->id.'&&c=1" name="accpt" class="btn btn-danger btn-sm">InComplete</a>';
                                                 }
                                             ?>
                                             </td>

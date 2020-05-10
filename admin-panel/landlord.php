@@ -2,14 +2,12 @@
 ob_start();
 include('configure.php');
 DB::connect();
-// require_once("check.php");
-
+require_once("check.php");
 
  $select_enquiry="SELECT * FROM landlord order by id desc limit 20";
  $sql=$dbconn->prepare($select_enquiry);
  $sql->execute();
  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-	
 	
 ?>
 
@@ -20,31 +18,12 @@ DB::connect();
 
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
+
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -56,16 +35,7 @@ DB::connect();
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Info box -->
-                <!-- ============================================================== -->
                 
                 <!-- basic table -->
                 <div class="row">
@@ -92,32 +62,21 @@ DB::connect();
 												<th class="center">Edit</th>
                                                 <th class="center">Delete</th>
 											  </tr>
-											  
-											 
-<?php
+                                                <?php
 
-//while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
-//{ 
-if($sql->rowCount() > 0){
-	foreach($wlvd as $rows){
-$id = $rows->id;
-$landlord_name= $rows->landlord_name;
-$landlord_email= $rows->landlord_email;
-$landlord_phone= $rows->landlord_phone;
-$landlord_password= $rows->landlord_password;
-$landlord_city= $rows->landlord_city;
-$landlord_address= $rows->landlord_address;
-$landlord_state = $rows->landlord_state;
-
- 
-?>
-							
-
-
-
-
-
-
+                                                //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
+                                                //{ 
+                                                if($sql->rowCount() > 0){
+                                                    foreach($wlvd as $rows){
+                                                $id = $rows->id;
+                                                $landlord_name= $rows->landlord_name;
+                                                $landlord_email= $rows->landlord_email;
+                                                $landlord_phone= $rows->landlord_phone;
+                                                $landlord_password= $rows->landlord_password;
+                                                $landlord_city= $rows->landlord_city;
+                                                $landlord_address= $rows->landlord_address;
+                                                $landlord_state = $rows->landlord_state;
+                                                ?>
 											 </thead>
 										<tbody>
                                     <tr>
@@ -142,21 +101,11 @@ $landlord_state = $rows->landlord_state;
 										</tbody>
 									</table>
 								</div>
-								
-								
-                                        
-                                        
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- order table -->
-                
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
             <?php include('inc/footer.php'); ?>

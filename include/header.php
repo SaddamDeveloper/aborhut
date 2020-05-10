@@ -146,7 +146,13 @@ DB::connect();
                         <div class="carrot"></div>
                         <ul class="border-bottom">
                             <li>
-                               <a href="cart.php"> Cart (0)</a>
+                               <a href="cart.php"> Cart <?php 
+                               if($_SESSION['cart']){
+                                echo "(".count($_SESSION['cart']).")";
+                               }else{
+                                   echo "(0)";
+                               } 
+                               ?></a>
                             </li>
                         </ul>
                         <?php 

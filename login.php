@@ -3,9 +3,8 @@
 include_once('customer-panel/configure.php');
 DB::connect();
     if(isset($_POST['Login'])){
-        $mobile = $_POST['mobile'];
-        $password = $_POST['password'];
-
+        $mobile = trim($_POST['mobile']);
+        $password = trim($_POST['password']);
         $select  = "select * from `customer` WHERE cus_phone = '".$mobile."' and cus_password = '".$password."'";
         $sql=$dbconn->prepare($select);
         $sql->execute();

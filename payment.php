@@ -1,11 +1,32 @@
-<?php include('include/header.php'); ?>
+
  
 <?php
+include_once('customer-panel/configure.php');
+DB::connect();
+
+date_default_timezone_set('Asia/Kolkata');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); 
 $id = $_REQUEST['id'];
- 
-$start = $_REQUEST['start'];
-$wallet_bal = $_REQUEST['wallet_bal'];
-$chk_total = $_REQUEST['chk_total'];
+
+$cart_sql  = "select * from `orders` WHERE checkout_id ='$id'";
+$cart_prep=$dbconn->prepare($cart_sql);
+$cart_prep->execute();
+$cart_data=$cart_prep->fetchAll(PDO::FETCH_OBJ);
+$cart_data_count = $cart_prep->rowCount();
+$amount = 0;
+if ($cart_data_count > 0 ) {
+  foreach ($cart_data as $row) {
+    $amount+=$row->online_pay;
+  }
+} else {
+  # code...
+}
+
+// $start = $_REQUEST['start'];
+// $wallet_bal = $_REQUEST['wallet_bal'];
+$chk_total = $amount;
 // Merchant key here as provided by Payu
 $MERCHANT_KEY = "lOrHCXkF";
 
@@ -38,6 +59,11 @@ if(empty($posted['txnid'])) {
 } else {
   $txnid = $posted['txnid'];
 }
+
+$update_transaction= "UPDATE `checkout` SET `online_trans_id` = '$txnid' WHERE id = '".$_REQUEST['id']."'";
+$res_transaction=$dbconn->prepare($update_transaction);
+$res_transaction->execute();
+
 $hash = '';
 // Hash Sequence
 $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
@@ -48,12 +74,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           || empty($posted['amount'])
           || empty($posted['service_provider'])
   ) {
-
-    if($wallet_bal > $chk_total){
-      $formError = 0;
-    }else if($wallet_bal < $chk_total){
-      $formError = 1;
-    }
     
   } else {
     //$posted['productinfo'] = json_encode(json_decode('[{"name":"tutionfee","description":"","value":"500","isRequired":"false"},{"name":"developmentfee","description":"monthly tution fee","value":"1500","isRequired":"false"}]'));
@@ -82,7 +102,8 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
  foreach($wlvd as $rows);}
  
-?>   
+?> 
+<?php include('include/header.php'); ?>  
    <body onload="submitPayuForm()">                   
                          
  <script>
@@ -115,7 +136,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 									<input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
 									<input type="hidden" name="service_provider" value="payu_paisa" size="64" />
 									<input type="hidden" name="productinfo" value="Test Product" size="64" />
-									<input type="hidden" name="surl" value="http://localhost/aborhut/status.php?id=<?php echo $id ?>" size="64" />
 									<input type="hidden" name="firstname" value="<?php echo $rows->chk_bill_name; ?>" size="64" />
 									<input type="hidden" name="phone" value="<?php echo $rows->chk_bill_phone; ?>" size="64" />
 									<input type="hidden" name="email" value="<?php echo $rows->chk_bill_email; ?>" size="64" />
@@ -126,7 +146,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 									 
 									<div class="form-group">
                     <label for="exampleInputEmail1">Amount Payable</label>
-										<input name="amount" type="number" readonly class="form-control" id="amount" aria-describedby="emailHelp" required="" value="<?php echo $rows->chk_total; ?>" >
+										<input name="amount" type="number" readonly class="form-control" id="amount" aria-describedby="emailHelp" required="" value="<?php echo $amount; ?>" >
                       <small id="emailHelp" class="form-text text-muted"></small>	
                       </div>
     

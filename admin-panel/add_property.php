@@ -7,7 +7,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 $start = $_REQUEST['start'];
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = "";
+$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr = "";
 if(isset($_POST['submit12345'])){
 
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
@@ -24,8 +24,9 @@ if(isset($_POST['submit12345'])){
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
     !is_numeric($_POST['bua']) ? $buaErr = "Built Up area should be numeric!" : $prop_bua = test_input($_POST['bua']);
     !is_numeric($_POST['ca']) ? $caErr = "Carpet area should be numeric!" : $prop_ca = test_input($_POST['ca']);
-    $prop_desc = test_input($_POST['prop_desc']);
+    empty($_POST['prop_area']) ? $areaErr = "Area is required!" : $prop_area = test_input($_POST['prop_area']);
 
+    $prop_desc = test_input($_POST['prop_desc']);
     $prop_ac = test_input($_POST['prop_ac']);
     $prop_balcony = test_input($_POST['prop_balcony']);
     $prop_d2h = test_input($_POST['prop_d2h']);
@@ -34,7 +35,9 @@ if(isset($_POST['submit12345'])){
     $prop_internet = test_input($_POST['prop_internet']);
     $prop_parking = test_input($_POST['prop_parking']);
     $prop_pool = test_input($_POST['prop_pool']);
- 
+    $prop_water = test_input($_POST['prop_water']);
+    $prop_furnishing = test_input($_POST['prop_furnishing']);
+    
     $prop_bedroom = test_input($_POST['prop_bedroom']);
     $prop_bathroom = test_input($_POST['prop_bathroom']);
     $prop_posted_by = test_input($_SESSION['admin_name']);
@@ -177,6 +180,7 @@ if(isset($_POST['submit12345'])){
         prop_address = '".$prop_address."',
         prop_desc = '".$prop_desc."',
         prop_city = '".$prop_city."',
+        prop_area = '$prop_area',
         prop_state = '".$prop_state."',
         prop_type = '".$prop_type."',
         prop_ac = '".$prop_ac."',
@@ -189,7 +193,6 @@ if(isset($_POST['submit12345'])){
         prop_internet = '".$prop_internet."',
         prop_parking = '".$prop_parking."',
         prop_pool = '".$prop_pool."',
-     
         prop_visit_price = '".$prop_visit_price."',
         prop_category = '".$prop_category."',
         prop_latitude = '".$prop_latitude."',
@@ -197,8 +200,12 @@ if(isset($_POST['submit12345'])){
         prop_location = '".$prop_location."',
         prop_bua = '".$prop_bua."',
         prop_ca = '".$prop_ca."',
+        prop_furnishing = '".$prop_furnishing."',
+        prop_water = '".$prop_water."',
         posted_by = '".$prop_posted_by."',
         created_at = '".$prop_created_at."'";
+
+        // echo $update_user;die();
         $sql_update=$dbconn->prepare($update_user);
         $sql_update->execute();
         $last_id = $dbconn->lastInsertId();
@@ -279,31 +286,10 @@ $select_enquiry3="SELECT * FROM city order by id desc";
 
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -315,20 +301,8 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- row -->
-                 
-                        
-                            <div class="box-body">
+                    <div class="box-body">
                             
                             <?php if($_REQUEST['message']!="") { 
                                     
@@ -493,6 +467,11 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                             <small class="form-text text-danger"><?php echo $caErr ?></small> 
                                         </div>
                                     </div>
+                                    <div class="form-group m-b-30">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Total Area (In SQ Ft.)</label>
+                                        <input type="text" class="form-control" name="prop_area" value=" <?php echo isset($_POST['prop_area']) ? $_POST['prop_area'] : '' ?>">
+                                        <small class="form-text text-danger"><?php echo $areaErr ?></small> 
+                                    </div>
                                     <h4>Amentities</h4>
                                     <hr>
                                     <div class="box-body row">
@@ -612,9 +591,10 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                         <div class="col-md-6">
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Parking  </label>
                                             <select class="custom-select mr-sm-2" id="prop_parking" name="prop_parking" >
-                                            <option selected value="">--Select Parking--</option>
-                                                <option <?php echo (isset($_POST['prop_parking']) && $_POST['prop_parking'] === 'Yes') ? 'selected' : '';?>>Yes </option>
-                                                <option <?php echo (isset($_POST['prop_parking']) && $_POST['prop_parking'] === 'No') ? 'selected' : '';?>>No </option> 
+                                                <option selected value="">--Select Parking--</option>
+                                                <option <?php echo (isset($_POST['prop_parking']) && $_POST['prop_parking'] === '2 Wheeler') ? 'selected' : '';?>>2 Wheeler</option>
+                                                <option <?php echo (isset($_POST['prop_parking']) && $_POST['prop_parking'] === '3 Wheeler') ? 'selected' : '';?>>3 Wheeler </option> 
+                                                <option <?php echo (isset($_POST['prop_parking']) && $_POST['prop_parking'] === '4 Wheeler') ? 'selected' : '';?>>4 Wheeler </option> 
                                             </select>
                                         </div>
                                     </div>                                                  

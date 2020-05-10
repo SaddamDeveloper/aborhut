@@ -38,7 +38,7 @@
                         </div>
                         <ul class="links">
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="index.php">Home</a>
                             </li>
                             <li>
                                 <a href="about.php">About Us</a>
@@ -53,7 +53,7 @@
                                 <a href="services.php">Services</a>
                             </li>
                             <li>
-                                <a href="list_your_properties.php">List Your Property</a>
+                                <a href="list_your_property.php">List Your Property</a>
                             </li>
                         </ul>
                     </div>

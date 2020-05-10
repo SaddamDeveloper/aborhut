@@ -3,8 +3,10 @@ ob_start();
 include('configure.php');
 DB::connect();
 require_once("check.php");
+date_default_timezone_set('Asia/Kolkata');
+$created_at = date('Y-m-d H:i:s');
 
- $select_bookings= "SELECT orders.id, orders.product_id, checkout.chk_bill_name, checkout.chk_bill_phone,
+ $select_bookings= "SELECT orders.id, orders.product_id, orders.payment_status, checkout.chk_bill_name, checkout.chk_bill_phone,
   orders.amount, orders.status FROM `orders` 
   LEFT JOIN checkout ON orders.checkout_id = checkout.id order by orders.id desc LIMIT 20";
  $sql=$dbconn->prepare($select_bookings);
@@ -22,8 +24,8 @@ if(isset($_GET['v']) == 2){
 
     if($sql_update){
         $delete_app = "DELETE FROM appointment WHERE app_property_id ='$id'";
-            $sql_update=$dbconn->prepare($delete_app);
-            $sql_update->execute();
+        $sql_update=$dbconn->prepare($delete_app);
+        $sql_update->execute();
         header('location:order.php');
     }
 }
@@ -36,31 +38,11 @@ if(isset($_GET['v']) == 2){
 
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+        
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -72,18 +54,7 @@ if(isset($_GET['v']) == 2){
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Info box -->
-                <!-- ============================================================== -->
-                
-                <!-- basic table -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -102,7 +73,9 @@ if(isset($_GET['v']) == 2){
 												<th class="center"> Phone No</th>
 												<th class="center">Property VIew</th>
 												<th class="center"> Amount</th>
-                                                 <th class="center">Action</th>
+												<th class="center"> Payment Status</th>
+												<th class="center"> Status</th>
+                                                <th class="center">Action</th>
 											  </tr>
 											  
                                         <?php
@@ -123,28 +96,36 @@ if(isset($_GET['v']) == 2){
 										<td class="center"><?php echo $rows->chk_bill_name;?> </td>
 									    <td class="center"><?php echo $rows->chk_bill_phone; ?></td>
 										<td class="center"><a href="appointment_prop.php?id=<?php echo $rows->product_id; ?>&start=2"target="_self"><font color="purple">View</font></a> 
-										<td class="center"><?php echo $rows->amount; ?></td>
+										<td class="center">₹<?php echo number_format($rows->amount, 2); ?></td>
+										<td class="center">
+                                        <?php  if($rows->payment_status == 'PENDING' && $rows->status =='5'){
+                                            print '<label class="label label-danger">Payment Failed</label>';
+                                        }elseif($rows->payment_status == 'PENDING'){ ?>
+                                                <label class="label label-warning"><?php echo $rows->payment_status ?></label>
+                                            <?php }else{?>
+                                                <label class="label label-success"><?php echo $rows->payment_status ?></label>
+                                           <?php } ?>
+                                        </td>
                                         <td class="center">
                                         <div class="form-group row">
                                             <form method="POST">
                                                 <?php
-                                                if($rows->status == 1){ 
-                                                ?>
-                                                    <a href="appointments.php?p=<?php echo $id ?>&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
+                                                if ($rows->payment_status == 'PENDING' && $rows->status == 5) {
+                                                    print '<a href="#" class="btn btn-danger btn-sm">Cancelled</a>';
+                                                 }elseif ($rows->payment_status == 'PENDING') {
+                                                    print '<a href="#" class="btn btn-info btn-sm">Payment Failed</a>';
+                                                 }elseif ($rows->status == 4) {
+                                                     print '<a href="#" name="accpt" class="btn btn-primary btn-sm">Waiting For accept</a>
+                                                     ';
+                                                 }else if($rows->status == 3){
+                                                    print '<a href="#" name="accpt" class="btn btn-warning btn-sm">Refunded</a>
+                                                     ';
+                                                }else if($rows->status == 3){
+                                                    ?>
+                                                    <a href="#" class="btn btn-warning btn-sm" disabled>REFUNDED</a>
                                                 <?php
                                                 }else if($rows->status == 2){
-                                                    ?>
-                                                    <a href="order.php?p=<?php echo $rows->product_id ?>&&v=1&&c=<?php echo $id ?>" name="accpt" class="btn btn-danger btn-sm">Reject</a>
-                                                    <a href="" class="btn btn-primary btn-sm">Refund</a>
-                                                <?php
-                                                }else if($rows->status == 3){
-                                                ?>
-                                                    <a href="#" class="btn btn-warning" disabled>REFUNDED</a>
-                                                <?php
-                                                }else if($rows->status == 4){
-                                                ?>
-                                                    <a href="appointments.php?p=<?php echo $id ?>&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
-                                                <?php
+                                                   print '<a href="#" class="btn btn-primary btn-sm" disabled>Accepted</a>';
                                                 }
                                                 ?>
                                             </form>
@@ -152,11 +133,13 @@ if(isset($_GET['v']) == 2){
                                         </td>
                                         <td class="center">
                                         <?php
-                                        if($rows->status == 3){
-                                                ?>
-                                                <a href="order.php?p=<?php echo $id ?>&&v=1" name="accpt" class="btn btn-primary btn-sm">Refund</a>
-                                                <?php
-                                                }
+                                            if ($rows->payment_status == 'PENDING' && $rows->status != 5) {
+                                                print '<a href="admin_order_cancel.php?r='.$id.'" class="btn btn-info btn-sm">Cancel</a>';
+                                             }elseif ($rows->status == 4) {
+                                                print '<a href="appointments.php?p='.$id.'&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
+                                                <a href="admin_order_refund.php?r='.$id.'" class="btn btn-info btn-sm">Refund</a>
+                                                ';
+                                            }
                                             ?>
                                         </td>
 									</tr>	

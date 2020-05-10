@@ -26,10 +26,10 @@ if(isset($_POST['signup'])){
             $passwordErr = "Password doesn't matched!";
         }else{
             $insert_user = "INSERT `customer` SET
-                cus_name = '".$name."',
-                cus_email = '".$email."',
-                cus_phone = '".$mobile."',
-                cus_password = '".$password."'";
+                cus_name = '$name',
+                cus_email = '$email',
+                cus_phone = '$mobile',
+                cus_password = '$password'";
     
             $sql_update=$dbconn->prepare($insert_user);
             $sql_update->execute();
