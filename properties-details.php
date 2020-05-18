@@ -420,7 +420,7 @@ DB::connect();
                                 }
                             }else{
                                 ?>
-                                <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                                <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
                             <div class="book-now">
                                 <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
                             </div>
@@ -429,7 +429,7 @@ DB::connect();
                         }
                      else{
                     ?>
-                            <img src="img/map-blur.jpg" alt="property location map" title="Book Now To Unlock Map Location">
+                            <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
                             <div class="book-now">
                                 <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
                             </div>

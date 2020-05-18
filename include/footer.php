@@ -84,19 +84,7 @@
                             <h1>Quick Contact</h1>
                         </div>
                         <div class="newsletter clearfix">
-                            <form action="#" method="post">
-                                <div class="form-group">
-                                    <input class="nsu-field btn-block" id="nsu-email-0" type="text" name="name" placeholder="Enter your Name" required="">
-                                    <input class="nsu-field btn-block" id="nsu-email-0" type="text" name="email" placeholder="Enter your Email Address" required="">
-                                    <textarea class="nsu-field btn-block" name="message" id=""  rows="2"
-                                    placeholder="Enter your message..."></textarea>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <button type="submit" class="button-sm button-theme btn-block">
-                                        Submit
-                                    </button>
-                                </div>
-                            </form>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28652.844482127668!2d91.7881206!3d26.144400899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1584342498093!5m2!1sen!2sin" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                         </div>
                     </div>
                 </div>

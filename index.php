@@ -33,7 +33,17 @@ DB::connect();
                 <img src="img/banner/banner-slider-1.jpg" alt="banner-slider-1">
                 <div class="carousel-caption banner-slider-inner banner-tb text-left">
                     <div class="banner-content banner-content-left">
-                        <div class="banner-search-box">
+                        <!--banner-search was here-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+
+<!--banner serach-->
+<div class="banner-search-box">
                             <!-- Search area start -->
                             <div class="search-area animated fadeInDown delay-1s">
                                 <div class="search-area-inner">
@@ -117,13 +127,7 @@ DB::connect();
                             </div>
                             <!-- Search area start -->
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner end -->
+<!--banner search-->
 
 <!-- Properties section body start -->
 <div class="properties-section-body content-area">
@@ -235,7 +239,7 @@ DB::connect();
                 ?>
                 <!-- Property start -->
                 <div class="property clearfix wow fadeInUp delay-03s">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-pad">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 col-pad">
                         <!-- Property img -->
                         <div class="property-img">
                             <!-- <div class="property-tag button alt featured">Featured</div> -->
@@ -255,7 +259,7 @@ DB::connect();
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-3 col-xs-12 property-content ">
+                    <div class="col-lg-9 col-md-9 col-sm-3 col-xs-7 property-content ">
                     <?php $id = $row['id']; ?>
                         <!-- title -->
                         <h1 class="title">
@@ -264,24 +268,25 @@ DB::connect();
                         <ul class="facilities-list clearfix">
                             <li>
                                 <p class="property_listing_features">Property Type</p>
-                                <span><?php print $row['prop_type']; ?></span>
+                                <span class="mobile-lc-1"><?php print $row['prop_type']; ?></span>
                             </li>
-                            <li>
+                            <li class="hidden-mobile">
                                 <p class="property_listing_features">Bathroom</p>
                                 <span><?php print $row['prop_bathroom']; ?></span>
                             </li>
-                            <li>
+                            <li class="hidden-mobile">
                                 <p class="property_listing_features">Property area</p>
                                 <span><?php print $row['prop_area']; ?> sq ft.</span>
                             </li>
-                            <li>
+                            <li class="hidden-mobile">
                                 <p class="property_listing_features">Bedroom</p>
                                 <span><?php print $row['prop_bedroom']; ?></span>
                             </li>
                             <li>
                                 <p class="property_listing_features">Location</p>
-                                <span><?php print $row['prop_location']; ?>, <?php print $row['prop_city']; ?></span>
+                                <span class="mobile-lc-1"><?php print $row['prop_location']; ?>, <?php print $row['prop_city']; ?></span>
                             </li>
+                            <li class="visible-mobile more-li"><a class="more" href="properties-details.php?p=<?php echo $id ?>">more...</a></li>
                         </ul>
                         <!-- Property footer -->
                         <div class="property-footer">
