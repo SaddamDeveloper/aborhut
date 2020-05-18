@@ -15,7 +15,7 @@
 </div>
 <!-- Sub Banner end -->
 
-<!-- About city estate start -->
+<!-- Cart start -->
 <div id="cartpage">
     <div class="container">
         <div class="row">
@@ -54,7 +54,7 @@
         </div>
     </div>
 </div>
-<!-- About city estate end -->
+<!-- Cart end -->
 <div class="clearfix" style="padding-top: 60px;"></div>
 <!-- Intro section -->
 <div class="intro-section">
