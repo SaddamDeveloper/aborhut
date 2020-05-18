@@ -3,22 +3,19 @@ ob_start();
 include('configure.php');
 DB::connect();
 require_once("check.php");
-
-
-$id = $_REQUEST['id'];
+$id = $_SESSION['id'];
 
 if(isset($id) && !empty($id)){
-//  $select_bookings= "SELECT * FROM `orders` WHERE product_id = '$id'";
-//  $sql=$dbconn->prepare($select_bookings);
-//  $sql->execute();
-//  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-//  foreach($wlvd as $rows);
-//  print_r($wlvd);exit();
-
-$select_enquiry="SELECT * FROM property WHERE id= '$id' ";
-$sql1=$dbconn->prepare($select_enquiry);
-$sql1->execute();
-$wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
+ $select_bookings= "SELECT * FROM `wallet` WHERE user_id = '".$_SESSION['id']."' LIMIT 1";
+ $sql=$dbconn->prepare($select_bookings);
+ $sql->execute();
+ $wlvd=$sql->fetch(PDO::FETCH_OBJ);
+ $select_client1= "SELECT * FROM `wallet_history` WHERE 
+ wallet_id = '".$wlvd->id."' AND user_id = '".$wlvd->user_id."' ORDER BY ID DESC";
+ $sql1=$dbconn->prepare($select_client1);
+ $sql1->execute();
+ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
+ foreach($wlvd1 as $rows1);
 }
 ?>
 
@@ -55,7 +52,7 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title"> </h4>
+                        <h4 class="page-title">My Wallet</h4>
                         <div class="d-flex align-items-center">
 
                         </div>
@@ -79,7 +76,7 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All property</h4>
+                                <h3 class="card-title" style="text-align: center;">Wallet Balance: ₹ <?php echo number_format($wlvd->amount, 2) ?></h3>
                                 
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
@@ -89,30 +86,58 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
 										<thead>
 											<tr>
 												<th class="center"> ID</th>
-												<th class="center"> Name</th>
-										 
-                                                <th class="center">  Image</th>
+                                                 <th class="center">Amount</th>
+                                                 <th class="center">Date</th>
+                                                 <th class="center">Status</th>
 											  </tr>
-                                                <?php
-                                                if($sql1->rowCount() > 0){
-                                                    foreach($wlvd1 as $rows1){
-                                                    $id = $rows1->id;
-                                                    $prop_name = $rows1->prop_name;
-                                                    $prop_image1 = $rows1->prop_image1;
-                                                ?>
+                                            <?php
+
+                                            //while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
+                                            //{ 
+                                            if($sql->rowCount() > 0){
+
+                                            foreach($wlvd1 as $rows1){
+
+                                            $id = $rows1->id;
+
+                                            $amount = $rows1->amount;            
+                                            
+                                            $total_amount = $rows1->total_amount; 
+                                            $chk_status = $rows1->type;
+                                            $msg = $rows1->message
+                                            ?>
+
 											 </thead>
 										<tbody>
                                     <tr>
 										<td class="center"><?php echo $id;?> </td>
-										<td class="center"><?php echo $prop_name;?> </td>
-					 
-      
-                                        <td class="center"><img src="../images/property/<?php echo $prop_image1; ?>" alt="" width="228" height="94"/></td>
+									 
+										<td class="center"><?php echo $amount; ?></td>
+										<td class="center"><?php echo $total_amount; ?></td>
+										<?php
+                                            if($chk_status == 1){ 
+                                        ?>
+										<td class="center"><label class="label label-success">Cr</label></td>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <td class="center"><label class="label label-warning">Dr</label></td>
+
+                                                <?php
+                                            }
+                                        ?>
+
+                                        <td class="center">
+                                            <?php echo $msg ?>
+                                        </td>
 									</tr>	
 										<?php } } ?>
 										</tbody>
 									</table>
 								</div>
+								
+								
+                                        
                                         
                                     </table>
                                 </div>

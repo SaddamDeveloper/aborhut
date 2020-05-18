@@ -7,7 +7,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 $start = $_REQUEST['start'];
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $locationErr = $latErr = $longErr = $categoryErr = "";
+$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr ="";
 if(isset($_POST['submit12345'])){
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
     empty($_POST['prop_price']) ? $priceErr = "Price is required!" : $prop_price = test_input($_POST['prop_price']);
@@ -18,7 +18,10 @@ if(isset($_POST['submit12345'])){
     empty($_POST['prop_location']) ? $locationErr = "Location is required!" : $prop_location = test_input($_POST['prop_location']);
     empty($_POST['latitude']) ? $latErr = "Latitude is required!" : $prop_latitude = test_input($_POST['latitude']);
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
-    empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
+    empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);    
+    !is_numeric($_POST['bua']) ? $buaErr = "Built Up area should be numeric!" : $prop_bua = test_input($_POST['bua']);
+    !is_numeric($_POST['ca']) ? $caErr = "Carpet area should be numeric!" : $prop_ca = test_input($_POST['ca']);
+    empty($_POST['prop_area']) ? $areaErr = "Area is required!" : $prop_area = test_input($_POST['prop_area']);
 
     $prop_desc = test_input($_POST['prop_desc']);
 
@@ -30,6 +33,8 @@ if(isset($_POST['submit12345'])){
     $prop_internet = test_input($_POST['prop_internet']);
     $prop_parking = test_input($_POST['prop_parking']);
     $prop_pool = test_input($_POST['prop_pool']);
+    $prop_water = test_input($_POST['prop_water']);
+    $prop_furnishing = test_input($_POST['prop_furnishing']);
  
     $prop_bedroom = test_input($_POST['prop_bedroom']);
     $prop_bathroom = test_input($_POST['prop_bathroom']);
@@ -163,6 +168,7 @@ if(isset($_POST['submit12345'])){
         prop_landlord_id = '".$prop_landlord_id."',
         prop_price = '".$prop_price."',
         prop_address = '".$prop_address."',
+        prop_area = '$prop_area',
         prop_desc = '".$prop_desc."',
         prop_city = '".$prop_city."',
         prop_state = '".$prop_state."',
@@ -181,9 +187,15 @@ if(isset($_POST['submit12345'])){
         prop_category = '".$prop_category."',
         prop_latitude = '".$prop_latitude."',
         prop_longitude = '".$prop_longitude."',
-        prop_location = '".$prop_location."',
+        prop_location = '".$prop_location."',        
+        prop_bua = '".$prop_bua."',
+        prop_ca = '".$prop_ca."',
+        prop_furnishing = '".$prop_furnishing."',
+        prop_water = '".$prop_water."',
         posted_by = '".$prop_posted_by."',
         created_at = '".$prop_created_at."'";
+
+        // echo $update_user;die();
         $sql_update=$dbconn->prepare($update_user);
         $sql_update->execute();
         $last_id = $dbconn->lastInsertId();
@@ -428,6 +440,23 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                         </select>
                                         <small class="form-text text-danger"><?php echo $locationErr ?></small> 
                                     </div>
+                                    <div class="form-group m-b-30 row">
+                                        <div class="col-md-6">
+                                            <label for="bua">Built Up Area</label>
+                                            <input type="text" class="form-control" id="bua" name="bua" value="<?php echo isset($_POST['bua']) ? $_POST['bua'] : '' ?>">    
+                                            <small class="form-text text-danger"><?php echo $buaErr ?></small> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ca">Carpet Area</label>
+                                            <input type="text" class="form-control" id="ca" name="ca" value="<?php echo isset($_POST['ca']) ? $_POST['ca'] : '' ?>">    
+                                            <small class="form-text text-danger"><?php echo $caErr ?></small> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-b-30">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Total Area (In SQ Ft.)</label>
+                                        <input type="text" class="form-control" name="prop_area" value=" <?php echo isset($_POST['prop_area']) ? $_POST['prop_area'] : '' ?>">
+                                        <small class="form-text text-danger"><?php echo $areaErr ?></small> 
+                                    </div>
                                     <h4>Amentities</h4>
                                     <hr>
                                     <div class="box-body row">
@@ -612,18 +641,8 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                 <button type="submit"  name="submit12345" value="Submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                       
-             
-             
-                <!-- row -->
-                <!-- .row -->
-                
-                
+                    
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
             <script src="assets/libs/ckeditor/ckeditor.js"></script>
     <script src="assets/libs/ckeditor/samples/js/sample.js"></script>
             <script>

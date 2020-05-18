@@ -16,6 +16,12 @@
                         <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Admin Dashboard</span></li>
                          
                         
+                        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Commission</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <span class="hide-menu">Commission</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="add_commission.php" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu">Add Commission</span></a></li>
+                            </ul>       
+                         </li>
                         <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Customer</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <span class="hide-menu">Customer</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
@@ -120,7 +126,7 @@
                          <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Appointments</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> </i><span class="hide-menu">Appointments</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="appointments.php" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu">All Appointments</span></a></li>
+                                <li class="sidebar-item"><a href="all_appointment.php" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu">All Appointments</span></a></li>
                          
                             </ul>       
                          </li>

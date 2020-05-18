@@ -132,7 +132,7 @@ if(isset($_POST['button'])){
                     </div>
                     <div class="row m-t-20">
                         <!-- Form -->
-                        <form name="loginform" class="col-12" id="loginform"  method="post"">
+                        <form name="loginform" class="col-12" id="loginform"  method="post">
 						
                             <!-- email -->
                             <div class="form-group row">

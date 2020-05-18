@@ -1,3 +1,7 @@
+<?php
+    include('customer-panel/configure.php');
+    DB::connect();
+?>
 <?php include('include/header.php'); ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -20,36 +24,116 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-               <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Remove</th>
-                      <th>Image</th>
-                      <th>Property Name</th>
-                      <th>Charge</th>
-                      <th>Total Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><a href="#"><i class="fa fa-trash"></i></a></td>
-                      <td><img src="http://www.aborhut.com/images/property/6f5d5d77b723da21addca839cf8150a4.png" width="70" alt=""></td>
-                      <td><a href="#"><h4>Single room at Natun Sarania,012</h4></a></td>
-                      <td>₹150.00</td>
-                      <td>₹150.00</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <?php
+                $cart_data_count = 0;
+                if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+                    $cart_sql  = "select * from `carts` WHERE customer_id ='$_SESSION[id]'";
+                    $cart_prep=$dbconn->prepare($cart_sql);
+                    $cart_prep->execute();
+                    $cart_data=$cart_prep->fetchAll(PDO::FETCH_OBJ);
+                    $cart_data_count = $cart_prep->rowCount();
+                    if($cart_data_count > 0){
+                        ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Remove</th>
+                            <th>Image</th>
+                            <th>Property Name</th>
+                            <th>Charge</th>
+                            <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $subtotal =0;
+
+                            foreach($cart_data as $data)
+                            {
+                                $select_bookings= "SELECT * FROM `property` WHERE id = $data->property_id LIMIT 1";
+                                $sql=$dbconn->prepare($select_bookings);
+                                $sql->execute();
+                                $wlvd=$sql->fetch(PDO::FETCH_OBJ);
+                                $pidArr[] = $id;
+                            ?>
+                            <tr>
+                                <td><a href="deleteCart.php?pid=<?php echo base64_encode($data->property_id)?>"><i class="fa fa-trash"></i></a></td>
+                                <td><img src="images/property/<?php echo $wlvd->prop_image1; ?>" width="70" alt=""></td>
+                                <td><a href="properties-details.php?p=<?php echo $id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
+                                <td>₹<?php echo number_format($visitArr[] = $wlvd->prop_visit_price, 2); ?></td>
+                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); $subtotal += ($wlvd->prop_visit_price); ?></td>
+                            </tr>
+                            <?php 
+                            }
+
+                            ?>
+                        </tbody>
+                        </table>
+                    <?php
+                    }
+
+                }else{
+                    if(!empty($_SESSION['cart'])){
+                        $cart_data_count = 1;
+                        ?>
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Remove</th>
+                            <th>Image</th>
+                            <th>Property Name</th>
+                            <th>Charge</th>
+                            <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $subtotal =0;
+
+                            foreach($_SESSION['cart'] as $id)
+                            {
+                                $select_bookings= "SELECT * FROM `property` WHERE id =$id LIMIT 1";
+                                $sql=$dbconn->prepare($select_bookings);
+                                $sql->execute();
+                                $wlvd=$sql->fetch(PDO::FETCH_OBJ);
+                                $pidArr[] = $id;
+                            ?>
+                            <tr>
+                                <td><a href="deleteCart.php?pid=<?php echo base64_encode($id)?>"><i class="fa fa-trash"></i></a></td>
+                                <td><img src="images/property/<?php echo $wlvd->prop_image1; ?>" width="70" alt=""></td>
+                                <td><a href="properties-details.php?p=<?php echo $id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
+                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); ?></td>
+                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); ?></td>
+                            </tr>
+                            <?php 
+                            }
+
+                            ?>
+                        </tbody>
+                        </table>
+                            
+                        <?php
+                    }else{
+                        ?>
+                        <h2>No Item In Carts</h2>
+                        <?php
+                            }
+                }
+                ?>
                 <a href="./" class="btn btn-primary">Continue Shopping</a>
-                <a href="./" class="btn btn-primary pull-right">Update Shopping Cart</a>
+                <!-- <a href="./" class="btn btn-primary pull-right">Update Shopping Cart</a> -->
             </div>
         </div>
         <div class="row" style="margin-top: 20px;">
             <div class="col-md-8"></div>
             <div class="col-md-4">
-                <h4>Subtotal ₹ 150</h4>
-                <h4 class="border-bottom">Grand Total ₹ 150</h4>
-                <a href="checkout.php" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
+                <h4>Subtotal ₹ <?php echo number_format($subtotal, 2) ?></h4>
+                <h4 class="border-bottom">Grand Total ₹ <?php echo number_format($subtotal, 2) ?></h4>
+                <?php if($cart_data_count > 0){
+                    ?>
+                    <a href="checkout.php" class="btn btn-primary pull-right">PROCEED TO CHECKOUT</a>
+                <?php
+                }?>
             </div>
         </div>
     </div>

@@ -1,4 +1,29 @@
+<?php 
+include_once('customer-panel/configure.php');
+DB::connect();
+
+?>
+
 <?php include('include/header.php'); ?>
+<?php
+    $select  = "select * from `city` ORDER BY id DESC";
+    $sql=$dbconn->prepare($select);
+    $sql->execute();
+    $data=$sql->fetchAll(PDO::FETCH_OBJ);
+   
+   
+    $select1  = "select * from `location` ORDER BY id DESC";
+    $sql1=$dbconn->prepare($select1);
+    $sql1->execute();
+    $data1=$sql1->fetchAll(PDO::FETCH_OBJ);
+
+    $select2  = "select * from `property_type` ORDER BY id DESC";
+    $sql2=$dbconn->prepare($select2);
+    $sql2->execute();
+    $data2=$sql2->fetchAll(PDO::FETCH_OBJ);
+
+
+?>
 <!-- Banner start -->
 <div class="banner">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -16,66 +41,74 @@
                                         <form action="index.php" method="post">
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="area-from" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>City</option>
-                                                        <option>1000</option>
-                                                        <option>800</option>
-                                                        <option>600</option>
-                                                        <option>400</option>
-                                                        <option>200</option>
-                                                        <option>100</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Location</option>
-                                                        <option>For Sale</option>
-                                                        <option>For Rent</option>
+                                                    <select class="selectpicker search-fields" name="city" data-live-search="true" data-live-search-placeholder="Search value">
+                                                        <option value="">City</option>
+                                                        <?php 
+                                                        if($sql->rowCount() > 0){
+                                                            foreach ($data as $row) {
+                                                                echo '<option>'.$row->city_name.'</option>';
+                                                            }
+                                                        } 
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
                                                     <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Property Type</option>
-                                                        <option>United States</option>
-                                                        <option>United Kingdom</option>
-                                                        <option>American Samoa</option>
-                                                        <option>Belgium</option>
-                                                        <option>Cameroon</option>
-                                                        <option>Canada</option>
+                                                        <option value="">Location</option>
+                                                        <?php 
+                                                        if($sql1->rowCount() > 0){
+                                                            foreach ($data1 as $row) {
+                                                                echo '<option>'.$row->location_name.'</option>';
+                                                            }
+                                                        } 
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option>Min Budget</option>
-                                                        <option>Residential</option>
-                                                        <option>Commercial</option>
-                                                        <option>Land</option>
+                                                    <select class="selectpicker search-fields" name="property_type" data-live-search="true" data-live-search-placeholder="Search value">
+                                                        <option value="">Property Type</option>
+                                                        <?php 
+                                                        if($sql1->rowCount() > 0){
+                                                            foreach ($data2 as $row) {
+                                                                echo '<option>'.$row->property_type.'</option>';
+                                                            }
+                                                        } 
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="bedrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                                        <option>Max Budget</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                        <option>6</option>
-                                                        <option>7</option>
+                                                    <select class="selectpicker search-fields" name="min_budget" data-live-search="true" data-live-search-placeholder="Search value">
+                                                        <option value="">Min Budget</option>
+                                                        <option>2000</option>
+                                                        <option>3000</option>
+                                                        <option>4000</option>
+                                                        <option>5000</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                <div class="form-group">
+                                                    <select class="selectpicker search-fields" name="max_budget" data-live-search="true" data-live-search-placeholder="Search value" >
+                                                        <option value="">Max Budget</option>
+                                                        <option>10000</option>
+                                                        <option>15000</option>
+                                                        <option>20000</option>
+                                                        <option>25000</option>
+                                                        <option>30000</option>
+                                                        <option>40000</option>
+                                                        <option>50000</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                 <div class="form-group mb-0">
-                                                    <button class="search-button">Search</button>
+                                                    <button class="search-button" name="search" type="submit">Search</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -91,109 +124,6 @@
     </div>
 </div>
 <!-- Banner end -->
-
-<!-- Search area start -->
-<!-- <div class="search-area hidden-lg hidden-md">
-    <div class="container">
-        <div class="search-area-inner">
-            <div class="search-contents ">
-                <form method="GET">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="area-from" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Area From</option>
-                                    <option>1000</option>
-                                    <option>800</option>
-                                    <option>600</option>
-                                    <option>400</option>
-                                    <option>200</option>
-                                    <option>100</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Property Status</option>
-                                    <option>For Sale</option>
-                                    <option>For Rent</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>American Samoa</option>
-                                    <option>Belgium</option>
-                                    <option>Cameroon</option>
-                                    <option>Canada</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value">
-                                    <option>Property Types</option>
-                                    <option>Residential</option>
-                                    <option>Commercial</option>
-                                    <option>Land</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="bedrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                    <option>Bedrooms</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="bathrooms" data-live-search="true" data-live-search-placeholder="Search value" >
-                                    <option>Bathrooms</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                            <div class="form-group">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
-                            <div class="form-group">
-                                <button class="search-button">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- Search area start -->
 
 <!-- Properties section body start -->
 <div class="properties-section-body content-area">
@@ -227,17 +157,78 @@
 
                 <div class="clearfix"></div>
                 <?php
+                $pagination = true;
+                if(isset($_POST['search'])){
+                    $pagination = false;
+                    $city = $_POST['city'];
+                    $location = $_POST['location'];
+                    $type = $_POST['property_type'];
+                    $min_budget = $_POST['min_budget'];
+                    $max_budget = $_POST['max_budget'];
 
-                if(!empty($_GET['page']) > 0)
-                    $page = $_GET['page'];
-                else
-                    $page = 1;
+                    $query_flag = false;
+                  
+                    if(!empty($_GET['page']) > 0)
+                        $page = $_GET['page'];
+                    else
+                        $page = 1;
 
-                $limit = ($page * 10) - 10;
+                    $limit = ($page * 10) - 10;
+                    $select13 = "select * from `property` WHERE";
+                    
+                    if(!empty($_POST['city'])){                                              
+                        $select13  .= " prop_city LIKE '%$city%'";
+                        $query_flag = true;  
+                    }
+                    if(!empty($_POST['location'])){                        
+                        if ($query_flag) {                            
+                            $select13  .= " AND prop_location LIKE '%$location%'";
+                        } else {
+                            $select13  .= " prop_location LIKE '%$location%'";
+                        }                        
+                        $query_flag = true;
+                    }
+                    if(!empty($type)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_type LIKE '%$type%'";
+                        } else {
+                            $select13  .= " prop_type LIKE '%$type%'";
+                        }   
+                        $query_flag = true;
+                    }
+                    if(!empty($min_budget)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_price >= '$min_budget'";
+                        } else {
+                            $select13  .= " prop_price >= '$min_budget'";
+                        }  
+                        $query_flag = true;
+                    }
+                    if(!empty($max_budget)){
+                        if ($query_flag) {
+                            $select13  .= " AND prop_price <= '$max_budget'";
+                        } else {
+                            $select13  .= " prop_price <= '$max_budget'";
+                        } 
+                        $query_flag = true;
+                    }
 
-                $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
-                $pdo_statement->execute();
-                $result = $pdo_statement->fetchAll();
+                        $select13 .= " ORDER BY id DESC LIMIT $limit, 50";
+                    $sql13=$dbconn->prepare($select13);
+                    $sql13->execute();
+                    $result=$sql13->fetchAll();
+                }else{
+                    if(!empty($_GET['page']) > 0)
+                        $page = $_GET['page'];
+                    else
+                        $page = 1;
+    
+                    $limit = ($page * 10) - 10;
+    
+                    $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
+                    $pdo_statement->execute();
+                    $result = $pdo_statement->fetchAll();
+                }
 
                 if(!empty($result)) { 
                     foreach($result as $row) {
@@ -253,9 +244,10 @@
                             <img src="images/property/<?php echo $row['prop_image1']; ?>" alt="fp-list" class="img-responsive hp-1">
                             <div class="property-overlay">
                                 <div class="property-magnify-gallery">
-                                    <a href="images/property/<?php echo $row['prop_image2']; ?>" class="overlay-link">
+                                    <a href="images/property/<?php echo $row['prop_image1']; ?>" class="overlay-link">
                                         <i class="fa fa-search-plus"></i>
                                     </a>
+                                    <a href="images/property/<?php echo $row['prop_image2']; ?>" class="hidden"></a>
                                     <a href="images/property/<?php echo $row['prop_image3']; ?>" class="hidden"></a>
                                     <a href="images/property/<?php echo $row['prop_image4']; ?>" class="hidden"></a>
                                     <a href="images/property/<?php echo $row['prop_image5']; ?>" class="hidden"></a>
@@ -280,7 +272,7 @@
                             </li>
                             <li>
                                 <p class="property_listing_features">Property area</p>
-                                <span><?php print $row['prop_area']; ?></span>
+                                <span><?php print $row['prop_area']; ?> sq ft.</span>
                             </li>
                             <li>
                                 <p class="property_listing_features">Bedroom</p>
@@ -307,6 +299,7 @@
                 }
                 ?>
                 <!-- Page navigation start -->
+                <?php if($pagination){?>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php
@@ -339,6 +332,7 @@
                         ?>
                     </ul>
                 </nav>
+                    <?php } ?>
                 <!-- Page navigation end-->
             </div>
         </div>

@@ -1,18 +1,19 @@
-<?php 
-ob_start();
+<?php
 include('configure.php');
 DB::connect();
 require_once("check.php");
 
-
- $select_enquiry="SELECT * FROM checkout WHERE chk_bill_phone = '".$_SESSION['cus_phone']."' and chk_status = 'success' order by id desc ";
- $sql=$dbconn->prepare($select_enquiry);
- $sql->execute();
- $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-	
-	
+$id = $_SESSION['id'];
+$select_bookings= "SELECT appointment.id, checkout.chk_bill_name, checkout.chk_bill_phone,
+appointment.app_date, property.prop_address, property.id as prop_id, landlord.landlord_name, landlord.landlord_phone FROM `appointment` 
+LEFT JOIN checkout ON appointment.app_checkout_id = checkout.id
+INNER JOIN property ON appointment.app_property_id = property.id
+INNER JOIN landlord ON property.prop_landlord_id = landlord.id
+WHERE appointment.app_cus_id = '$id' order by appointment.id desc LIMIT 20";
+$sql=$dbconn->prepare($select_bookings);
+$sql->execute();
+$wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
 ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <?php include('inc/header.php'); ?>
@@ -48,7 +49,7 @@ require_once("check.php");
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Appointment</h4>
+                         
                         <div class="d-flex align-items-center">
 
                         </div>
@@ -72,84 +73,39 @@ require_once("check.php");
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All appointment</h4>
-                                
-                                <div class="table-responsive">
-                                    <table id="zero_config" class="table table-striped table-bordered">
-									
-									<div class="panel-body">
-									<table class="table table-hover" id="sample-table-1">
-										<thead>
-											<tr>
-												<th class="center">ID</th>
-												<th class="center">Name</th>
-                                                <th class="center">Address</th>
-                                                <th class="center">Total(₹)</th>
-												<th class="center">Date</th> 
-                                                <th class="center">Visit Status</th>
-                                                <th class="center">Property</th>
-										 
-											  </tr>
-											  
-											 
-<?php
-
-//while($rows = mysql_fetch_array($aResult,MYSQL_ASSOC))
-//{ 
-if($sql->rowCount() > 0){
-	foreach($wlvd as $rows){
-$id = $rows->id;
-$chk_bill_name = $rows->chk_bill_name;
-$chk_bill_street_addr = $rows->chk_bill_street_addr;
-$chk_total = $rows->chk_total;
-$chk_prop_visit_date = $rows->chk_prop_visit_date;
-$chk_status= $rows->chk_status;
-$chk_appointment = $rows->chk_appointment;
- 
-
- 
-?>
-							
-
-
-
-
-
-
-											 </thead>
-										<tbody>
-                                    <tr>
-										<td class="center"><?php echo $id;?> </td>
-										<td class="center"><?php echo $chk_bill_name; ?></td>
-                                        <td class="center"><?php echo $chk_bill_street_addr; ?></td>
-                                        <td class="center">₹ <?php echo $chk_total; ?></td>
-                                        <td class="center"><?php echo $chk_prop_visit_date; ?></td>
-                                        <td class="center"><?php echo $chk_appointment; ?></td>
-                                        <td class="center"><a href="appointment_prop.php?id=<?php echo $id; ?>&start=2"target="_self"><font color="purple">View</font></a> 
-                                       
-               
+                                <h4 class="card-title">All Appointments</h4>
+                                    <div class="table-responsive">
+                                        <table id="zero_config" class="table table-striped table-bordered">
                                         
-										 
-									</tr>	
-										<?php } } ?>
-										</tbody>
-									</table>
-								</div>
-								
-								
-                                        
-                                        
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- order table -->
-                
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <?php include('inc/footer.php'); ?>
+                                        <div class="panel-body">
+                                        <table class="table table-hover" id="sample-table-1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="center"> ID</th>
+                                                    <th class="center"> Landlord Name</th>
+                                                    <th class="center">Property Address</th>
+                                                    <th class="center">Landlord Phone No</th>
+                                                    <th class="center"> Appointment Date</th> 
+                                                    <th class="center"> View Property</th>
+                                                    </tr>
+                                                    </thead>
+                                            <tbody>
+                                        <?php
+                                                foreach ($wlvd as $row=> $rows) {
+                                                    
+                                            ?>
+                                        <tr>
+                                            <td class="center"><?php echo $rows->id;?> </td>
+                                            <td class="center"><?php echo $rows->landlord_name; ?></td>
+                                            <td class="center"><?php echo $rows->prop_address; ?></td>
+                                            <td class="center"><?php echo $rows->landlord_phone; ?></td>
+                                            <td class="center"><?php echo $rows->app_date; ?></td>
+                                            <td><a href="appointment_prop.php?id=<?php echo $rows->prop_id; ?>&start=2"target="_self"><font color="purple">View</font></a</td>
+                                        </tr>	
+                                                <?php } ?>  
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                        </table>
+                                    </div>
+<?php include('inc/footer.php'); ?>

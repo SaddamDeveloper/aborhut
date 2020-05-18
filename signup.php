@@ -14,7 +14,6 @@ if(isset($_POST['signup'])){
         $mobile_check = "SELECT COUNT(*) FROM landlord WHERE landlord_phone = '$mobile'";
         $sql=$dbconn->prepare($mobile_check);
         $sql->execute();
-
         $email_check = "SELECT COUNT(*) FROM landlord WHERE landlord_email = '$email'";
         $sql1=$dbconn->prepare($email_check);
         $sql1->execute();
@@ -27,14 +26,24 @@ if(isset($_POST['signup'])){
             $passwordErr = "Password doesn't matched!";
         }else{
             $insert_user = "INSERT `customer` SET
-                cus_name = '".$name."',
-                cus_email = '".$email."',
-                cus_phone = '".$mobile."',
-                cus_password = '".$password."'";
+                cus_name = '$name',
+                cus_email = '$email',
+                cus_phone = '$mobile',
+                cus_password = '$password'";
     
             $sql_update=$dbconn->prepare($insert_user);
             $sql_update->execute();
-            if($sql_update){
+            $userId = $dbconn->lastInsertId();
+            if($userId){
+                // Wallet Create
+                $amount = "0.00";
+                $insert_wallet = "INSERT `wallet` SET
+                user_id = '".$userId."',
+                amount = '".$amount."',
+                created_at = NOW()";
+                $sql_update=$dbconn->prepare($insert_wallet);
+                $sql_update->execute();
+                
                 $msg = "Registered Successfully!";
             }else{
                 $msg = "Somthing went wrong!";

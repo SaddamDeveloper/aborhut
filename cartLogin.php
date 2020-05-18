@@ -3,8 +3,9 @@
 include_once('customer-panel/configure.php');
 DB::connect();
     if(isset($_POST['Login'])){
-        $mobile = trim($_POST['mobile']);
-        $password = trim($_POST['password']);
+        $mobile = $_POST['mobile'];
+        $password = $_POST['password'];
+
         $select  = "select * from `customer` WHERE cus_phone = '".$mobile."' and cus_password = '".$password."'";
         $sql=$dbconn->prepare($select);
         $sql->execute();
@@ -13,10 +14,10 @@ DB::connect();
             if($sql->rowCount() > 0){
             foreach($wlvd as $row5)
             {
-                // echo "Details";exit();
                 $_SESSION['id'] = $row5->id;  
                 $_SESSION['cus_name'] = $row5->cus_name; 
-                header("location:customer-panel/welcome.php");
+                $product = $_GET['product'];
+                header("location:checkout.php?product=$product");
             }
             
            } else {
@@ -75,7 +76,7 @@ DB::connect();
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="forgot_password.php" class="link-not-important pull-right">Forgot Password</a>
+                                <a href="forgot-password.html" class="link-not-important pull-right">Forgot Password</a>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
