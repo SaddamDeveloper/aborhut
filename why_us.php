@@ -19,6 +19,9 @@
 <div class="about-city-estate">
     <div class="container">
         <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <img class="img-responsive" src="img/properties/properties-4.jpg" alt="">
+            </div>
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                 <div class="about-text">
                     <h3>Why Us</h3>
@@ -27,7 +30,7 @@
                     <a href="contact.php" class=" btn button-sm button-theme">Contact Us</a>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 hidden-mobile">
                 <img class="img-responsive" style="padding-top: 50px;" src="img/properties/properties-4.jpg" alt="">
             </div>
         </div>

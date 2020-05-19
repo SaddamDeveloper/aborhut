@@ -30,6 +30,9 @@ DB::connect();
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
+    <!-- responsive css -->
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="img/logos/logo.png" type="image/x-icon" >
 
