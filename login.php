@@ -1,4 +1,3 @@
-
 <?php
 include_once('customer-panel/configure.php');
 DB::connect();

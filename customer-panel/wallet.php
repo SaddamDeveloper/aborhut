@@ -28,23 +28,9 @@ if(isset($id) && !empty($id)){
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -60,12 +46,6 @@ if(isset($id) && !empty($id)){
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Info box -->
@@ -87,8 +67,10 @@ if(isset($id) && !empty($id)){
 											<tr>
 												<th class="center"> ID</th>
                                                  <th class="center">Amount</th>
-                                                 <th class="center">Date</th>
+                                                 <th class="center">Total Amount</th>
                                                  <th class="center">Status</th>
+                                                 <th class="center">Message</th>
+                                                 <th class="center">Created At</th>
 											  </tr>
                                             <?php
 
@@ -105,6 +87,7 @@ if(isset($id) && !empty($id)){
                                             $total_amount = $rows1->total_amount; 
                                             $chk_status = $rows1->type;
                                             $msg = $rows1->message
+
                                             ?>
 
 											 </thead>
@@ -129,6 +112,9 @@ if(isset($id) && !empty($id)){
 
                                         <td class="center">
                                             <?php echo $msg ?>
+                                        </td>
+                                        <td class="center">
+                                            <?php echo $rows1->created_at ?>
                                         </td>
 									</tr>	
 										<?php } } ?>
