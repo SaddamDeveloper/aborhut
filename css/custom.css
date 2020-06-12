@@ -229,3 +229,11 @@ margin-top: 10px;
       z-index: 25;
   }
 }
+.property-content {
+  cursor: pointer;
+}
+.right a {
+    background-color: #e8e8e8;
+    padding: 3px 10px;
+    border-radius: 3px;
+}

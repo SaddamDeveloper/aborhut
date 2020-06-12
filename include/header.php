@@ -43,6 +43,7 @@ DB::connect();
     <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
 
     <script src="js/ie-emulation-modes-warning.js"></script>
+    <?php echo $fbMetaTags; ?>
 </head>
 <body>
 

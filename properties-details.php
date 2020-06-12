@@ -43,7 +43,18 @@ DB::connect();
     $prop_prep->execute();
     $prop=$prop_prep->fetchAll(PDO::FETCH_OBJ);
 ?>
-<?php include_once('include/header.php'); ?>
+<?php
+    $fbMetaTags = '
+    <meta property="og:url"           content="properties-details.php?p='.$data->id.'" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="'.$data->prop_name.'" />
+    <meta property="og:description"   content="Aborhut" />
+    <meta property="og:image"         content="'.$data->prop_image1.'" />
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
+    ';
+    include_once('include/header.php');
+?>
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="overlay">
@@ -312,6 +323,14 @@ DB::connect();
                                 <tr>
                                     <th>Carpet Area</th>
                                     <td><?php echo $data->prop_ca ?> sq. ft</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fa fa-share-alt" style="padding-right: 5px;font-size: 18px;margin-left: 3px;"></i> Share:</th>
+                                    <td>
+                                        <div id="facebook-share" class="fb-share-button" data-href="{{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">fb
+                                        </a>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

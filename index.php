@@ -259,11 +259,11 @@ DB::connect();
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-3 col-xs-7 property-content ">
+                    <div class="col-lg-9 col-md-9 col-sm-3 col-xs-7 property-content " onclick="window.open('properties-details.php?p=<?php echo $row['id'] ?>', '_blank');">
                     <?php $id = $row['id']; ?>
                         <!-- title -->
                         <h1 class="title">
-                            <a href="properties-details.php?p=<?php echo $id ?>"><?php print $row['prop_name']; ?></a>
+                            <a href="#!"><?php print $row['prop_name']; ?></a>
                         </h1>                        <!-- Facilities List -->
                         <ul class="facilities-list clearfix">
                             <li>
@@ -290,12 +290,14 @@ DB::connect();
                         </ul>
                         <!-- Property footer -->
                         <div class="property-footer">
-                            <!-- <span class="left">
+                            <span class="left">
                                 <a href="#">Posted by: <i class="fa fa-user"></i>Narayan</a>
-                            </span> -->
-                            <!-- <span class="right">
+                                <span style="padding: 0 10px;">|</span>
                                 <i class="fa fa-calendar"></i>21/03/20
-                            </span> -->
+                            </span>
+                            <span class="right">
+                                <a href="#!">View Detail</a>
+                            </span>
                         </div>
                     </div>
                 </div>
