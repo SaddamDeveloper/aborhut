@@ -154,7 +154,13 @@ DB::connect();
                                if($_SESSION['cart']){
                                 echo "(".count($_SESSION['cart']).")";
                                }else{
-                                   echo "(0)";
+                                    $id = $_SESSION['id'];
+                                    $select_carts = "SELECT * FROM `carts` where customer_id=$id";
+                                    $sql2=$dbconn->prepare($select_carts);
+                                    $sql2->execute();
+                                    $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
+                                    $cart_data_count = $sql2->rowCount();
+                                    echo "(".$cart_data_count.")";
                                } 
                                ?></a>
                             </li>

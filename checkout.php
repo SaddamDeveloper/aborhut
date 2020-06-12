@@ -7,6 +7,14 @@
     $cart_data_count = 0;
     $product_ids = null;
     $grand_total = 0;
+    if($_SESSION['cart']){
+        $productID = $_SESSION['cart'];
+        foreach($_SESSION['cart'] as $key=>$value){
+            $select_bookings = "INSERT INTO `carts`(`property_id`, `customer_id`) VALUES ('$value','$_SESSION[id]')";
+            $sql=$dbconn->prepare($select_bookings);
+            $sql->execute();
+        }
+    }
     // Fetch cart Product
     $cart_sql  = "select * from `carts` WHERE customer_id ='$_SESSION[id]'";
     $cart_prep=$dbconn->prepare($cart_sql);

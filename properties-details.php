@@ -3,11 +3,10 @@ include_once('customer-panel/configure.php');
 DB::connect();
     if(isset($_GET['p']) && !empty($_GET['p'])){
         $id = $_GET['p'];
-        $select  = "select * from `property` WHERE id = '$id' LIMIT 1";
+        $select  = "select property.*, landlord.landlord_name from `property` INNER JOIN landlord ON property.prop_landlord_id = landlord.id WHERE property.id = '$id' LIMIT 1";
         $sql=$dbconn->prepare($select);
         $sql->execute();
         $data=$sql->fetch(PDO::FETCH_OBJ);
-
         $select_carts = "SELECT product_id FROM `carts` where product_id='$id' ";
         $sql2=$dbconn->prepare($select_carts);
         $sql2->execute();
@@ -83,6 +82,8 @@ DB::connect();
                         <p>
                             <i class="fa fa-map-marker"></i><?php echo $data->prop_location.", ". $data->prop_address ?>
                         </p>
+                        <p>Owner: <?php echo $data->landlord_name ?></p>
+                        <small>Posted At: <?php echo date("m/d/Y",strtotime($data->created_at)) ?></small>
                     </div>
                     <div class="pull-right">
                         <h3><span>₹<?php echo $data->prop_price ?></span></h3>
@@ -436,6 +437,14 @@ DB::connect();
                                 <a href="tel:<?php echo $data3->chk_bill_phone ?>">+91-<?php echo $data3->landlord_phone ?></a>
                             </div>
                     <?php
+                                }elseif($data3->status == 4){
+                                    ?>
+                                <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
+
+                                    <div class="book-now">
+                                    <a href="#">Pending</a>
+                                </div>
+                                <?php
                                 }
                             }else{
                                 ?>

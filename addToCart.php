@@ -19,10 +19,6 @@
         if(isset($_GET['pid']) && !empty($_GET['pid'])){
             $id = $_GET['pid'];
             $productId = base64_decode($id);
-            // print_r($_SESSION['cart'][$productId]);exit();
-            // print_r($_SESSION['cart'][$productId]);exit();
-          
-            
             if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
                 $cart = $_SESSION['cart'];
                 $cart[$productId] = $productId;
