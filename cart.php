@@ -103,7 +103,7 @@
                                 <td><img src="images/property/<?php echo $wlvd->prop_image1; ?>" width="70" alt=""></td>
                                 <td><a href="properties-details.php?p=<?php echo $id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
                                 <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); ?></td>
-                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); ?></td>
+                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); $subtotal += ($wlvd->prop_visit_price); ?></td>
                             </tr>
                             <?php 
                             }
