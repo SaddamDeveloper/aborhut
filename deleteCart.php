@@ -10,6 +10,7 @@ session_start();
     $deleteCart  = "DELETE FROM `carts` WHERE property_id ='$productId'";
     $cart_prep=$dbconn->prepare($deleteCart);
     $cart_prep->execute();
+    unset($_SESSION['cart'][$productId]);
     header("location:cart.php");
   }else{
     $id = $_GET['pid'];

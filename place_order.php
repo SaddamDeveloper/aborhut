@@ -33,13 +33,22 @@ function test_input($data) {
      
       if($cart_data_count > 0){
           $separator = true;
+           // Fetch Admin Charge
+         $commission_fetch = "SELECT * FROM commission";
+         $sql = $dbconn->prepare($commission_fetch);
+         $sql->execute();
+         $commission = $sql->fetchColumn(1);
+
           foreach ($cart_data as $row) {
               $product_sql  = "SELECT * FROM `property` WHERE `id` ='$row->property_id'";           
               $product_prep=$dbconn->prepare($product_sql);
               $product_prep->execute();
               $product_data=$product_prep->fetch(PDO::FETCH_OBJ);
-  
-              $grand_total  += $product_data->prop_visit_price;
+
+              // Admin Commission
+            $admin_commission = ($product_data->prop_price * $commission)/100;
+
+              $grand_total  += $admin_commission;
               if ($separator) {
                   $product_ids .="$product_data->id";
               }else{
@@ -60,23 +69,23 @@ function test_input($data) {
         $sql25=$dbconn->prepare($select_wallet);
         $sql25->execute();
         $wlvd25=$sql25->fetch(PDO::FETCH_OBJ);
-  
-    $name = test_input($_POST['name']);
-    $email = test_input($_POST['email']);
-    $mobile = test_input($_POST['phone']);
-    $address = test_input($_POST['address']);
-    $city = test_input($_POST['city']);
-    $state = test_input($_POST['state']);
-    $V_date = test_input($_POST['V_date']);
-  
-    $product_id =  $product_ids;
-    $chk_total = $grand_total;
-    $user_id = $wlvd->id;
-  
-    $payment_status = "PENDING";
-    $online_pay = $grand_total;
-    $wallet_pay = 0;
-    $total_amount = $grand_total;
+      
+        $name = test_input($_POST['name']);
+        $email = test_input($_POST['email']);
+        $mobile = test_input($_POST['phone']);
+        $address = test_input($_POST['address']);
+        $city = test_input($_POST['city']);
+        $state = test_input($_POST['state']);
+        $V_date = test_input($_POST['V_date']);
+      
+        $product_id =  $product_ids;
+        $chk_total = $grand_total;
+        $user_id = $wlvd->id;
+      
+        $payment_status = "PENDING";
+        $online_pay = $grand_total;
+        $wallet_pay = 0;
+        $total_amount = $grand_total;
   
     if ($wlvd25->amount > 0) {
         if ($wlvd25->amount >= $grand_total) {
@@ -131,14 +140,21 @@ function test_input($data) {
         if($checkoutId){
             if($cart_data_count > 0){
                 $separator = true;
+                 // Fetch Admin Charge
+                $commission_fetch = "SELECT * FROM commission";
+                $sql = $dbconn->prepare($commission_fetch);
+                $sql->execute();
+                $commission = $sql->fetchColumn(1);
+
                 $wallet_total_amount = $wlvd25->amount;
                 foreach ($cart_data as $row) {
                     $product_sql  = "SELECT * FROM `property` WHERE `id` ='$row->property_id'";           
                     $product_prep=$dbconn->prepare($product_sql);
                     $product_prep->execute();
                     $product_data=$product_prep->fetch(PDO::FETCH_OBJ);
-  
-                    $order_amount = $product_data->prop_visit_price;
+                    // Admin Commission
+                    $admin_commission = ($product_data->prop_price * $commission)/100;
+                    $order_amount = $admin_commission;
                     $order_status = "PENDING";
                     $status = "4";
                     $order_wallet_pay = 0;

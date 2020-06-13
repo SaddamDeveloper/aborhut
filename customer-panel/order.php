@@ -84,6 +84,8 @@ if($id !=''){
                                                         print '<label class="label label-warning"><'.$row->payment_status.'</label>';
                                                     }elseif ($row->payment_status == 'SUCCESS' &&  $row->status == '3') {
                                                         print '<label class="label label-primary">Refunded</label>';
+                                                    }elseif ($row->payment_status == 'PENDING' &&  $row->status == '4') {
+                                                        print '<label class="label label-primary">Failed</label>';
                                                     }else{
                                                         print '<label class="label label-success">'.$row->payment_status.'</label>';
                                                     }

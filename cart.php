@@ -46,6 +46,12 @@
                         </thead>
                         <tbody>
                         <?php
+                        // Fetch Admin Charge
+                            $commission_fetch = "SELECT * FROM commission";
+                            $sql = $dbconn->prepare($commission_fetch);
+                            $sql->execute();
+                            $commission = $sql->fetchColumn(1);
+
                             $subtotal =0;
 
                             foreach($cart_data as $data)
@@ -55,17 +61,19 @@
                                 $sql->execute();
                                 $wlvd=$sql->fetch(PDO::FETCH_OBJ);
                                 $pidArr[] = $id;
+
+                                // Admin Commission
+                                $admin_commission = ($wlvd->prop_price * $commission)/100;
                             ?>
                             <tr>
                                 <td><a href="deleteCart.php?pid=<?php echo base64_encode($data->property_id)?>"><i class="fa fa-trash"></i></a></td>
                                 <td><img src="images/property/<?php echo $wlvd->prop_image1; ?>" width="70" alt=""></td>
                                 <td><a href="properties-details.php?p=<?php echo $id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
-                                <td>₹<?php echo number_format($visitArr[] = $wlvd->prop_visit_price, 2); ?></td>
-                                <td>₹<?php echo number_format($wlvd->prop_visit_price, 2); $subtotal += ($wlvd->prop_visit_price); ?></td>
+                                <td>₹<?php echo number_format($visitArr[] = $admin_commission, 2); ?></td>
+                                <td>₹<?php echo number_format($admin_commission , 2); $subtotal += ($admin_commission); ?></td>
                             </tr>
                             <?php 
                             }
-
                             ?>
                         </tbody>
                         </table>
@@ -120,7 +128,7 @@
                             }
                 }
                 ?>
-                <a href="./" class="btn btn-primary">Continue Shopping</a>
+                <a href="./" class="btn btn-primary">Book More</a>
                 <!-- <a href="./" class="btn btn-primary pull-right">Update Shopping Cart</a> -->
             </div>
         </div>
