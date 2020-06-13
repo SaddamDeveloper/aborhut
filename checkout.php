@@ -24,13 +24,22 @@
    
     if($cart_data_count > 0){
         $separator = true;
+         // Fetch Admin Charge
+         $commission_fetch = "SELECT * FROM commission";
+         $sql = $dbconn->prepare($commission_fetch);
+         $sql->execute();
+         $commission = $sql->fetchColumn(1);
+
         foreach ($cart_data as $row) {
             $product_sql  = "SELECT * FROM `property` WHERE `id` ='$row->property_id'";           
             $product_prep=$dbconn->prepare($product_sql);
             $product_prep->execute();
             $product_data=$product_prep->fetch(PDO::FETCH_OBJ);
 
-            $grand_total  += $product_data->prop_visit_price;
+            // Admin Commission
+            $admin_commission = ($product_data->prop_price * $commission)/100;
+
+            $grand_total  += $admin_commission;
             if ($separator) {
                 $product_ids .="$product_data->id";
             }else{
@@ -86,7 +95,7 @@
                             <h1><span>Billing</span> Details</h1>
                         </div>
                         <input type="hidden" name="product_id" value="<?php echo $pid; ?>">
-                        <input type="hidden" name="visit" value="<?php echo $visitCharge; ?>">
+                        <input type="hidden" name="visit" value="<?php echo $admin_commission; ?>">
                         <div class="search-contents-sidebar mb-30">
                         <div class="row">
                             <div class="col-md-6">

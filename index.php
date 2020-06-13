@@ -44,89 +44,89 @@ DB::connect();
 
 <!--banner serach-->
 <div class="banner-search-box">
-                            <!-- Search area start -->
-                            <div class="search-area animated fadeInDown delay-1s">
-                                <div class="search-area-inner">
-                                    <div class="search-contents ">
-                                        <form action="index.php" method="post">
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="city" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option value="">City</option>
-                                                        <?php 
-                                                        if($sql->rowCount() > 0){
-                                                            foreach ($data as $row) {
-                                                                echo '<option>'.$row->city_name.'</option>';
-                                                            }
-                                                        } 
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option value="">Location</option>
-                                                        <?php 
-                                                        if($sql1->rowCount() > 0){
-                                                            foreach ($data1 as $row) {
-                                                                echo '<option>'.$row->location_name.'</option>';
-                                                            }
-                                                        } 
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="property_type" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option value="">Property Type</option>
-                                                        <?php 
-                                                        if($sql1->rowCount() > 0){
-                                                            foreach ($data2 as $row) {
-                                                                echo '<option>'.$row->property_type.'</option>';
-                                                            }
-                                                        } 
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="min_budget" data-live-search="true" data-live-search-placeholder="Search value">
-                                                        <option value="">Min Budget</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                        <option>4000</option>
-                                                        <option>5000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group">
-                                                    <select class="selectpicker search-fields" name="max_budget" data-live-search="true" data-live-search-placeholder="Search value" >
-                                                        <option value="">Max Budget</option>
-                                                        <option>10000</option>
-                                                        <option>15000</option>
-                                                        <option>20000</option>
-                                                        <option>25000</option>
-                                                        <option>30000</option>
-                                                        <option>40000</option>
-                                                        <option>50000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                <div class="form-group mb-0">
-                                                    <button class="search-button" name="search" type="submit">Search</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Search area start -->
+    <!-- Search area start -->
+    <div class="search-area animated fadeInDown delay-1s">
+        <div class="search-area-inner">
+            <div class="search-contents ">
+                <form action="index.php" method="post">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="city" data-live-search="true" data-live-search-placeholder="Search value">
+                                <option value="">City</option>
+                                <?php 
+                                if($sql->rowCount() > 0){
+                                    foreach ($data as $row) {
+                                        echo '<option>'.$row->city_name.'</option>';
+                                    }
+                                } 
+                                ?>
+                            </select>
                         </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
+                                <option value="">Location</option>
+                                <?php 
+                                if($sql1->rowCount() > 0){
+                                    foreach ($data1 as $row) {
+                                        echo '<option>'.$row->location_name.'</option>';
+                                    }
+                                } 
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="property_type" data-live-search="true" data-live-search-placeholder="Search value">
+                                <option value="">Property Type</option>
+                                <?php 
+                                if($sql1->rowCount() > 0){
+                                    foreach ($data2 as $row) {
+                                        echo '<option>'.$row->property_type.'</option>';
+                                    }
+                                } 
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="min_budget" data-live-search="true" data-live-search-placeholder="Search value">
+                                <option value="">Min Budget</option>
+                                <option>2000</option>
+                                <option>3000</option>
+                                <option>4000</option>
+                                <option>5000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="max_budget" data-live-search="true" data-live-search-placeholder="Search value" >
+                                <option value="">Max Budget</option>
+                                <option>10000</option>
+                                <option>15000</option>
+                                <option>20000</option>
+                                <option>25000</option>
+                                <option>30000</option>
+                                <option>40000</option>
+                                <option>50000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="form-group mb-0">
+                            <button class="search-button" name="search" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Search area start -->
+</div>
 <!--banner search-->
 
 <!-- Properties section body start -->
@@ -291,9 +291,9 @@ DB::connect();
                         <!-- Property footer -->
                         <div class="property-footer">
                             <span class="left">
-                                <a href="#">Posted by: <i class="fa fa-user"></i>Narayan</a>
+                                <a href="#">Posted by: <i class="fa fa-user"></i><?php echo $row['posted_by'] ?></a>
                                 <span style="padding: 0 10px;">|</span>
-                                <i class="fa fa-calendar"></i>21/03/20
+                                <i class="fa fa-calendar"></i><?php echo date("m/d/Y",strtotime($row['created_at'])) ?>
                             </span>
                             <span class="right">
                                 <a href="#!">View Detail</a>
