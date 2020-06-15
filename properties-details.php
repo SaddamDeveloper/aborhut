@@ -328,7 +328,7 @@ DB::connect();
                                 <tr>
                                     <th><i class="fa fa-share-alt" style="padding-right: 5px;font-size: 18px;margin-left: 3px;"></i> Share:</th>
                                     <td>
-                                        <div id="facebook-share" class="fb-share-button" data-href="{{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">fb
+                                        <div id="facebook-share" class="fb-share-button" data-href="properties-details.php?p=<?php echo $data->id ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">fb
                                         </a>
                                         </div>
                                     </td>
