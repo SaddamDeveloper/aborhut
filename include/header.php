@@ -123,15 +123,9 @@ DB::connect();
                         </a>
                     </li>
                     <li>
-                    <?php
-                    if(!$_SESSION['id']){
-                    ?>
-                        <a href="list_your_property.php">
-                            List Your Property<span></span>
-                        </a>
-                    <?php
-                    }
-                    ?>
+                    <a href="list_your_property.php">
+                        List Your Property<span></span>
+                    </a>
                     </li>
                     <li>
                         <a href="contact.php">

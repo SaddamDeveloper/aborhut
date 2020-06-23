@@ -159,7 +159,7 @@
                 <h3>Looking To Sell Or Rent Your Property?</h3>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-12">
-                <a href="submit-property.html" class="btn button-md button-theme">Submit Now</a>
+                <a href="list_your_property.php" class="btn button-md button-theme">Submit Now</a>
             </div>
         </div>
     </div>
