@@ -485,7 +485,7 @@ DB::connect();
 				?>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <!-- Property 2 start -->
-                <div class="property-2">
+                <div class="property-2" onclick="window.open('properties-details.php?p=<?php echo $v['id']; ?>', '_blank');">
                     <!-- Property img -->
                     <div class="property-img">
                         <div class="featured">

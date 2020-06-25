@@ -11,3 +11,13 @@ $(window).scroll(function() {
 $(".my-account").click(function(){
   $('.dropDownBox').toggleClass('hidden');
 });
+
+$(document).ready(function(){
+  $(".navbar-toggle").click(function(){
+    if ($(".navbar-toggle").hasClass("collapsed")) {
+    	$(".banner-search-box").fadeOut();
+    } else {
+    	$(".banner-search-box").fadeIn();
+    }
+  });
+});

@@ -224,12 +224,13 @@ margin-top: 10px;
 }
 @media (max-width: 425px) {
   .banner-search-box {
-      top: 9.3vh;
+      /*top: 9.3vh;*/
+      top: 12vh;
       min-width: 93%;
       z-index: 25;
   }
 }
-.property-content {
+.property-content, .property-2 {
   cursor: pointer;
 }
 .right a {
