@@ -328,9 +328,11 @@ DB::connect();
                                 <tr>
                                     <th><i class="fa fa-share-alt" style="padding-right: 5px;font-size: 18px;margin-left: 3px;"></i> Share:</th>
                                     <td>
-                                        <div id="facebook-share" class="fb-share-button" data-href="properties-details.php?p=<?php echo $data->id ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('frontend.checkout', ['p_id' => encrypt($product_checkout[0]->id)])}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">fb
+                                        <div id="facebook-share" class="fb-share-button" data-href="properties-details.php?p=<?php echo $data->id ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=properties-details.php?p=<?php echo $data->id ?>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">fb
                                         </a>
                                         </div>
+                                        <a target="_blank" href="https://web.whatsapp.com/send?text=properties-details.php?p=<?php echo $data->id ?>" data-action="share/whatsapp/share" class="whatsapp-share-desktop"><i class="fa fa-whatsapp"></i></a>
+                                        <a target="_blank" href="https://api.WhatsApp.com/send?text=properties-details.php?p=<?php echo $data->id ?>" data-action="share/whatsapp/share" class="whatsapp-share-mobile"><i class="fa fa-whatsapp"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

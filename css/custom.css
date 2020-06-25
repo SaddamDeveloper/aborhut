@@ -238,3 +238,38 @@ margin-top: 10px;
     padding: 3px 10px;
     border-radius: 3px;
 }
+.whatsapp-share-desktop {
+    background: #0ea90e;
+    color: #fff;
+    padding: 0 25px;
+    border-radius: 4px;
+    margin-left: 5px;
+    font-size: 118%;
+    display: none;
+}
+.whatsapp-share-desktop:hover {
+  background: #129612;
+  color: #fff;
+}.whatsapp-share-mobile {
+    background: #0ea90e;
+    color: #fff;
+    padding: 0 25px;
+    border-radius: 4px;
+    margin-left: 5px;
+    font-size: 118%;
+    display: none;
+}
+.whatsapp-share-mobile:hover {
+  background: #129612;
+  color: #fff;
+}
+@media (max-width: 425px) {
+  .whatsapp-share-mobile {
+    display: inline-block;
+  }
+}
+@media (min-width: 426px) {
+  .whatsapp-share-desktop {
+    display: inline-block;
+  }
+}
