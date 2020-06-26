@@ -122,7 +122,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Visit Date</label>
-                                    <input type="date" class="input-text" name="V_date" placeholder="Visit Date" required>
+                                    <input type="date" class="input-text" name="V_date" id="v_date" placeholder="Visit Date" required>
                                     <small class="form-text text-danger"><?php echo $visitErr; ?></small> 
                                 </div>
                             </div>
@@ -170,8 +170,22 @@
                                 </tr>
                                 <?php } ?>
                                 <tr>
-                                    <th>Shipping and Handling</th>
-                                    <td>Free Shipping</td>
+                                    <th>No of Orders</th>
+                                    <td>
+                                    <?php 
+                                    if($_SESSION['cart']){
+                                        echo count($_SESSION['cart']);
+                                    }else{
+                                        $id = $_SESSION['id'];
+                                        $select_carts = "SELECT * FROM `carts` where customer_id=$id";
+                                        $sql2=$dbconn->prepare($select_carts);
+                                        $sql2->execute();
+                                        $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
+                                        $cart_data_count = $sql2->rowCount();
+                                        echo $cart_data_count;
+                                    } 
+                                ?>
+                               </td>
                                 </tr>
                                 <tr>
                                     <th>Online Pay</th>

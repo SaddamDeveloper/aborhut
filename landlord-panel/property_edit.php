@@ -294,7 +294,7 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                           <form id="formID" class="m-t-30" method="post" action="" enctype="multipart/form-data" > 
   
                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Name</label>
+                                        <label  for="exampleInputEmail1">Title (eg. 3BHK Flat)</label>
                                         <input name="prop_name" type="text" class="form-control" id="prop_name" value=" <?php echo $rows->prop_name; ?>" >
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $nameErr; ?></small> 
                                     </div> 
@@ -396,12 +396,12 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                     </div>
                                     <div class="form-group m-b-30 row">
                                         <div class="col-md-6">
-                                            <label for="bua">Built Up Area</label>
+                                            <label for="bua">No of Floor</label>
                                             <input type="text" class="form-control" id="bua" name="bua" value="<?php echo $rows->prop_bua ?>">    
                                             <small class="form-text text-danger"><?php echo $buaErr ?></small> 
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="ca">Carpet Area</label>
+                                            <label for="ca">Which Floor?</label>
                                             <input type="text" class="form-control" id="ca" name="ca" value="<?php echo $rows->prop_ca ?>">    
                                             <small class="form-text text-danger"><?php echo $caErr ?></small> 
                                         </div>

@@ -332,7 +332,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                 <form id="formID" class="m-t-30" method="post" action="" enctype="multipart/form-data"> 
 
                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Name</label>
+                                        <label  for="exampleInputEmail1">Title (eg. 3BHK Flat)</label>
                                         <input name="prop_name" type="text" class="form-control" id="prop_name" value="<?php echo isset($_POST['prop_name']) ? $_POST['prop_name'] : '' ?>" >
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $nameErr; ?></small> 
                                     </div> 
@@ -442,12 +442,12 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                     </div>
                                     <div class="form-group m-b-30 row">
                                         <div class="col-md-6">
-                                            <label for="bua">Built Up Area</label>
+                                            <label for="bua">No of Floors</label>
                                             <input type="text" class="form-control" id="bua" name="bua" value="<?php echo isset($_POST['bua']) ? $_POST['bua'] : '' ?>">    
                                             <small class="form-text text-danger"><?php echo $buaErr ?></small> 
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="ca">Carpet Area</label>
+                                            <label for="ca">Which Floor?</label>
                                             <input type="text" class="form-control" id="ca" name="ca" value="<?php echo isset($_POST['ca']) ? $_POST['ca'] : '' ?>">    
                                             <small class="form-text text-danger"><?php echo $caErr ?></small> 
                                         </div>

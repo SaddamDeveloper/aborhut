@@ -318,12 +318,12 @@ DB::connect();
                                     <td><?php echo $data->prop_area ?> sq. ft</td>
                                 </tr>
                                 <tr>
-                                    <th>Built Up Area</th>
-                                    <td><?php echo $data->prop_bua ?> sq. ft</td>
+                                    <th>Total No of Floors</th>
+                                    <td><?php echo $data->prop_bua ?></td>
                                 </tr>
                                 <tr>
-                                    <th>Carpet Area</th>
-                                    <td><?php echo $data->prop_ca ?> sq. ft</td>
+                                    <th>Which Floor</th>
+                                    <td><?php echo $data->prop_ca ?></td>
                                 </tr>
                                 <tr>
                                     <th><i class="fa fa-share-alt" style="padding-right: 5px;font-size: 18px;margin-left: 3px;"></i> Share:</th>
