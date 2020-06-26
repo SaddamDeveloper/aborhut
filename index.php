@@ -135,7 +135,7 @@ DB::connect();
         <div class="row">
             <div class="col-lg-10 col-md-10 col-xs-12 col-lg-offset-1">
                 <!-- Option bar start -->
-                <div class="option-bar">
+                <!-- <div class="option-bar">
                     <div class="row">
                         <div class="col-lg-6 col-md-5 col-sm-5 col-xs-2">
                             <h4>
@@ -156,7 +156,7 @@ DB::connect();
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Option bar end -->
 
                 <div class="clearfix"></div>

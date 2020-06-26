@@ -30,9 +30,7 @@
                     <a href="contact.php" class=" btn button-sm button-theme">Contact Us</a>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 hidden-mobile">
-                <img class="img-responsive" style="padding-top: 50px;" src="img/properties/properties-4.jpg" alt="">
-            </div>
+
         </div>
     </div>
 </div>
