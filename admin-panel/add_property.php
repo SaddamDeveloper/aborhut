@@ -318,7 +318,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                 <form id="formID" class="m-t-30" method="post" action="" enctype="multipart/form-data"> 
 
                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Name</label>
+                                        <label  for="exampleInputEmail1">Title (eg. 3 BHK Flat)</label>
                                         <input name="prop_name" type="text" class="form-control" id="prop_name" value="<?php echo isset($_POST['prop_name']) ? $_POST['prop_name'] : '' ?>" >
                                         <small class="form-text text-danger"><?php echo $nameErr; ?></small> 
                                     </div> 

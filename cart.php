@@ -64,6 +64,7 @@
 
                                 // Admin Commission
                                 $admin_commission = ($wlvd->prop_price * $commission)/100;
+                                print_r($commission);exit();
                             ?>
                             <tr>
                                 <td><a href="deleteCart.php?pid=<?php echo base64_encode($data->property_id)?>"><i class="fa fa-trash"></i></a></td>
