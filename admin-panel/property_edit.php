@@ -542,7 +542,7 @@ $img_result = $statement->fetchAll();
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo</label>
+                                                <label  for="exampleInputEmail1">Product Photo* (Maximum 12 image Allowed)</label>
                                                 <input name="photo[]"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" multiple value="<?php echo $photo1 ?>" >
                                                 <?php foreach($img_result as $img) {?>
                                                 <div class="form-inline">

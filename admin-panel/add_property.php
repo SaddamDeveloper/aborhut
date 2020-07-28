@@ -548,7 +548,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo</label>
+                                                <label  for="exampleInputEmail1">Product Photo* (Maximum 12 image Allowed)</label>
                                                 <input name="files[]"  type="file" class="form-control-file" aria-describedby="emailHelp" multiple>
                                                 <small id="emailHelp" class="form-text text-muted"></small> 
                                             </div>

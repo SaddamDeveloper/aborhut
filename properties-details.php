@@ -659,7 +659,7 @@ DB::connect();
         </div>
         <div class="row">
 				<?php
-					$stmt = $dbconn->prepare("SELECT * FROM property ORDER BY id DESC LIMIT 4");
+					$stmt = $dbconn->prepare("SELECT * FROM property WHERE prop_status='Approved' ORDER BY id DESC LIMIT 4");
 					$stmt->execute();
 					$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
