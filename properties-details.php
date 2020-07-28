@@ -41,6 +41,11 @@ DB::connect();
     $prop_prep=$dbconn->prepare($property_sql);
     $prop_prep->execute();
     $prop=$prop_prep->fetchAll(PDO::FETCH_OBJ);
+
+    $id = $_GET['p'];
+    $statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $id");
+    $statement->execute();
+    $img_result = $statement->fetchAll();
 ?>
 <?php
     $fbMetaTags = '
@@ -48,7 +53,7 @@ DB::connect();
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="'.$data->prop_name.'" />
     <meta property="og:description"   content="Aborhut" />
-    <meta property="og:image"         content="'.$data->prop_image1.'" />
+    <meta property="og:image"         content="'.$data->img_result[0]['image'].'" />
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
     ';
     include_once('include/header.php');
@@ -102,54 +107,134 @@ DB::connect();
                                 <div class="carousel-inner">
                                     <?php
                                     $counter = false;
-                                        if($data->prop_image1){
+                                        if($img_result[0]['image']){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
                                                 print '<div class="item active">'; 
                                                 $counter = true;                                              
                                             }                                            
-                                            print '<img src="images/property/'.$data->prop_image1.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            print '<img src="images/property/'.$img_result[0]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($data->prop_image2){
+                                        if($img_result[1]['image']){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
                                                 print '<div class="item active">'; 
                                                 $counter = true;                                              
                                             }                                            
-                                            print '<img src="images/property/'.$data->prop_image2.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            print '<img src="images/property/'.$img_result[1]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($data->prop_image3){
+                                        if($img_result[2]['image']){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
                                                 print '<div class="item active">'; 
                                                 $counter = true;                                              
                                             }                                            
-                                            print '<img src="images/property/'.$data->prop_image3.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            print '<img src="images/property/'.$img_result[2]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($data->prop_image4){
+                                        if($img_result[3]['image']){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
                                                 print '<div class="item active">'; 
                                                 $counter = true;                                              
                                             }                                            
-                                            print '<img src="images/property/'.$data->prop_image4.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            print '<img src="images/property/'.$img_result[3]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($data->prop_image5){
+                                        if($img_result[4]['image']){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
                                                 print '<div class="item active">'; 
                                                 $counter = true;                                              
                                             }                                            
-                                            print '<img src="images/property/'.$data->prop_image5.'" class="thumb-preview" alt="Chevrolet Impala">
+                                            print '<img src="images/property/'.$img_result[4]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[5]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[5]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[6]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[6]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[7]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[7]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[8]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[8]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[9]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[9]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[10]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[10]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[11]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[11]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
+                                            </div>';
+                                        }
+                                        if($img_result[12]['image']){
+                                            if ($counter) {
+                                                print '<div class="item">';
+                                            } else {
+                                                print '<div class="item active">'; 
+                                                $counter = true;                                              
+                                            }                                            
+                                            print '<img src="images/property/'.$img_result[12]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
                                    ?>
@@ -200,7 +285,7 @@ DB::connect();
                                 <?php
                                     $data_counter = 0;
                                     $data_class = false;
-                                    if($data->prop_image1){
+                                    if($img_result[0]['image']){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -208,11 +293,11 @@ DB::connect();
                                             $data_class = true;
                                         }                                                        
                                         print  '
-                                            <img  src="images/property/'.$data->prop_image1.'" alt="Chevrolet Impala">
+                                            <img  src="images/property/'.$img_result[0]['image'].'" alt="Chevrolet Impala">
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($data->prop_image2){
+                                    if($img_result[1]['image']){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -220,11 +305,11 @@ DB::connect();
                                             $data_class = true;
                                         }                                                        
                                         print  '
-                                            <img  src="images/property/'.$data->prop_image2.'" alt="Chevrolet Impala">
+                                            <img  src="images/property/'.$img_result[1]['image'].'" alt="Chevrolet Impala">
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($data->prop_image3){
+                                    if($img_result[2]['image']){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -232,11 +317,11 @@ DB::connect();
                                             $data_class = true;
                                         }                                                        
                                         print  '
-                                            <img  src="images/property/'.$data->prop_image3.'" alt="Chevrolet Impala">
+                                            <img  src="images/property/'.$img_result[2]['image'].'" alt="Chevrolet Impala">
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($data->prop_image4){
+                                    if($img_result[3]['image']){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -244,11 +329,11 @@ DB::connect();
                                             $data_class = true;
                                         }                                                        
                                         print  '
-                                            <img  src="images/property/'.$data->prop_image4.'" alt="Chevrolet Impala">
+                                            <img  src="images/property/'.$img_result[3]['image'].'" alt="Chevrolet Impala">
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($data->prop_image5){
+                                    if($img_result[4]['image']){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -256,7 +341,103 @@ DB::connect();
                                             $data_class = true;
                                         }                                                        
                                         print  '
-                                            <img  src="images/property/'.$data->prop_image5.'" alt="Chevrolet Impala">
+                                            <img  src="images/property/'.$img_result[4]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[5]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[5]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[6]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[6]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[7]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[7]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[8]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[8]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[9]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[9]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[10]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[10]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[11]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[11]['image'].'" alt="Chevrolet Impala">
+                                        </li>';
+                                        $data_counter++;
+                                    }
+                                    if($img_result[12]['image']){
+                                        if ($data_class) {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
+                                        } else {
+                                            print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="active">';
+                                            $data_class = true;
+                                        }                                                        
+                                        print  '
+                                            <img  src="images/property/'.$img_result[12]['image'].'" alt="Chevrolet Impala">
                                         </li>';
                                         $data_counter++;
                                     }
@@ -484,6 +665,11 @@ DB::connect();
 
 				  if(!empty($result)) { 
 					  foreach($stmt->fetchAll() as $k=>$v) {
+                        $id = $v['id'];
+                        $statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $id");
+                        $statement->execute();
+                        $img = $statement->fetchAll();
+                          
 				?>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <!-- Property 2 start -->
@@ -503,17 +689,19 @@ DB::connect();
                                 <i class="fa fa-star-o"></i>
                             </div>
                         </div>
-                        <img src="images/property/<?php echo $v['prop_image1'] ?>" alt="rp" class="img-responsive">
+                        <img src="images/property/<?php echo $img[0]['image'] ?>" alt="rp" class="img-responsive">
                         <div class="property-overlay">
                             <a href="properties-details.php?p=<?php echo $v['id'] ?>" class="overlay-link">
                                 <i class="fa fa-link"></i>
                             </a>
                             <div class="property-magnify-gallery">
-                                <a href="img/properties/properties-4.jpg" class="overlay-link">
+                                <a href="img/properties/<?php echo $img[0]['image'] ?>" class="overlay-link">
                                     <i class="fa fa-expand"></i>
                                 </a>
-                                <a href="img/properties/properties-2.jpg" class="hidden"></a>
-                                <a href="img/properties/properties-3.jpg" class="hidden"></a>
+                                <?php foreach($img as $im) {?>
+                                <a href="img/properties/<?php echo $im['image']; ?>" class="hidden"></a>
+                                <a href="img/properties/<?php echo $im['image']; ?>" class="hidden"></a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

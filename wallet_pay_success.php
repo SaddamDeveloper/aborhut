@@ -18,8 +18,6 @@ if(isset($_SESSION['id'])){
         $chk_prop_visit_date = $rows->chk_prop_visit_date;
         
 
-        $encodedMessage = urlencode($mss); 
-
         $sms = "Dear $chk_bill_name, 
         The status of your request for property visit on $chk_prop_visit_date with Aborhut.com is Success .
         You shall recieve a feedback call from us shortly!

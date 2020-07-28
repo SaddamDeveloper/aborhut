@@ -217,7 +217,7 @@ DB::connect();
                         $query_flag = true;
                     }
 
-                        $select13 .= " ORDER BY id DESC LIMIT $limit, 50";
+                    $select13 .= " ORDER BY id DESC LIMIT $limit, 50";
                     $sql13=$dbconn->prepare($select13);
                     $sql13->execute();
                     $result=$sql13->fetchAll();
@@ -229,13 +229,19 @@ DB::connect();
     
                     $limit = ($page * 10) - 10;
     
-                    $pdo_statement = $dbconn->prepare("SELECT * FROM property order by id desc LIMIT $limit, 10");
+                    $pdo_statement = $dbconn->prepare("SELECT * FROM property WHERE prop_status='Approved' ORDER BY id DESC LIMIT $limit, 10");
                     $pdo_statement->execute();
                     $result = $pdo_statement->fetchAll();
                 }
 
                 if(!empty($result)) { 
                     foreach($result as $row) {
+                        $id = $row['id'];
+                        $statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $id");
+                        $statement->execute();
+                        $img_result = $statement->fetchAll();
+                        // echo"<pre>";
+                        // print_r($img_result[0]['image']);exit();
                 ?>
                 <!-- Property start -->
                 <div class="property clearfix wow fadeInUp delay-03s">
@@ -245,16 +251,15 @@ DB::connect();
                             <!-- <div class="property-tag button alt featured">Featured</div> -->
                             <div class="property-tag button sale">For Sale</div>
                             <div class="property-price">₹<?php echo $row['prop_price']; ?></div>
-                            <img src="images/property/<?php echo $row['prop_image1']; ?>" alt="fp-list" class="img-responsive hp-1">
+                            <img src="images/property/<?php echo $img_result[0]['image']; ?>" alt="fp-list" class="img-responsive hp-1">
                             <div class="property-overlay">
                                 <div class="property-magnify-gallery">
-                                    <a href="images/property/<?php echo $row['prop_image1']; ?>" class="overlay-link">
+                                    <a href="images/property/<?php echo $img_result[0]['image']; ?>" class="overlay-link">
                                         <i class="fa fa-search-plus"></i>
                                     </a>
-                                    <a href="images/property/<?php echo $row['prop_image2']; ?>" class="hidden"></a>
-                                    <a href="images/property/<?php echo $row['prop_image3']; ?>" class="hidden"></a>
-                                    <a href="images/property/<?php echo $row['prop_image4']; ?>" class="hidden"></a>
-                                    <a href="images/property/<?php echo $row['prop_image5']; ?>" class="hidden"></a>
+                                    <?php foreach($img_result as $im) {?>
+                                    <a href="images/property/<?php echo $im['image']; ?>" class="hidden"></a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,6 @@
 
             // Admin Commission
             $admin_commission = ($product_data->prop_price * $commission)/100;
-
             $grand_total  += $admin_commission;
             if ($separator) {
                 $product_ids .="$product_data->id";

@@ -55,48 +55,41 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
             //echo "No Image";
         } else {    
         
-        $photo1=basename($_FILES['photo1']['name']); 
-        $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
-        if(in_array($extension,$allow)){
-        $target_path = "../images/property/"; 
-        $photo1       = md5(rand() * time()).'.'.$extension;
-        
-        $target_path = $target_path . $photo1; 
-        
-        move_uploaded_file($_FILES['photo1']['tmp_name'], $target_path);
-        
-        $sql1 = ($photo1!='')?"   prop_image1='$photo1' ".',':'' ;
-        
-        }
+            $photo1=basename($_FILES['photo1']['name']); 
+            $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
+            if(in_array($extension,$allow)){
+                $target_path = "../images/property/"; 
+                $photo1       = md5(rand() * time()).'.'.$extension;
+                $target_path = $target_path . $photo1; 
+                move_uploaded_file($_FILES['photo1']['tmp_name'], $target_path);
+                $sql1 = ($photo1!='')?"   prop_image1='$photo1' ".',':'' ;
+            }
         }
     
         $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
-        //1st
+        //2nD
         if($_FILES['photo2']['name'] =="") {
             //echo "No Image";
         } else {    
         
-        $photo2=basename($_FILES['photo2']['name']); 
-        $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
-        if(in_array($extension,$allow)){
-        $target_path = "../images/property/";  
-        $photo2       = md5(rand() * time()).'.'.$extension;
-        
-        $target_path = $target_path . $photo2; 
-        
-        move_uploaded_file($_FILES['photo2']['tmp_name'], $target_path);
-        
-        $sql2 = ($photo2!='')?"   prop_image2='$photo2' ".',':'' ;
-        
-        
-        
-        }
+            $photo2=basename($_FILES['photo2']['name']); 
+            $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
+            if(in_array($extension,$allow)){
+                $target_path = "../images/property/";  
+                $photo2       = md5(rand() * time()).'.'.$extension;
+                
+                $target_path = $target_path . $photo2; 
+                
+                move_uploaded_file($_FILES['photo2']['tmp_name'], $target_path);
+                
+                $sql2 = ($photo2!='')?"   prop_image2='$photo2' ".',':'' ;
+            }
         }
         
         $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
-        //1st
+        //3rd
         if($_FILES['photo3']['name'] =="") {
             //echo "No Image";
         } else {    
@@ -104,44 +97,36 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         $photo3=basename($_FILES['photo3']['name']); 
         $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
         if(in_array($extension,$allow)){
-        $target_path = "../images/property/";  
-        $photo3 = md5(rand() * time()).'.'.$extension;
-        
-        $target_path = $target_path . $photo3; 
-        
-        move_uploaded_file($_FILES['photo3']['tmp_name'], $target_path);
-        
-        $sql3 = ($photo3!='')?"   prop_image3='$photo3' ".',':'' ;
-        
-        
-        
-        }
+                $target_path = "../images/property/";  
+                $photo3 = md5(rand() * time()).'.'.$extension;
+                
+                $target_path = $target_path . $photo3; 
+                move_uploaded_file($_FILES['photo3']['tmp_name'], $target_path);
+                $sql3 = ($photo3!='')?"   prop_image3='$photo3' ".',':'' ;
+            }
         }
         
         
         $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
         
-        //1st
+        //4th
         if($_FILES['photo4']['name'] =="") {
             //echo "No Image";
         } else {    
         
-        $photo4=basename($_FILES['photo4']['name']); 
-        $extension = pathinfo($photo4, PATHINFO_EXTENSION); //extenction our file name .jpg
-        if(in_array($extension,$allow)){
-        $target_path =  "../images/property/";  
-        $photo4       = md5(rand() * time()).'.'.$extension;
-        
-        $target_path = $target_path . $photo1; 
-        
-        move_uploaded_file($_FILES['photo4']['tmp_name'], $target_path);
-        
-        $sql4 = ($photo4!='')?"   prop_image4='$photo4' ".',':'' ;
-        
-        
-        
-        }
+            $photo4=basename($_FILES['photo4']['name']); 
+            $extension = pathinfo($photo4, PATHINFO_EXTENSION); //extenction our file name .jpg
+            if(in_array($extension,$allow)){
+                $target_path =  "../images/property/";  
+                $photo4       = md5(rand() * time()).'.'.$extension;
+                
+                $target_path = $target_path . $photo1; 
+                
+                move_uploaded_file($_FILES['photo4']['tmp_name'], $target_path);
+                
+                $sql4 = ($photo4!='')?"   prop_image4='$photo4' ".',':'' ;
+            }
         }
         
         
@@ -256,7 +241,10 @@ $select_bookings4= "SELECT * FROM `location` order by id desc";
 $sql14=$dbconn->prepare($select_bookings4);
 $sql14->execute();
 $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
- 
+
+$statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $id");
+$statement->execute();
+$img_result = $statement->fetchAll();
 
 ?>
 
@@ -551,35 +539,19 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                     </div>                                                  
                                     </div>
 
-                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 1</label>
-                                        <input name="photo1"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" placeholder="<?php echo $rows->prop_image1; ?>"   value="<?php echo $rows->prop_image1; ?>" > 
-                                        <small id="emailHelp" class="form-text text-muted"></small><?php if($image1 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image1;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 2</label>
-                                        <input name="photo2"  type="file" class="form-control-file" id="photo2" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image2; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small><?php if($image2 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image2;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 3</label>
-                                        <input name="photo3"  type="file" class="form-control-file" id="photo3" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image3; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image3 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image3;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 4</label>
-                                        <input name="photo4"  type="file" class="form-control-file" id="photo4" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image4; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image4 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image4;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 5  (Optional)</label>
-                                    <input name="photo5"  type="file" class="form-control-file" id="photo5" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image5; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image5 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image5;?>" height="100" width="100"> <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label  for="exampleInputEmail1">Product Photo</label>
+                                                <input name="photo[]"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" multiple value="<?php echo $photo1 ?>" >
+                                                <?php foreach($img_result as $img) {?>
+                                                <div class="form-inline">
+                                                    <img src="../images/property/<?php echo $img['image']; ?>" class="overlay-link" width="200"/>
+                                                </div>
+                                                <?php } ?>
+                                                <small id="emailHelp" class="form-text text-muted"></small> 
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="form-group">

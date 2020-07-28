@@ -251,6 +251,9 @@ $sql14=$dbconn->prepare($select_bookings4);
 $sql14->execute();
 $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
  
+$statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $id");
+$statement->execute();
+$img_result = $statement->fetchAll();
 
 ?>
 
@@ -394,6 +397,7 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                         </select>
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $locationErr; ?></small> 
                                     </div>
+
                                     <div class="form-group m-b-30 row">
                                         <div class="col-md-6">
                                             <label for="bua">No of Floor</label>
@@ -515,35 +519,19 @@ $wlvd4=$sql14->fetchAll(PDO::FETCH_OBJ);
                                     </div>                                                  
                                     </div>
 
-                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 1</label>
-                                        <input name="photo1"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" placeholder="<?php echo $rows->prop_image1; ?>"   value="<?php echo $rows->prop_image1; ?>" > 
-                                        <small id="emailHelp" class="form-text text-muted"></small><?php if($image1 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image1;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 2</label>
-                                        <input name="photo2"  type="file" class="form-control-file" id="photo2" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image2; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small><?php if($image2 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image2;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 3</label>
-                                        <input name="photo3"  type="file" class="form-control-file" id="photo3" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image3; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image3 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image3;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 4</label>
-                                        <input name="photo4"  type="file" class="form-control-file" id="photo4" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image4; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image4 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image4;?>" height="100" width="100"> <?php } ?>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Product Photo 5  (Optional)</label>
-                                    <input name="photo5"  type="file" class="form-control-file" id="photo5" aria-describedby="emailHelp"   value="<?php echo $rows->prop_image5; ?>" >
-                                        <small id="emailHelp" class="form-text text-muted"></small> <?php if($image5 !=""){ ?> <img src="../images/property/<?php echo $rows->prop_image5;?>" height="100" width="100"> <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label  for="exampleInputEmail1">Product Photo</label>
+                                                <input name="photo[]"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" multiple value="<?php echo $photo1 ?>" >
+                                                <?php foreach($img_result as $img) {?>
+                                                <div class="form-inline">
+                                                    <img src="../images/property/<?php echo $img['image']; ?>" class="overlay-link" width="200"/>
+                                                </div>
+                                                <?php } ?>
+                                                <small id="emailHelp" class="form-text text-muted"></small> 
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="form-group">

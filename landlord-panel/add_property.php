@@ -139,31 +139,56 @@ if(isset($_POST['submit12345'])){
         $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
         
-        //1st
-        if($_FILES['photo5']['name'] =="") {
-            //echo "No Image";
-        } else {    
-        
-        $photo5=basename($_FILES['photo5']['name']); 
-        $extension = pathinfo($photo5, PATHINFO_EXTENSION); //extenction our file name .jpg
-        if(in_array($extension,$allow)){
-        $target_path =  "../images/property/"; 
-        $photo5      = md5(rand() * time()).'.'.$extension;
-        
-        $target_path = $target_path . $photo5; 
-        
-        move_uploaded_file($_FILES['photo5']['tmp_name'], $target_path);
-        
-        $sql5 = ($photo5!='')?"   prop_image5='$photo5' ".',':'' ;
-        
-        }
-        }
+        $photos = array();
+                //1st
+                if($_FILES['files']['name'] =="") {
+                    // echo "No Image";
+                } else {   
+                    foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name) {
+                        $file_name=$_FILES["files"]["name"][$key];
+                        $file_tmp=$_FILES["files"]["tmp_name"][$key];
+                        $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                        if(in_array($ext,$allow)) {
+                            $target_path = "../images/property/"; 
+                            $photo = md5(rand() * time()).'.'.$ext;
+                            $photos[] = $photo;
+                            $target_path = $target_path . $photo;
+                            if(!file_exists($target_path)) {
+                                move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],$target_path);
+                            }
+                            else {
+                                $filename=basename($file_name,$ext);
+                                $newFileName=$filename.time().".".$ext;
+                                move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],$target_path);
+                            }
+    
+                            // $insertImage = "INSERT `property_image` SET
+                            // $sql1
+                            // image = '".$photo."'";
+                
+                            // $stmt = $dbconn->prepare($insertImage);
+                            // $stmt->execute();
+                        }
+                    }
+                // $photo1=basename($_FILES['photo1']['name']); 
+                // $extension = pathinfo($photo1, PATHINFO_EXTENSION); //extenction our file name .jpg
+                //     if(in_array($extension,$allow)){
+                //     $target_path = "../images/property/"; 
+                //     $photo1       = md5(rand() * time()).'.'.$extension;
+                    
+                //     $target_path = $target_path . $photo1; 
+                    
+                //     move_uploaded_file($_FILES['photo1']['tmp_name'], $target_path);
+                    
+                //     $sql1 = ($photo1!='')?"   prop_image1='$photo1' ".',':'' ;
+                // }
+            }
 
 
     if($prop_name && $prop_price && $prop_type && $prop_address && $prop_city && $prop_state
     && $prop_location && $prop_latitude && $prop_longitude && $prop_category != ""){
         $update_user = "INSERT `property` SET
-        $sql1 $sql2 $sql3 $sql4 $sql5
+        $sql2 $sql3 $sql4 $sql5
         prop_name = '".$prop_name."',
         prop_landlord_id = '".$prop_landlord_id."',
         prop_price = '".$prop_price."',
@@ -204,6 +229,16 @@ if(isset($_POST['submit12345'])){
             $pID_update = "UPDATE `property` SET propertyID = '".$p_id."' WHERE id = '".$last_id."'";
             $stmt = $dbconn->prepare($pID_update);
             $stmt->execute();
+
+            foreach ($photos as $ph) {
+                $insertImage = "INSERT `property_image` SET
+                        $sql1
+                        property_id = '".$last_id."',
+                        image = '".$ph."'";
+
+                $stmt = $dbconn->prepare($insertImage);
+                $stmt->execute();
+            }
         }
 
         if($update_user){
@@ -586,46 +621,11 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo 1</label>
-                                                <input name="photo1"  type="file" class="form-control-file" id="photo1" aria-describedby="emailHelp" multiple value="<?php echo $photo1 ?>" >
+                                                <label  for="exampleInputEmail1">Product Photo</label>
+                                                <input name="files[]"  type="file" class="form-control-file" aria-describedby="emailHelp" multiple>
                                                 <small id="emailHelp" class="form-text text-muted"></small> 
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo 2</label>
-                                            <input name="photo2"  type="file" class="form-control-file" id="photo2" aria-describedby="emailHelp" multiple value="<?php echo $photo2 ?>" >
-                                                <small id="emailHelp" class="form-text text-muted"></small> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo 3</label>
-                                                <input name="photo3"  type="file" class="form-control-file" id="photo3" aria-describedby="emailHelp" multiple value="<?php echo $photo3 ?>" >
-                                                <small id="emailHelp" class="form-text text-muted"></small> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo 4</label>
-                                                <input name="photo4"  type="file" class="form-control-file" id="photo4" aria-describedby="emailHelp" multiple value="<?php echo $photo4 ?>" >
-                                                <small id="emailHelp" class="form-text text-muted"></small> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  for="exampleInputEmail1">Product Photo 5  (Optional)</label>
-                                                <input name="photo5"  type="file" class="form-control-file" id="photo5" aria-describedby="emailHelp" multiple value="<?php echo $photo5 ?>" >
-                                                <small id="emailHelp" class="form-text text-muted"></small> 
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="box-body">
                                         <div class="form-group">
