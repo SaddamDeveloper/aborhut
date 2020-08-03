@@ -1,6 +1,5 @@
 <?php
-include_once('customer-panel/configure.php');
-DB::connect();
+    include_once('include/header.php');
     if(isset($_GET['p']) && !empty($_GET['p'])){
         $id = $_GET['p'];
         $select  = "select property.*, landlord.landlord_name from `property` INNER JOIN landlord ON property.prop_landlord_id = landlord.id WHERE property.id = '$id' LIMIT 1";
@@ -56,7 +55,6 @@ DB::connect();
     <meta property="og:image"         content="'.$data->img_result[0]['image'].'" />
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
     ';
-    include_once('include/header.php');
 ?>
 
 <!-- Sub banner start -->

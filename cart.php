@@ -1,7 +1,3 @@
-<?php
-    include('customer-panel/configure.php');
-    DB::connect();
-?>
 <?php include('include/header.php'); ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -61,7 +57,6 @@
                                 $sql->execute();
                                 $wlvd=$sql->fetch(PDO::FETCH_OBJ);
                                 $pidArr[] = $id;
-
                                 $statement = $dbconn->prepare("SELECT * FROM property_image WHERE property_id = $wlvd->id");
                                 $statement->execute();
                                 $img_result = $statement->fetchAll();
@@ -71,7 +66,7 @@
                             <tr>
                                 <td><a href="deleteCart.php?pid=<?php echo base64_encode($data->property_id)?>"><i class="fa fa-trash"></i></a></td>
                                 <td><img src="images/property/<?php echo $img_result[0]['image']; ?>" width="70" alt=""></td>
-                                <td><a href="properties-details.php?p=<?php echo $id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
+                                <td><a href="properties-details.php?p=<?php echo $data->property_id ?>"><h4><?php echo $wlvd->prop_name ?></h4></a></td>
                                 <td>₹<?php echo number_format($visitArr[] = $admin_commission, 2); ?></td>
                                 <td>₹<?php echo number_format($admin_commission , 2); $subtotal += ($admin_commission); ?></td>
                             </tr>
