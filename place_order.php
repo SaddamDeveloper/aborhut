@@ -182,10 +182,10 @@ function test_input($data) {
             }
   
             if ($payment_status == 'PENDING' && $online_pay > 0) {
-                header("location:http://localhost/aborhut/payment.php?id=$checkoutId");
+                header("location:http://aborhut.com/payment.php?id=$checkoutId");
             }else{
               //cut wallet balance
-              header("location:http://localhost/aborhut/wallet_pay_success.php?id=$checkoutId");
+              header("location:http://aborhut.com/wallet_pay_success.php?id=$checkoutId");
             }
         }            
     }

@@ -8,12 +8,12 @@
                 ':phone' => trim($_POST['phone'])
             );
 
-            $query = "SELECT * FROM customer WHERE cus_phone= :phone";
+            $query = "SELECT * FROM landlord WHERE landlord_phone= :phone";
             $statement = $dbconn->prepare($query);
             $statement->execute($data);
             if($statement->rowCount() > 0){
                 $result = $statement->fetch(PDO::FETCH_OBJ);
-                $sms = "Dear $result->cus_name, Your password is $result->cus_password 
+                $sms = "Dear $result->cus_name, Your password is $result->landlord_password 
 
                 Team,
                 Aborhut.com";   
@@ -25,7 +25,7 @@
                   $priority="11";// 11-Enterprise, 12- Scrub
                   $method="GET";
               
-                  $mobile=$result->cus_phone;
+                  $mobile=$result->landlord_phone;
                   $message=$sms;
               
                   $username=urlencode($username);

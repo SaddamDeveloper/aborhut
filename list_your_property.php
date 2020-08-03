@@ -171,7 +171,7 @@ function test_input($data) {
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="forgot-password.html" class="link-not-important pull-right">Forgot Password</a>
+                                <a href="list_forgot_password.php" class="link-not-important pull-right">Forgot Password</a>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">

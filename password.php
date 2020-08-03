@@ -1,6 +1,11 @@
 <?php include('include/header.php'); ?>
 <?php
-      if(isset($_POST['send'])){
+error_reporting(0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(E_ALL);
+ini_set("error_reporting", E_ALL);
+error_reporting(E_ALL & ~E_NOTICE);
+    if(isset($_POST['submit'])){
         if(empty($_POST['phone'])){
             $message = '<div class="alert alert-danger">Mobile No is required!</div>';
         }else {
@@ -12,55 +17,13 @@
             $statement = $dbconn->prepare($query);
             $statement->execute($data);
             if($statement->rowCount() > 0){
-                $result = $statement->fetch(PDO::FETCH_OBJ);
-                $sms = "Dear $result->cus_name, Your password is $result->cus_password 
-
-                Team,
-                Aborhut.com";   
-              
-                  $username="Fiscaleindia";
-                  $api_password="9aea62lulgu3by1ph";
-                  $sender="FISCLE";
-                  $domain="http://sms.webinfotech.co";
-                  $priority="11";// 11-Enterprise, 12- Scrub
-                  $method="GET";
-              
-                  $mobile=$result->cus_phone;
-                  $message=$sms;
-              
-                  $username=urlencode($username);
-                  $api_password=urlencode($api_password);
-                  $sender=urlencode($sender);
-                  $message=urlencode($message);
-              
-                  $sms = urlencode($sms);
-              
-                  $parameters="username=$username&api_password=$api_password&sender=$sender&to=$mobile&message=$message&priority=$priority";
-                  $url="$domain/pushsms.php?".$parameters;
-                  $ch = curl_init($url);
-              
-                  if($method=="POST")
-                  {
-                      curl_setopt($ch, CURLOPT_POST,1);
-                      curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-                  }
-                  else
-                  {
-                      $get_url=$url."?".$parameters;
-              
-                      curl_setopt($ch, CURLOPT_POST,0);
-                      curl_setopt($ch, CURLOPT_URL, $get_url);
-                  }
-                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-                  curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-                  $return_val = curl_exec($ch);
-                  $message = '<div class="alert alert-success">Password has been sent!</div>';
+                $result = $statement->fetchAll();
+               print_r($result);exit();
             }else {
                 $message = '<div class="alert alert-danger">Mobile No is not found!</div>';
             }
         }
-      }
+    }
 ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -92,20 +55,8 @@
                         <div class="main-title">
                             <h1><span>Forgot</span> Password</h1>
                         </div>
-                        <?php
-                            if(isset($message)){
-                                echo $message;
-                            }
-                        ?>
-                        <!-- Form start -->
-                        <form action="#" method="POST">
-                            <div class="form-group">
-                                <input type="text" name="phone" class="input-text" placeholder="Mobile No">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" name="send" class="button-md button-theme btn-block">Send</button>
-                            </div>
-                        </form>
+                        
+                       <h3>Your password is</h3> 
                         <!-- Form end -->
                     </div>
                     <!-- Footer -->
