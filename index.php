@@ -249,7 +249,6 @@ DB::connect();
                         <!-- Property img -->
                         <div class="property-img">
                             <!-- <div class="property-tag button alt featured">Featured</div> -->
-                            <div class="property-tag button sale">For Sale</div>
                             <div class="property-price">₹<?php echo $row['prop_price']; ?></div>
                             <img src="images/property/<?php echo $img_result[0]['image']; ?>" alt="fp-list" class="img-responsive hp-1">
                             <div class="property-overlay">

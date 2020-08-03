@@ -7,7 +7,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 $start = $_REQUEST['start'];
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr ="";
+$nameErr = $priceErr = $typeErr = $addressErr = $cityErr = $stateErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr ="";
 if(isset($_POST['submit12345'])){
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
     empty($_POST['prop_price']) ? $priceErr = "Price is required!" : $prop_price = test_input($_POST['prop_price']);

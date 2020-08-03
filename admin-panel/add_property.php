@@ -7,7 +7,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 $start = $_REQUEST['start'];
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr = "";
+$nameErr = $priceErr = $typeErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $areaErr = "";
 if(isset($_POST['submit12345'])){
 
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
@@ -18,7 +18,6 @@ if(isset($_POST['submit12345'])){
     empty($_POST['prop_state']) ? $stateErr = "State is required!" : $prop_state = test_input($_POST['prop_state']);
     empty($_POST['prop_landlord_id']) ? $landlordErr = "Landlord is required!" : $prop_landlord_id = test_input($_POST['prop_landlord_id']);
     empty($_POST['prop_location']) ? $locationErr = "Location is required!" : $prop_location = test_input($_POST['prop_location']);
-    empty($_POST['prop_visit_price']) ? $visitErr = "Visit charge is required!" : $prop_visit_price = test_input($_POST['prop_visit_price']);
     empty($_POST['latitude']) ? $latErr = "Latitude is required!" : $prop_latitude = test_input($_POST['latitude']);
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
@@ -93,8 +92,7 @@ if(isset($_POST['submit12345'])){
 
 
     if($prop_name && $prop_price && $prop_type && $prop_address && $prop_city && $prop_state && $prop_landlord_id 
-    && $prop_location && $prop_latitude && $prop_longitude && $prop_visit_price
-    && $prop_category != ""){
+    && $prop_location && $prop_latitude && $prop_longitude && $prop_category != ""){
         $update_user = "INSERT `property` SET
         $sql2 $sql3 $sql4 $sql5
         prop_name = '".$prop_name."',
@@ -116,7 +114,6 @@ if(isset($_POST['submit12345'])){
         prop_internet = '".$prop_internet."',
         prop_parking = '".$prop_parking."',
         prop_pool = '".$prop_pool."',
-        prop_visit_price = '".$prop_visit_price."',
         prop_category = '".$prop_category."',
         prop_latitude = '".$prop_latitude."',
         prop_longitude = '".$prop_longitude."',
@@ -295,14 +292,6 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                         <input name="prop_price" type="text" class="form-control" id="prop_price" value="<?php echo isset($_POST['prop_price']) ? $_POST['prop_price'] : '' ?>">
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $priceErr ?></small> 
                                     </div>
-                                    
-                                    
-                                    <div class="form-group">
-                                        <label  for="exampleInputEmail1">Visit Charge</label>
-                                        <input name="prop_visit_price" type="text" class="form-control" id="prop_visit_price" value="<?php echo isset($_POST['prop_visit_price']) ? $_POST['prop_visit_price'] : '' ?>">
-                                        <small id="emailHelp" class="form-text text-danger"><?php echo $visitErr ?></small> 
-                                    </div>
- 
                                     
                                     <div class="form-group">
                                         <label  for="exampleInputEmail1">Address</label>

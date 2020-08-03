@@ -6,7 +6,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = $areaErr = $buaErr = $caErr = "";
+$nameErr = $priceErr = $typeErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = $areaErr = $buaErr = $caErr = "";
 if(isset($_POST['submit'])){
    
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
@@ -41,7 +41,6 @@ if(isset($_POST['submit'])){
     $prop_water = test_input($_POST['prop_water']);
     $prop_furnishing = test_input($_POST['prop_furnishing']);
     $prop_landlord_id = $_SESSION['id'];
-    $prop_visit_price = '';
 
 $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         
@@ -191,7 +190,6 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
             prop_category   = '".addslashes($prop_category)."',
             prop_bua = '".addslashes($prop_bua)."',
             prop_ca = '".addslashes($prop_ca)."',
-            prop_visit_price   = '".addslashes($prop_visit_price)."',
             prop_pool   = '".addslashes($prop_pool)."',
             prop_furnishing   = '".addslashes($prop_furnishing)."',
             prop_water   = '".addslashes($prop_water)."'

@@ -7,7 +7,7 @@ require_once("check.php");
 $id = $_REQUEST['id'];
 
 
-$nameErr = $priceErr = $typeErr = $visitErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = $areaErr = "";
+$nameErr = $priceErr = $typeErr = $addressErr = $cityErr = $stateErr = $landlordErr = $locationErr = $latErr = $longErr = $categoryErr = $statusErr = $areaErr = "";
 if(isset($_POST['submit'])){
    
     empty($_POST['prop_name']) ? $nameErr = "Name is required!" : $prop_name = test_input($_POST['prop_name']);
@@ -18,7 +18,6 @@ if(isset($_POST['submit'])){
     empty($_POST['prop_state']) ? $stateErr = "State is required!" : $prop_state = test_input($_POST['prop_state']);
     empty($_POST['prop_landlord_id']) ? $landlordErr = "Landlord is required!" : $prop_landlord_id = test_input($_POST['prop_landlord_id']);
     empty($_POST['prop_location']) ? $locationErr = "Location is required!" : $prop_location = test_input($_POST['prop_location']);
-    empty($_POST['prop_visit_price']) ? $visitErr = "Visit charge is required!" : $prop_visit_price = test_input($_POST['prop_visit_price']);
     empty($_POST['latitude']) ? $latErr = "Latitude is required!" : $prop_latitude = test_input($_POST['latitude']);
     empty($_POST['longitude']) ? $longErr = "Longitude is required!" : $prop_longitude = test_input($_POST['longitude']);
     empty($_POST['prop_category']) ? $categoryErr = "Category is required!" : $prop_category = test_input($_POST['prop_category']);
@@ -154,8 +153,7 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
         }
  
         if($prop_name && $prop_price && $prop_type && $prop_address && $prop_city && $prop_state && $prop_landlord_id 
-        && $prop_location && $prop_latitude && $prop_longitude && $prop_visit_price
-        && $prop_category && $prop_status != ""){
+        && $prop_location && $prop_latitude && $prop_longitude && $prop_category && $prop_status != ""){
 
             $update_user = "UPDATE `property` SET
             $sql1 $sql2 $sql3 $sql4 $sql5
@@ -182,7 +180,6 @@ $allow = array("jpg","JPG","jpeg","JPEG", "gif","GIF","png","PNG","pdf","PDF");
             prop_category   = '".addslashes($prop_category)."',
             prop_bua = '".addslashes($prop_bua)."',
             prop_ca = '".addslashes($prop_ca)."',
-            prop_visit_price   = '".addslashes($prop_visit_price)."',
             prop_pool   = '".addslashes($prop_pool)."',
             prop_furnishing   = '".addslashes($prop_furnishing)."',
             prop_water   = '".addslashes($prop_water)."'
@@ -340,12 +337,6 @@ $img_result = $statement->fetchAll();
                                     </div>
                               
                                     <div class="form-group">
-                                        <label  for="exampleInputEmail1">Visit Charge</label>
-                                        <input name="prop_visit_price" type="text" class="form-control" id="prop_visit_price" value=" <?php echo $rows->prop_visit_price; ?>" >
-                                        <small id="emailHelp" class="form-text text-danger"><?php echo $visitErr ?></small> 
-                                    </div>
-                                    
-                                    <div class="form-group">
                                         <label  for="exampleInputEmail1">Address</label>
                                         <input name="prop_address" type="text" class="form-control" id="prop_address" value=" <?php echo $rows->prop_address; ?>" >
                                         <small class="form-text text-danger"><?php echo $addressErr ?></small>
@@ -407,10 +398,11 @@ $img_result = $statement->fetchAll();
                                         <label  for="exampleInputEmail1">Location</label>
                                         <select class="custom-select mr-sm-2" id="prop_location" name="prop_location">
                                         <option selected value="">--Select Location--</option>
-                                    <?php 
+                                     <?php 
                                             foreach($wlvd4 as $rows1){
                                             $id = $rows1->id;
                                             $location_name = $rows1->location_name;
+                                            echo $rows->location_name;
                                             ?>
                                             <option <?php echo $location_name == $rows->prop_location ? "selected": ""?>><?php echo $location_name ?></option>
                                         <?php } ?>
