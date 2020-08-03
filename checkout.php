@@ -10,9 +10,15 @@
     if($_SESSION['cart']){
         $productID = $_SESSION['cart'];
         foreach($_SESSION['cart'] as $key=>$value){
-            $select_bookings = "INSERT INTO `carts`(`property_id`, `customer_id`) VALUES ('$value','$_SESSION[id]')";
-            $sql=$dbconn->prepare($select_bookings);
-            $sql->execute();
+            $check_cart_table = "SELECT * FROM carts WHERE property_id = $productId AND customer_id = $_SESSION[id]";
+            $cart_check=$dbconn->prepare($check_cart_table);
+            $cart_check->execute();
+            $cart_check_data=$cart_check->fetchAll(PDO::FETCH_OBJ);
+            if($cart_check->rowCount() < 1){
+                $select_bookings = "INSERT INTO `carts`(`property_id`, `customer_id`) VALUES ('$value','$_SESSION[id]')";
+                $sql=$dbconn->prepare($select_bookings);
+                $sql->execute();
+            }
         }
     }
     // Fetch cart Product
