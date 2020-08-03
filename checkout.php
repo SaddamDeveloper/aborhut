@@ -10,7 +10,7 @@
     if($_SESSION['cart']){
         $productID = $_SESSION['cart'];
         foreach($_SESSION['cart'] as $key=>$value){
-            $check_cart_table = "SELECT * FROM carts WHERE property_id = $productId AND customer_id = $_SESSION[id]";
+            $check_cart_table = "SELECT * FROM carts WHERE property_id = $productID AND customer_id = $_SESSION[id]";
             $cart_check=$dbconn->prepare($check_cart_table);
             $cart_check->execute();
             $cart_check_data=$cart_check->fetchAll(PDO::FETCH_OBJ);
