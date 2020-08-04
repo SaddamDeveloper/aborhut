@@ -10,7 +10,7 @@
     if($_SESSION['cart']){
         $productID = $_SESSION['cart'];
         foreach($_SESSION['cart'] as $key=>$value){
-            $check_cart_table = "SELECT * FROM carts WHERE property_id = $productID AND customer_id = $_SESSION[id]";
+            $check_cart_table = "SELECT * FROM carts WHERE property_id = $value AND customer_id = $_SESSION[id]";
             $cart_check=$dbconn->prepare($check_cart_table);
             $cart_check->execute();
             $cart_check_data=$cart_check->fetchAll(PDO::FETCH_OBJ);
@@ -178,17 +178,21 @@
                                     <th>No of Orders</th>
                                     <td>
                                     <?php 
-                                    if($_SESSION['cart']){
-                                        echo count($_SESSION['cart']);
+                                   if (isset($_SESSION['id']) && !empty($_SESSION['id'])){
+                                    $id = $_SESSION['id'];
+                                    $select_carts = "SELECT * FROM `carts` where customer_id=$id";
+                                    $sql2=$dbconn->prepare($select_carts);
+                                    $sql2->execute();
+                                    $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
+                                    $cart_data_count = $sql2->rowCount();
+                                    echo $cart_data_count;
                                     }else{
-                                        $id = $_SESSION['id'];
-                                        $select_carts = "SELECT * FROM `carts` where customer_id=$id";
-                                        $sql2=$dbconn->prepare($select_carts);
-                                        $sql2->execute();
-                                        $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
-                                        $cart_data_count = $sql2->rowCount();
-                                        echo $cart_data_count;
-                                    } 
+                                        if(!empty($_SESSION['cart'])){
+                                            echo count($_SESSION['cart']);
+                                        }else{
+                                            echo "0";
+                                        }
+                                    }
                                 ?>
                                </td>
                                 </tr>

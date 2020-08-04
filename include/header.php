@@ -1,8 +1,5 @@
-<?php //require_once "connection/connection.php"; ?>
 <?php 
-include_once('customer-panel/configure.php');
-DB::connect();
-    // require_once("./customer-panel/check.php");
+    include_once('customer-panel/configure.php');
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -75,9 +72,9 @@ DB::connect();
 </header>
 <!-- Top header end -->
 <?php  
-    $id = $_SESSION['id'];
+    $id = $_GET['id'];
     if($id !=''){
-        $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_SESSION['id']."'";
+        $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_GET['id']."'";
         $sql=$dbconn->prepare($select_bookings25);
         $sql->execute();
         $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
@@ -145,9 +142,7 @@ DB::connect();
                         <ul class="border-bottom">
                             <li>
                                <a href="cart.php"> Cart <?php 
-                               if($_SESSION['cart']){
-                                echo "(".count($_SESSION['cart']).")";
-                               }else{
+                               if (isset($_SESSION['id']) && !empty($_SESSION['id'])){
                                     $id = $_SESSION['id'];
                                     $select_carts = "SELECT * FROM `carts` where customer_id=$id";
                                     $sql2=$dbconn->prepare($select_carts);
@@ -155,7 +150,13 @@ DB::connect();
                                     $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
                                     $cart_data_count = $sql2->rowCount();
                                     echo "(".$cart_data_count.")";
-                               } 
+                                }else{
+                                    if(!empty($_SESSION['cart'])){
+                                        echo "(".count($_SESSION['cart']).")";
+                                    }else{
+                                        echo "(0)";
+                                    }
+                                }
                                ?></a>
                             </li>
                         </ul>
@@ -167,7 +168,7 @@ DB::connect();
                             </li>
                         </ul>
 
-                            <a href="logout.php" class="btn btn-danger">Logout</a>
+                            <!-- <a href="logout.php" class="btn btn-danger">Logout</a> -->
                         <?php
                             }else{
                         ?>

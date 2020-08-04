@@ -1,6 +1,10 @@
 <?php include_once('include/header.php'); ?>
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); 
   $id = $_SESSION['id'];
+  echo "Hello- " .$id;
   $checkout_id = $_REQUEST['id'];
 
 if(isset($_SESSION['id'])){
@@ -13,7 +17,7 @@ if(isset($_SESSION['id'])){
   $productinfo = $_POST["productinfo"];
   $email       = $_POST["email"];
   $salt        = "LKT8zBvmaD"; // Your salt
-
+  echo $status;die();
   If(isset($_POST["additionalCharges"])) {
     $additionalCharges = $_POST["additionalCharges"];
     $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;      
@@ -27,7 +31,7 @@ if(isset($_SESSION['id'])){
     echo "Invalid Transaction. Please try again";
   }  
 
-if($id !='' && $status == 'success'){
+  if($id !='' && $status == 'success'){
 
 	$select_bookings= "UPDATE `checkout` SET `chk_status`='SUCCESS' WHERE id = '".$_REQUEST['id']."'";
 	$sql=$dbconn->prepare($select_bookings);

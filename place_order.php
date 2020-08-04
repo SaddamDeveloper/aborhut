@@ -4,9 +4,7 @@ include_once('customer-panel/configure.php');
 DB::connect();
 
 date_default_timezone_set('Asia/Kolkata');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+
 
 
 function test_input($data) {
@@ -111,7 +109,7 @@ function test_input($data) {
           $sql25=$dbconn->prepare($select_wallet);
           $sql25->execute();
   
-          $wallet_history= "INSERT INTO `wallet_history`(`user_id`, `wallet_id`, `type`, `amount`, `total_amount`, `message`, `created_at`, `updated_at`) VALUES ('$_SESSION[id]','$wlvd25->id','2','$wlvd25->amount','0','Amount Debited for online purchase','$created_at','$created_at')";
+          $wallet_history = "INSERT INTO `wallet_history`(`user_id`, `wallet_id`, `type`, `amount`, `total_amount`, `message`, `created_at`, `updated_at`) VALUES ('$_SESSION[id]','$wlvd25->id','2','$wlvd25->amount','0','Amount Debited for online purchase','$created_at','$created_at')";
           $wallet_prep=$dbconn->prepare($wallet_history);
           $wallet_prep->execute();
           
@@ -133,6 +131,7 @@ function test_input($data) {
         chk_prop_visit_date = '".$V_date."',
         chk_total = '".$chk_total."',
         chk_status = '".$payment_status."'";
+
         $sql_update=$dbconn->prepare($insert_cart);
         $sql_update->execute();
         $checkoutId = $dbconn->lastInsertId();
@@ -182,10 +181,10 @@ function test_input($data) {
             }
   
             if ($payment_status == 'PENDING' && $online_pay > 0) {
-                header("location:http://aborhut.com/payment.php?id=$checkoutId");
+                header("location:http://localhost/aborhut/payment.php?id=$checkoutId");
             }else{
               //cut wallet balance
-              header("location:http://aborhut.com/wallet_pay_success.php?id=$checkoutId");
+              header("location:http://localhost/aborhut/wallet_pay_success.php?id=$checkoutId");
             }
         }            
     }

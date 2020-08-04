@@ -1,13 +1,8 @@
 
- 
+ <?php include('include/header.php'); ?>  
 <?php
-include_once('customer-panel/configure.php');
-DB::connect();
-
 date_default_timezone_set('Asia/Kolkata');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+
 $id = $_REQUEST['id'];
 
 $cart_sql  = "select * from `orders` WHERE checkout_id ='$id'";
@@ -103,7 +98,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
  foreach($wlvd as $rows);}
  
 ?> 
-<?php include('include/header.php'); ?>  
+
    <body onload="submitPayuForm()">                   
                          
  <script>

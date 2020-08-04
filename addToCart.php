@@ -1,9 +1,6 @@
 <?php session_start();
   
     include('customer-panel/configure.php');
-    ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
     /* Add Product to carts */
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         if(isset($_GET['pid']) && !empty($_GET['pid'])){
