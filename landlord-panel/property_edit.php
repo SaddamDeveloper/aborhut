@@ -537,7 +537,7 @@ $img_result = $statement->fetchAll();
                                         <select class="custom-select mr-sm-2" id="prop_category" name="prop_category" >
                                         <option selected value="">--Select Category--</option>
                                             <option <?php echo $rows->prop_category === 'Commercial' ? 'selected' : '';?>>Commercial </option>
-                                            <option <?php echo $rows->prop_category === 'Rental' ? 'selected' : '';?>>Rental </option> 
+                                            <option <?php echo $rows->prop_category === 'Residential' ? 'selected' : '';?>>Residential </option> 
                                         </select>
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $categoryErr; ?></small> 
                                     </div>

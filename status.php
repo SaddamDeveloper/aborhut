@@ -1,10 +1,7 @@
-<?php include_once('include/header.php'); ?>
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+include('include/header.php'); 
+DB::connect();
   $id = $_SESSION['id'];
-  echo "Hello- " .$id;
   $checkout_id = $_REQUEST['id'];
 
 if(isset($_SESSION['id'])){
@@ -17,7 +14,6 @@ if(isset($_SESSION['id'])){
   $productinfo = $_POST["productinfo"];
   $email       = $_POST["email"];
   $salt        = "LKT8zBvmaD"; // Your salt
-  echo $status;die();
   If(isset($_POST["additionalCharges"])) {
     $additionalCharges = $_POST["additionalCharges"];
     $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;      
@@ -33,32 +29,31 @@ if(isset($_SESSION['id'])){
 
   if($id !='' && $status == 'success'){
 
-	$select_bookings= "UPDATE `checkout` SET `chk_status`='SUCCESS' WHERE id = '".$_REQUEST['id']."'";
-	$sql=$dbconn->prepare($select_bookings);
-	$sql->execute();
+    $select_bookings= "UPDATE `checkout` SET `chk_status`='SUCCESS' WHERE id = '".$_REQUEST['id']."'";
+    $sql=$dbconn->prepare($select_bookings);
+    $sql->execute();
+    $update_payment= "UPDATE `orders` SET `payment_status`='SUCCESS' WHERE checkout_id = '".$_REQUEST['id']."'";
+    $sql2=$dbconn->prepare($update_payment);
+    $sql2->execute();
 
-	$select_bookings= "UPDATE `orders` SET `payment_status`='SUCCESS', WHERE checkout_id = '".$_REQUEST['id']."'";
-	$sql=$dbconn->prepare($select_bookings);
-	$sql->execute();
+    $update_checkout= "SELECT * FROM `checkout` WHERE id = '".$_REQUEST['id']."'";
+    $sql3=$dbconn->prepare($update_checkout);
+    $sql3->execute();
+    $wlvd=$sql3->fetchAll(PDO::FETCH_OBJ);
+      foreach($wlvd as $rows);
 
- $select_bookings= "SELECT * FROM `checkout` WHERE id = '".$_REQUEST['id']."'";
- $sql=$dbconn->prepare($select_bookings);
- $sql->execute();
- $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
-  foreach($wlvd as $rows);
-
-  $chk_bill_name = $rows->chk_bill_name;
-  $chk_bill_phone = $rows->chk_bill_phone;
-  $chk_prop_visit_date = $rows->chk_prop_visit_date;
+      $chk_bill_name = $rows->chk_bill_name;
+      $chk_bill_phone = $rows->chk_bill_phone;
+      $chk_prop_visit_date = $rows->chk_prop_visit_date;
   
 
  
 
-  $sms = "Dear $chk_bill_name, 
-  The status of your request for property visit on $chk_prop_visit_date with Aborhut.com is $status .
-  You shall recieve a feedback call from us shortly!
-  Team,
-  Aborhut.com";   
+      $sms = "Dear $chk_bill_name, 
+      The status of your request for property visit on $chk_prop_visit_date with Aborhut.com is $status .
+      You shall recieve a feedback call from us shortly!
+      Team,
+      Aborhut.com";   
 
     $username="Fiscaleindia";
     $api_password="9aea62lulgu3by1ph";
@@ -125,18 +120,28 @@ if(isset($_SESSION['id'])){
             </div>
     <script src="assets/libs/ckeditor/ckeditor.js"></script>
     <script src="assets/libs/ckeditor/samples/js/sample.js"></script>
-			
-            	</div>
+		</div>
 	</section>
-	
+	    <!-- Submit Property end -->
+<div class="clearfix" style="padding-top: 60px;"></div>
+<!-- Intro section -->
+<div class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <img src="img/logos/logo-2.png" alt="logo-2">
+            </div>
+            <div class="col-md-7 col-sm-6 col-xs-12">
+                <h3>Looking To Sell Or Rent Your Property?</h3>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <a href="list_your_property.php" class="btn button-md button-theme">Submit Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intro end -->
  
 <?php include('include/footer.php'); ?>
 
- 		
-<!-- <script>
-    window.onload = setTimeout(function(){
-        var form = document.getElementById('loginsubmit').click();
-    }
-    ,0000);
-</script>   -->
            

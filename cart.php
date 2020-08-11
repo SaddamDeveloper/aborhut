@@ -1,4 +1,7 @@
-<?php include('include/header.php'); ?>
+<?php 
+    require_once("check.php"); 
+    include('include/header.php'); 
+?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="overlay">
@@ -134,7 +137,7 @@
                         ?>
                         <h2>No Item In Carts</h2>
                         <?php
-                            }
+                    }
                 }
                 ?>
                 <a href="./" class="btn btn-primary">Book More</a>

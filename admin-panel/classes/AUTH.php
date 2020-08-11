@@ -1,7 +1,6 @@
 <?php
 class AUTH{
 
-
 	public static function do_login()
 	{
 		DB::connect();

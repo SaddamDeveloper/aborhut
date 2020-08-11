@@ -1,6 +1,5 @@
-
- <?php include('include/header.php'); ?>  
-<?php
+<?php 
+  include('include/header.php'); 
 date_default_timezone_set('Asia/Kolkata');
 
 $id = $_REQUEST['id'];
@@ -137,26 +136,40 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 									<input type="hidden" name="curl" value="http://localhost/aborhut/welcome.php" size="64"/>
 									<input type="hidden" name="surl" value="http://localhost/aborhut/status.php?id=<?php echo $id ?>" size="64" /> 
 									<input type="hidden" name="furl" value="http://localhost/aborhut/status.php?id=<?php echo $id ?>" size="64" /></td>
-         
-									 
 									<div class="form-group">
-                    <label for="exampleInputEmail1">Amount Payable</label>
-										<input name="amount" type="number" readonly class="form-control" id="amount" aria-describedby="emailHelp" required="" value="<?php echo $amount; ?>" >
-                      <small id="emailHelp" class="form-text text-muted"></small>	
-                      </div>
-    
-								
-									<tr>
+                      <label for="exampleInputEmail1">Amount Payable</label>
+										  <input name="amount" type="number" readonly class="form-control" id="amount" required="" value="<?php echo $amount; ?>" >
+                      <small class="form-text text-muted"></small>	
+                  </div>
+								<tr>
           <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" size="64" /></td>
         </tr>
 					<?php if(!$hash) { ?>
             <td colspan="4"><input type="submit" value="Pay Now"  id = "loginsubmit"  class="btn btn-primary" /></td>
           <?php } ?>
-									
         </form>
-										 
 		</div>
 		</div>
+    <!-- Submit Property end -->
+<div class="clearfix" style="padding-top: 60px;"></div>
+<!-- Intro section -->
+<div class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <img src="img/logos/logo-2.png" alt="logo-2">
+            </div>
+            <div class="col-md-7 col-sm-6 col-xs-12">
+                <h3>Looking To Sell Or Rent Your Property?</h3>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <a href="list_your_property.php" class="btn button-md button-theme">Submit Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intro end -->
+<?php include('include/footer.php'); ?>
 		
 	
 			 

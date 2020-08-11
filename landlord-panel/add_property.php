@@ -633,7 +633,7 @@ $select_enquiry3="SELECT * FROM city order by id desc";
                                         <select class="custom-select mr-sm-2" id="prop_category" name="prop_category" value="<?php echo isset($_POST['prop_category']) ? $_POST['prop_category'] : '' ?>">
                                         <option selected value="">--Select Category--</option>
                                             <option value="Commercial" >Commercial </option>
-                                            <option value="Rental">Rental </option> 
+                                            <option value="Residential">Residential </option> 
                                         </select>
                                         <small id="emailHelp" class="form-text text-danger"><?php echo $categoryErr ?></small>
                                     </div>

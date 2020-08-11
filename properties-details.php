@@ -52,7 +52,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="'.$data->prop_name.'" />
     <meta property="og:description"   content="Aborhut" />
-    <meta property="og:image"         content="'.$data->img_result[0]['image'].'" />
+    <meta property="og:image"         content="'.$img_result[0]['image'].'" />
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
     ';
 ?>
@@ -105,7 +105,7 @@
                                 <div class="carousel-inner">
                                     <?php
                                     $counter = false;
-                                        if($img_result[0]['image']){
+                                        if(isset($img_result[0]['image']) && !empty($img_result[0]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -115,7 +115,7 @@
                                             print '<img src="images/property/'.$img_result[0]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[1]['image']){
+                                        if(isset($img_result[1]['image']) && !empty($img_result[1]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -125,7 +125,7 @@
                                             print '<img src="images/property/'.$img_result[1]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[2]['image']){
+                                        if(isset($img_result[2]['image']) && !empty($img_result[2]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -135,7 +135,7 @@
                                             print '<img src="images/property/'.$img_result[2]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[3]['image']){
+                                        if(isset($img_result[3]['image']) && !empty($img_result[3]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -145,7 +145,7 @@
                                             print '<img src="images/property/'.$img_result[3]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[4]['image']){
+                                        if(isset($img_result[4]['image']) && !empty($img_result[4]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -155,7 +155,7 @@
                                             print '<img src="images/property/'.$img_result[4]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[5]['image']){
+                                        if(isset($img_result[5]['image']) && !empty($img_result[5]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -165,7 +165,7 @@
                                             print '<img src="images/property/'.$img_result[5]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[6]['image']){
+                                        if(isset($img_result[6]['image']) && !empty($img_result[6]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -175,7 +175,7 @@
                                             print '<img src="images/property/'.$img_result[6]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[7]['image']){
+                                        if(isset($img_result[7]['image']) && !empty($img_result[7]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -185,7 +185,7 @@
                                             print '<img src="images/property/'.$img_result[7]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[8]['image']){
+                                        if(isset($img_result[8]['image']) && !empty($img_result[8]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -195,7 +195,7 @@
                                             print '<img src="images/property/'.$img_result[8]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[9]['image']){
+                                        if(isset($img_result[9]['image']) && !empty($img_result[9]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -205,7 +205,7 @@
                                             print '<img src="images/property/'.$img_result[9]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[10]['image']){
+                                        if(isset($img_result[10]['image']) && !empty($img_result[10]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -215,7 +215,7 @@
                                             print '<img src="images/property/'.$img_result[10]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[11]['image']){
+                                        if(isset($img_result[11]['image']) && !empty($img_result[11]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -225,7 +225,7 @@
                                             print '<img src="images/property/'.$img_result[11]['image'].'" class="thumb-preview" alt="Chevrolet Impala">
                                             </div>';
                                         }
-                                        if($img_result[12]['image']){
+                                        if(isset($img_result[12]['image']) && !empty($img_result[12]['image'])){
                                             if ($counter) {
                                                 print '<div class="item">';
                                             } else {
@@ -283,7 +283,7 @@
                                 <?php
                                     $data_counter = 0;
                                     $data_class = false;
-                                    if($img_result[0]['image']){
+                                    if(isset($img_result[0]['image']) && !empty($img_result[0]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -295,7 +295,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[1]['image']){
+                                    if(isset($img_result[1]['image']) && !empty($img_result[1]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -307,7 +307,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[2]['image']){
+                                    if(isset($img_result[2]['image']) && !empty($img_result[2]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -319,7 +319,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[3]['image']){
+                                    if(isset($img_result[3]['image']) && !empty($img_result[3]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -331,7 +331,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[4]['image']){
+                                    if(isset($img_result[4]['image']) && !empty($img_result[4]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -343,7 +343,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[5]['image']){
+                                    if(isset($img_result[5]['image']) && !empty($img_result[5]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -355,7 +355,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[6]['image']){
+                                    if(isset($img_result[6]['image']) && !empty($img_result[6]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -367,7 +367,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[7]['image']){
+                                    if(isset($img_result[7]['image']) && !empty($img_result[7]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -379,7 +379,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[8]['image']){
+                                    if(isset($img_result[8]['image']) && !empty($img_result[8]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -391,7 +391,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[9]['image']){
+                                    if(isset($img_result[9]['image']) && !empty($img_result[9]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -403,7 +403,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[10]['image']){
+                                    if(isset($img_result[10]['image']) && !empty($img_result[10]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -415,7 +415,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[11]['image']){
+                                    if(isset($img_result[11]['image']) && !empty($img_result[11]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -427,7 +427,7 @@
                                         </li>';
                                         $data_counter++;
                                     }
-                                    if($img_result[12]['image']){
+                                    if(isset($img_result[12]['image']) && !empty($img_result[12]['image'])){
                                         if ($data_class) {
                                             print  '<li data-target="#carousel-custom" data-slide-to="'.$data_counter.'" class="">';
                                         } else {
@@ -463,7 +463,7 @@
                             <p>
                             <?php 
                                 $str = $data->prop_desc;
-                                echo preg_replace("#<p.*?>.*?</p>#", "", $str);
+                                echo htmlspecialchars_decode($str); 
                             ?></p>
                         </div>
                         <table class="property_detail_table">
@@ -624,7 +624,7 @@
 
                                     <div class="book-now">
                                     <a href="#">Pending</a>
-                                </div>
+                                    </div>
                                 <?php
                                 }
                             }else{

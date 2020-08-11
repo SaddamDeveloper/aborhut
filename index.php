@@ -1,10 +1,9 @@
 <?php 
-include_once('customer-panel/configure.php');
-DB::connect();
-
+    include('include/header.php'); 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL); 
 ?>
-
-<?php include('include/header.php'); ?>
 <?php
     $select  = "select * from `city` ORDER BY id DESC";
     $sql=$dbconn->prepare($select);

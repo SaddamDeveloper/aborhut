@@ -44,143 +44,143 @@
 </head>
 <body>
 
-<!-- Top header start -->
-<header class="top-header hidden-xs" id="top">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <div class="list-inline">
-                    <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>1-8X0-666-8X88</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+    <!-- Top header start -->
+    <header class="top-header hidden-xs" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="list-inline">
+                        <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>1-8X0-666-8X88</a>
+                        <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <ul class="top-social-media pull-right">
+                        <li>
+                            <a href="#" class="sign-in"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="sign-in"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="sign-in"><i class="fa fa-instagram"></i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <ul class="top-social-media pull-right">
-                    <li>
-                        <a href="#" class="sign-in"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="sign-in"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="sign-in"><i class="fa fa-instagram"></i></a>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </div>
-</header>
-<!-- Top header end -->
-<?php  
-    $id = $_GET['id'];
-    if($id !=''){
-        $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_GET['id']."'";
-        $sql=$dbconn->prepare($select_bookings25);
-        $sql->execute();
-        $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
-    foreach($wlvd25 as $rows25);
-    }
-?>
-<!-- Main header start -->
-<header class="main-header">
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navigation" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="./" class="logo">
-                    <img src="img/logos/logo.png" alt="logo">
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown active">
-                        <a href="./">
-                            Home<span></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="about.php">
-                            About<span></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="services.php">
-                            Service<span></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="why_us.php">
-                            Why Us<span></span>
-                        </a>
-                    </li>
-                    <li>
-                    <a href="list_your_property.php">
-                        List Your Property<span></span>
+    </header>
+    <!-- Top header end -->
+    <?php  
+        $id = $_GET['id'];
+        if($id !=''){
+            $select_bookings25= "SELECT * FROM `customer` WHERE id = '".$_GET['id']."'";
+            $sql=$dbconn->prepare($select_bookings25);
+            $sql->execute();
+            $wlvd25=$sql->fetchAll(PDO::FETCH_OBJ);
+        foreach($wlvd25 as $rows25);
+        }
+    ?>
+    <!-- Main header start -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="./" class="logo">
+                        <img src="img/logos/logo.png" alt="logo">
                     </a>
-                    </li>
-                    <li>
-                        <a href="contact.php">
-                            Contact Us<span></span>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown active">
+                            <a href="./">
+                                Home<span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.php">
+                                About<span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.php">
+                                Service<span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="why_us.php">
+                                Why Us<span></span>
+                            </a>
+                        </li>
+                        <li>
+                        <a href="list_your_property.php">
+                            List Your Property<span></span>
                         </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right rightside-navbar">
-                   
-                    <li class="phone-mb-15">
-                        <a class="button my-account">
-                            <i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i>
-                        </a>
-                    </li>
-                    <div class="dropDownBox buyerDBLink hidden">
-                        <div class="carrot"></div>
-                        <ul class="border-bottom">
-                            <li>
-                               <a href="cart.php"> Cart <?php 
-                               if (isset($_SESSION['id']) && !empty($_SESSION['id'])){
-                                    $id = $_SESSION['id'];
-                                    $select_carts = "SELECT * FROM `carts` where customer_id=$id";
-                                    $sql2=$dbconn->prepare($select_carts);
-                                    $sql2->execute();
-                                    $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
-                                    $cart_data_count = $sql2->rowCount();
-                                    echo "(".$cart_data_count.")";
-                                }else{
-                                    if(!empty($_SESSION['cart'])){
-                                        echo "(".count($_SESSION['cart']).")";
+                        </li>
+                        <li>
+                            <a href="contact.php">
+                                Contact Us<span></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right rightside-navbar">
+                    
+                        <li class="phone-mb-15">
+                            <a class="button my-account">
+                                <i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i>
+                            </a>
+                        </li>
+                        <div class="dropDownBox buyerDBLink hidden">
+                            <div class="carrot"></div>
+                            <ul class="border-bottom">
+                                <li>
+                                <a href="cart.php"> Cart <?php 
+                                if (isset($_SESSION['id']) && !empty($_SESSION['id'])){
+                                        $id = $_SESSION['id'];
+                                        $select_carts = "SELECT * FROM `carts` where customer_id=$id";
+                                        $sql2=$dbconn->prepare($select_carts);
+                                        $sql2->execute();
+                                        $wlvd2=$sql2->fetchAll(PDO::FETCH_OBJ);
+                                        $cart_data_count = $sql2->rowCount();
+                                        echo "(".$cart_data_count.")";
                                     }else{
-                                        echo "(0)";
+                                        if(!empty($_SESSION['cart'])){
+                                            echo "(".count($_SESSION['cart']).")";
+                                        }else{
+                                            echo "(0)";
+                                        }
                                     }
-                                }
-                               ?></a>
-                            </li>
-                        </ul>
-                        <?php 
-                            if(isset($_SESSION['id'])) { 
-                        ?>
-                        <ul class="border-bottom">
-                            <li><a href="customer-panel/welcome.php">My Dashboard</a>
-                            </li>
-                        </ul>
+                                ?></a>
+                                </li>
+                            </ul>
+                            <?php 
+                                if(isset($_SESSION['id'])) { 
+                            ?>
+                            <ul class="border-bottom">
+                                <li><a href="customer-panel/welcome.php">My Dashboard</a>
+                                </li>
+                            </ul>
 
-                            <!-- <a href="logout.php" class="btn btn-danger">Logout</a> -->
-                        <?php
-                            }else{
-                        ?>
-                        <a href="login.php" class="btn btn-danger">Login</a>
-                        <div class="text-center sign-up-cart">
-                            New to Aborhut ? <a href="signup.php">Sign Up</a>
+                                <a href="logout.php" class="btn btn-danger">Logout</a>
+                            <?php
+                                }else{
+                            ?>
+                            <a href="login.php" class="btn btn-danger">Login</a>
+                            <div class="text-center sign-up-cart">
+                                New to Aborhut ? <a href="signup.php">Sign Up</a>
+                            </div>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
-                    </div>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</header>
-<!-- Main header end -->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Main header end -->
