@@ -155,6 +155,14 @@
 <script src="js/ie10-viewport-bug-workaround.js"></script>
 <!-- custom js -->
 <script src="js/custom.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147727619-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-147727619-1');
+</script>
 </body>
 </html>

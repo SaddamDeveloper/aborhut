@@ -5368,6 +5368,7 @@ mark, .mark {
 
 #carousel-custom .carousel-indicators li img {
     display: block;
+    height: 80%;
     opacity: 0.5;
 }
 
