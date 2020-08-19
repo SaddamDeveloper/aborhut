@@ -55,6 +55,7 @@
     <meta property="og:image"         content="'.$img_result[0]['image'].'" />
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
     ';
+print_r($img_result[0]['image']);
 ?>
 
 <!-- Sub banner start -->

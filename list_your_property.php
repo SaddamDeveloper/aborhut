@@ -36,94 +36,50 @@ if(isset($_POST['Login'])){
 }
 
 //Sign Up
-$fullNameErr = $emailErr = $mobileErr = "";
+$success = false;
+$fullNameErr = $emailErr = $mobileErr = $passErr = $confirmErr = "";
 if(isset($_POST['signUp'])){
     empty($_POST['name']) ? $fullNameErr = "Name is required!" : $name = test_input($_POST['name']);
-    empty($_POST['email']) ? $emailErr = "Email is required!" : $email = test_input($_POST['email']);
     empty($_POST['number']) ? $mobileErr = "Mobile is required!" : $mobile = test_input($_POST['number']);
-    $rand1= mt_rand(100000,999999);
-    if($name && $email && $mobile != ""){
+    empty($_POST['password']) ? $passErr = "Password is required!" : $password = test_input($_POST['password']);
+    empty($_POST['confirmpassword']) ? $confirmErr = "Confirm Password is required!" : $confirmpassword = test_input($_POST['confirmpassword']);
+    $email = test_input($_POST['email']);
+    if($name && $mobile != ""){
 
         $mobile_check = "SELECT COUNT(*) FROM landlord WHERE landlord_phone = '$mobile'";
         $sql=$dbconn->prepare($mobile_check);
         $sql->execute();
-
-        $email_check = "SELECT COUNT(*) FROM landlord WHERE landlord_email = '$email'";
-        $sql1=$dbconn->prepare($email_check);
-        $sql1->execute();
         if($sql->fetchColumn() > 0){
            $mobileErr = "Mobile Number is already exists!";
-        }else if($sql1->fetchColumn() > 0){
-            $emailErr = "Email is already exists!";
-        }else{
+        }else if($password != $confirmpassword){
+            $confirmErr = "Confirm password doesn't match";
+        }
+        else if(strlen($password) < 6){
+            $passErr = "Password Length should be 6";
+        }
+        else{
             $insert_landlord = "INSERT `landlord` SET
             landlord_name = '".$name."',
             landlord_email = '".$email."',
             landlord_phone = '".$mobile."',
-            landlord_password = '".$rand1."'";
+            landlord_password = '".$password."'";
             $sql_update1=$dbconn->prepare($insert_landlord);
             $sql_update1->execute();
             
             if($sql_update1){
-                $update_user = "INSERT `customer` SET
-                cus_name = '".$name."',
-                cus_email = '".$email."',
-                cus_phone = '".$mobile."',
-                cus_password = '".$rand1."'";
+                $success = true;
+                // $update_user = "INSERT `customer` SET
+                // cus_name = '".$name."',
+                // cus_email = '".$email."',
+                // cus_phone = '".$mobile."',
+                // cus_password = '".$password."'";
         
-                $sql_update=$dbconn->prepare($update_user);
-                $sql_update->execute();
-                if($sql_update1 && $sql_update){
-                    $mobile_number = $mobile;
-                    $customer = $name;
-                }
-
-            //Send Password to mobile
-            $sms = "Dear $name, 
-            Thankyou for registering at Aborhut!
-            Your login id is $mobile and password is $rand1.
-
-            Team,
-            Aborhut.com";  
-
-            $username="Fiscaleindia";
-            $api_password="9aea62lulgu3by1ph";
-            $sender="FISCLE";
-            $domain="http://sms.webinfotech.co";
-            $priority="11";// 11-Enterprise, 12- Scrub
-            $method="GET";
-
-            $mobile=$mobile;
-            $message=$sms;
-
-            $username=urlencode($username);
-            $api_password=urlencode($api_password);
-            $sender=urlencode($sender);
-            $message=urlencode($message);
-
-            $sms = urlencode($sms);
-
-            $parameters="username=$username&api_password=$api_password&sender=$sender&to=$mobile&message=$message&priority=$priority";
-            $url="$domain/pushsms.php?".$parameters;
-            $ch = curl_init($url);
-
-            if($method=="POST")
-            {
-                curl_setopt($ch, CURLOPT_POST,1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-            }
-            else
-            {
-                $get_url=$url."?".$parameters;
-    
-                curl_setopt($ch, CURLOPT_POST,0);
-                curl_setopt($ch, CURLOPT_URL, $get_url);
-            }
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-            curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-            $return_val = curl_exec($ch);
-            return $return_val;
+                // $sql_update=$dbconn->prepare($update_user);
+                // $sql_update->execute();
+                // if($sql_update1 && $sql_update){
+                //     $mobile_number = $mobile;
+                //     $customer = $name;
+                // }
             }
         }
         
@@ -135,7 +91,17 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-
+  function confirmthepasswords($password,$confirmpassword)
+  {
+    $passwordOK = "";
+  
+    if($password == $confirmpassword)
+      {
+      $passwordOK = $password;
+      }
+  
+    return $passwordOK;
+  }
 ?>
 <?php include_once('include/header.php');  ?>
 <!-- Content area start -->
@@ -193,11 +159,9 @@ function test_input($data) {
                         <div class="main-title">
                             <h1><span>Signup</span></h1>
                             <?php
-                                if (!empty($mobile_number)) {
+                                if ($success == true) {
                                     echo "<p>Dear $customer, <br> <br>
                                     Your registration with Aborhut.com is successful. <br><br>
-                                    We have forwarded a 6 digit password, to your registered mobile number $mobile_number<br><br>
-                                    Kindly check your mobile and login with that password. <br><br> 
                                     <p>";
                                 }
                             ?>
@@ -215,6 +179,14 @@ function test_input($data) {
                             <div class="form-group">
                                 <span class="form-text text-danger"><?php echo $mobileErr; ?></span> 
                                 <input type="text" name="number" class="input-text text-danger" placeholder="Mobile">
+                            </div>
+                            <div class="form-group">
+                                <span class="form-text text-danger"><?php echo $passErr; ?></span> 
+                                <input type="password" name="password" class="input-text text-danger" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <span class="form-text text-danger"><?php echo $confirmErr; ?></span> 
+                                <input type="password" name="confirmpassword" class="input-text text-danger" placeholder="Confirm Password">
                             </div>
                             <div class="form-group">
                                 <button type="submit" name="signUp" class="button-md button-theme btn-block">Signup</button>
