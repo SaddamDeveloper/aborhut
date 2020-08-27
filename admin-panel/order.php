@@ -135,7 +135,7 @@ if(isset($_GET['v']) == 2){
                                         <?php
                                             if ($rows->payment_status == 'PENDING' && $rows->status == 5) {
                                                 print '<a href="admin_order_cancel.php?r='.$id.'" class="btn btn-info btn-sm">Cancel</a>';
-                                             }elseif ($rows->payment_status == 'PENDING' && $rows->status == 4) {
+                                             }elseif ($rows->payment_status == 'SUCCESS' && $rows->status == 4) {
                                                 print '<a href="appointments.php?p='.$id.'&&v=2" name="accpt" class="btn btn-primary btn-sm">Accept</a>
                                                 <a href="admin_order_refund.php?r='.$id.'" class="btn btn-info btn-sm">Refund</a>
                                                 ';

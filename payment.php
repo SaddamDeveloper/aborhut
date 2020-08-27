@@ -28,8 +28,8 @@ $MERCHANT_KEY = "lOrHCXkF";
 $SALT = "LKT8zBvmaD";
 
 // End point - change to ps://secure.payu.inhtt for LIVE mode
-$PAYU_BASE_URL = "https://secure.payu.in";
-// $PAYU_BASE_URL = "https://sandboxsecure.payu.in";		// For Sandbox Mode
+// $PAYU_BASE_URL = "https://secure.payu.in";
+$PAYU_BASE_URL = "https://sandboxsecure.payu.in";		// For Sandbox Mode
 
 
 $action = '';
