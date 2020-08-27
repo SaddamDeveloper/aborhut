@@ -94,12 +94,4 @@ if(isset($_SESSION['id'])){
 	
  
 <?php include('include/footer.php'); ?>
-
- 		
-<!-- <script>
-    window.onload = setTimeout(function(){
-        var form = document.getElementById('loginsubmit').click();
-    }
-    ,0000);
-</script>   -->
            

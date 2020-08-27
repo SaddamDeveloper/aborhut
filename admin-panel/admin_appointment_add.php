@@ -9,7 +9,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if(isset($_POST['app_submit'])){
-
     $id = $_POST['order_id'];    
     $app_date = $_POST['app_date'];
 
@@ -42,6 +41,5 @@ if(isset($_POST['app_submit'])){
              }
         }
     }
-
 }
 ?>
