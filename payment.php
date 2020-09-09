@@ -39,7 +39,6 @@ if(!empty($_POST)) {
     //print_r($_POST);
   foreach($_POST as $key => $value) {    
     $posted[$key] = $value; 
-  
   }
 }
 
@@ -140,10 +139,8 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
                       <label for="exampleInputEmail1">Amount Payable</label>
 										  <input name="amount" type="number" readonly class="form-control" id="amount" required="" value="<?php echo $amount; ?>" >
                       <small class="form-text text-muted"></small>	
-                  </div>
-								<tr>
-          <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" size="64" /></td>
-        </tr>
+            
+          <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
 					<?php if(!$hash) { ?>
             <td colspan="4"><input type="submit" value="Pay Now"  id = "loginsubmit"  class="btn btn-primary" /></td>
           <?php } ?>
