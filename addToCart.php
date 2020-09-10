@@ -1,5 +1,4 @@
-<?php session_start();
-  
+<?php
     include('customer-panel/configure.php');
     /* Add Product to carts */
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
@@ -44,6 +43,4 @@
             header('location:index.php');
         }
     }
-    
-   
 ?>

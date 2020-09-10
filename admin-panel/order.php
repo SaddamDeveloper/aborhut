@@ -6,9 +6,10 @@ require_once("check.php");
 date_default_timezone_set('Asia/Kolkata');
 $created_at = date('Y-m-d H:i:s');
 
-$select_bookings= "SELECT orders.id, orders.product_id, orders.payment_status, checkout.chk_bill_name, checkout.chk_bill_phone,
+$select_bookings= "SELECT orders.id, orders.product_id, orders.payment_status, orders.payment_time, checkout.chk_bill_name, checkout.chk_bill_phone,
 orders.amount, orders.status FROM `orders` 
-LEFT JOIN checkout ON orders.checkout_id = checkout.id order by orders.id desc LIMIT 20";
+LEFT JOIN checkout ON orders.checkout_id = checkout.id 
+order by orders.id desc LIMIT 20";
 $sql=$dbconn->prepare($select_bookings);
 $sql->execute();
 $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
@@ -74,6 +75,7 @@ header('location:order.php');
                                     <th class="center">Property VIew</th>
                                     <th class="center"> Amount</th>
                                     <th class="center"> Payment Status</th>
+                                    <th class="center"> Payment Time</th>
                                     <th class="center"> Status</th>
                                     <th class="center">Action</th>
                                     </tr>
@@ -87,7 +89,6 @@ header('location:order.php');
                             foreach($wlvd as $rows){
 
                             $id = $rows->id;
-                            // print_r($rows);
                             ?>
                         </thead>
                             <tbody>
@@ -105,6 +106,9 @@ header('location:order.php');
                                 <?php }else{?>
                                     <label class="label label-success"><?php echo $rows->payment_status ?></label>
                                 <?php } ?>
+                            </td>
+                            <td class="center">
+                                    <?php echo $rows->payment_time ?>
                             </td>
                             <td class="center">
                             <div class="form-group row">

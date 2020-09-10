@@ -55,7 +55,6 @@
     <meta property="og:image"         content="'.$img_result[0]['image'].'" />
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=318843728990066&autoLogAppEvents=1"></script>
     ';
-print_r($img_result[0]['image']);
 ?>
 
 <!-- Sub banner start -->
@@ -612,38 +611,37 @@ print_r($img_result[0]['image']);
                         if($data3->user_id == $_SESSION['id']){
                             if($data3->product_id){
                                 if($data3->status == 2){ 
-
-                    ?>
-                           <iframe src = 'https://maps.google.com/maps?q=<?php echo $latitude ?>,<?php echo $longitude ?>&hl=es;z=14&amp;output=embed' width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            <div class="book-now">
-                                <a href="tel:<?php echo $data3->chk_bill_phone ?>">+91-<?php echo $data3->landlord_phone ?></a>
-                            </div>
-                    <?php
+                                    ?>
+                                        <iframe src = 'https://maps.google.com/maps?q=<?php echo $latitude ?>,<?php echo $longitude ?>&hl=es;z=14&amp;output=embed' width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                            <div class="book-now">
+                                                <a href="tel:<?php echo $data3->chk_bill_phone ?>">+91-<?php echo $data3->landlord_phone ?></a>
+                                            </div>
+                                    <?php
                                 }elseif($data3->status == 4){
                                     ?>
-                                <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
+                                    <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
 
                                     <div class="book-now">
                                     <a href="#">Pending</a>
                                     </div>
-                                <?php
+                                    <?php
                                 }
-                            }else{
-                                ?>
-                                <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
-                            <div class="book-now">
-                                <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
-                            </div>
-                                <?php
-                            }
+                                }else{
+                                    ?>
+                                    <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
+                                    <div class="book-now">
+                                        <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
+                                    </div>
+                                    <?php
+                                }
                         }
                      else{
-                    ?>
-                            <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
-                            <div class="book-now">
-                                <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
-                            </div>
-                    <?php
+                                ?>
+                                        <img src="img/map-blur.jpg" alt="property location map" class="img-responsive map-img" title="Book Now To Unlock Map Location">
+                                        <div class="book-now">
+                                            <a href="<?php if($addandcheckoutStatus==1){ echo 'addToCart.php?pid='.base64_encode($_GET['p']); }else{ echo '#'; } ?>">Book Now</a>
+                                        </div>
+                                <?php
                     }
                     ?>
                     </div>

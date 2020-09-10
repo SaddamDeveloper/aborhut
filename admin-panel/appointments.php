@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <?php include('inc/header.php'); ?>
-
-
 <body>
     <?php include('inc/preloader.php'); ?>
     <div id="main-wrapper">
@@ -47,8 +45,6 @@
                                     </div>
                                     </form>
                                 </div>
-
-
                         </div>
                     </div>
                 </div>

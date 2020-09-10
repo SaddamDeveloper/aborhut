@@ -15,7 +15,9 @@ if(isset($id) && !empty($id)){
 //  foreach($wlvd as $rows);
 //  print_r($wlvd);exit();
 
-$select_enquiry="SELECT * FROM property WHERE id= '$id' ";
+$select_enquiry="SELECT property.*, property_image.image FROM property
+LEFT JOIN property_image ON property.id = property_image.property_id
+ WHERE property.id= '$id' ";
 $sql1=$dbconn->prepare($select_enquiry);
 $sql1->execute();
 $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
@@ -27,31 +29,10 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
 <?php include('inc/header.php'); ?>
 <body>
     <?php include('inc/preloader.php'); ?>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <?php include('inc/top_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <?php include('inc/main_menu.php'); ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
@@ -63,16 +44,7 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
                     
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Info box -->
-                <!-- ============================================================== -->
                 
                 <!-- basic table -->
                 <div class="row">
@@ -98,7 +70,7 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
                                                     foreach($wlvd1 as $rows1){
                                                     $id = $rows1->id;
                                                     $prop_name = $rows1->prop_name;
-                                                    $prop_image1 = $rows1->prop_image1;
+                                                    $prop_image1 = $rows1->image;
                                                 ?>
 											 </thead>
 										<tbody>
@@ -120,11 +92,6 @@ $wlvd1=$sql1->fetchAll(PDO::FETCH_OBJ);
                         </div>
                     </div>
                 </div>
-                <!-- order table -->
                 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
             <?php include('inc/footer.php'); ?>

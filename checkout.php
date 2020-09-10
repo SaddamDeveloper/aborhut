@@ -1,9 +1,6 @@
 <?php 
-    require_once("check.php"); 
+    // require_once("check.php"); 
     include_once('include/header.php');
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);  
     $cart_data_count = 0;
     $product_ids = null;
     $grand_total = 0;

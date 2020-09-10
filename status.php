@@ -1,7 +1,5 @@
 <?php
 include('include/header.php'); 
-DB::connect();
-session_start();
   $id = $_SESSION['id'];
   $checkout_id = $_REQUEST['id'];
 

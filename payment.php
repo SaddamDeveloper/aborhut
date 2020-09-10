@@ -69,7 +69,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   ) {
     
   } else {
-    //$posted['productinfo'] = json_encode(json_decode('[{"name":"tutionfee","description":"","value":"500","isRequired":"false"},{"name":"developmentfee","description":"monthly tution fee","value":"1500","isRequired":"false"}]'));
   $hashVarsSeq = explode('|', $hashSequence);
     $hash_string = '';  
   foreach($hashVarsSeq as $hash_var) {
@@ -88,26 +87,26 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 }
 
   $id = $_REQUEST['id'];
-  if($id !=''){
- $select_client= "SELECT * FROM `checkout` WHERE id = '".$_REQUEST['id']."'";
- $sql=$dbconn->prepare($select_client);
- $sql->execute();
- $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
- foreach($wlvd as $rows);}
- 
+if($id !=''){
+  $select_client= "SELECT * FROM `checkout` WHERE id = '".$_REQUEST['id']."'";
+  $sql=$dbconn->prepare($select_client);
+  $sql->execute();
+  $wlvd=$sql->fetchAll(PDO::FETCH_OBJ);
+  foreach($wlvd as $rows);
+}
 ?> 
 
    <body onload="submitPayuForm()">                   
                          
  <script>
-    var hash = '<?php echo $hash ?>';
-    function submitPayuForm() {
-      if(hash == '') {
-        return;
+      var hash = '<?php echo $hash ?>';
+      function submitPayuForm() {
+        if(hash == '') {
+          return;
+        }
+        var payuForm = document.forms.payuForm;
+        payuForm.submit();
       }
-      var payuForm = document.forms.payuForm;
-      payuForm.submit();
-    }
   </script>
 <section id="content">
 		<div class="content-blog">
@@ -123,7 +122,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
                 <br/>
               <?php } ?> 
 								<form action="<?php echo $action; ?>" class="m-t-30" method="post" name="payuForm">
-                               
 									<input type="hidden" name="key" value="<?php echo $MERCHANT_KEY ?>" />
 									<input type="hidden" name="hash" value="<?php echo $hash ?>"/>
 									<input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
@@ -136,9 +134,9 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 									<input type="hidden" name="surl" value="http://localhost/aborhut/status.php?id=<?php echo $id ?>" size="64" /> 
 									<input type="hidden" name="furl" value="http://localhost/aborhut/status.php?id=<?php echo $id ?>" size="64" /></td>
 									<div class="form-group">
-                      <label for="exampleInputEmail1">Amount Payable</label>
-										  <input name="amount" type="number" readonly class="form-control" id="amount" required="" value="<?php echo $amount; ?>" >
-                      <small class="form-text text-muted"></small>	
+                    <label for="exampleInputEmail1">Amount Payable</label>
+                    <input name="amount" type="number" readonly class="form-control" id="amount" required="" value="<?php echo $amount; ?>" >
+                    <small class="form-text text-muted"></small>	
             
           <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
 					<?php if(!$hash) { ?>

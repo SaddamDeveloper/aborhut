@@ -127,7 +127,6 @@
                             </tr>
                             <?php 
                             }
-
                             ?>
                         </tbody>
                         </table>
