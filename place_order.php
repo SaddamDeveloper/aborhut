@@ -1,11 +1,8 @@
 <?php 
-session_start();
 include_once('customer-panel/configure.php');
 DB::connect();
 
 date_default_timezone_set('Asia/Kolkata');
-
-
 
 function test_input($data) {
     $data = trim($data);
@@ -15,7 +12,6 @@ function test_input($data) {
   }
 
   if(isset($_POST['pay'])){
-
     $created_at = date('Y-m-d H:i:s');
       //cart data
   
@@ -28,7 +24,6 @@ function test_input($data) {
       $cart_prep->execute();
       $cart_data=$cart_prep->fetchAll(PDO::FETCH_OBJ);
       $cart_data_count = $cart_prep->rowCount();
-     
       if($cart_data_count > 0){
           $separator = true;
            // Fetch Admin Charge
@@ -36,7 +31,7 @@ function test_input($data) {
          $sql = $dbconn->prepare($commission_fetch);
          $sql->execute();
          $commission = $sql->fetchColumn(1);
-
+        
           foreach ($cart_data as $row) {
               $product_sql  = "SELECT * FROM `property` WHERE `id` ='$row->property_id'";           
               $product_prep=$dbconn->prepare($product_sql);
@@ -45,7 +40,6 @@ function test_input($data) {
 
               // Admin Commission
             $admin_commission = ($product_data->prop_price * $commission)/100;
-
               $grand_total  += $admin_commission;
               if ($separator) {
                   $product_ids .="$product_data->id";
@@ -116,7 +110,6 @@ function test_input($data) {
         }
         
     }
-  
   
     if($name && $email && $V_date != ""){
         $insert_cart = "INSERT `checkout` SET
