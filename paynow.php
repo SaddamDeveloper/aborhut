@@ -31,7 +31,7 @@ if(isset($_POST['loginsubmit'])){
     $response = curl_exec($ch);
     curl_close($ch); 
     $data = json_decode($response,true);
-    var_dump($data);
+    // var_dump($data);
     $site=$data["payment_request"]["longurl"];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location:'.$site); 
